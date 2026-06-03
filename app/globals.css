@@ -44,6 +44,7 @@ body {
 .glass-card {
   background: rgba(255, 255, 255, 0.03);
   backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
   border: 1px solid rgba(212, 168, 83, 0.15);
   box-shadow:
     0 8px 32px rgba(0, 0, 0, 0.4),
@@ -61,13 +62,8 @@ body {
 }
 
 @keyframes pulse-glow {
-  0%, 100% { opacity: 0.4; filter: blur(60px); }
-  50% { opacity: 0.8; filter: blur(80px); }
-}
-
-@keyframes shimmer {
-  0% { background-position: -200% center; }
-  100% { background-position: 200% center; }
+  0%, 100% { opacity: 0.3; filter: blur(60px); }
+  50% { opacity: 0.7; filter: blur(80px); }
 }
 
 @keyframes fade-in-up {
@@ -111,18 +107,12 @@ body {
 
 .hex {
   position: absolute;
-  width: 60px;
-  height: 60px;
   border: 1.5px solid rgba(212, 168, 83, 0.2);
   clip-path: polygon(50% 0%, 100% 25%, 100% 75%, 50% 100%, 0% 75%, 0% 25%);
   animation: hexagon-float 12s ease-in-out infinite;
 }
 
-input, textarea, select {
-  outline: none;
-}
-
-::selection {
+.selection {
   background: rgba(212, 168, 83, 0.3);
   color: white;
 }
