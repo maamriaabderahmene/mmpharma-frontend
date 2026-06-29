@@ -66,7 +66,7 @@ export function Hero() {
             MM Pharma conçoit, fabrique et distribue une gamme complète de produits d'hygiène, de désinfection et d'entretien pour les professionnels de santé, l'hôtellerie, l'industrie et les collectivités.
           </Typography>
 
-          <Stack spacing={2} pt={1} sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
+          <Stack spacing={2} sx={{ pt: 1, flexDirection: { xs: 'column', sm: 'row' } }}>
             <Button
               component={Link}
               href="/products"
@@ -87,7 +87,7 @@ export function Hero() {
             </Button>
           </Stack>
 
-          <Stack direction="row" spacing={4} pt={4} sx={{ flexWrap: 'wrap' }}>
+          <Stack direction="row" spacing={4} sx={{ pt: 4, flexWrap: 'wrap' }}>
             {trustPills.map((pill) => (
               <Stack key={pill} direction="row" spacing={1} sx={{ alignItems: 'center' }}>
                 <Box
