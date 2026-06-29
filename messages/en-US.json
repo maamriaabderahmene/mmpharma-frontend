@@ -1,0 +1,187 @@
+{
+  "common": {
+    "loading": "Loading...",
+    "error": "An error occurred",
+    "retry": "Retry",
+    "close": "Close",
+    "save": "Save",
+    "cancel": "Cancel",
+    "delete": "Delete",
+    "search": "Search",
+    "noResults": "No results",
+    "backToHome": "Back to home",
+    "viewAll": "View all",
+    "readMore": "Read more"
+  },
+  "nav": {
+    "home": "Home",
+    "products": "Products",
+    "blog": "Blog",
+    "articles": "Articles",
+    "events": "Events",
+    "community": "Community",
+    "cart": "Cart",
+    "signin": "Sign in",
+    "signup": "Sign up",
+    "signout": "Sign out",
+    "myAccount": "My account",
+    "myOrders": "My orders",
+    "myArticles": "My articles",
+    "myComments": "My comments",
+    "settings": "Settings",
+    "searchPlaceholder": "Search for a product..."
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "PHARMACEUTICAL · MOROCCO",
+      "title": "Hygiene and disinfection, by science.",
+      "lead": "MM Pharma designs, manufactures, and distributes a complete range of hygiene, disinfection, and cleaning products for healthcare professionals, hospitality, industry, and communities.",
+      "ctaPrimary": "Discover our products",
+      "ctaSecondary": "Request a quote"
+    },
+    "stats": {
+      "products": "Products",
+      "ranges": "Ranges",
+      "years": "Years of expertise",
+      "compliance": "Compliant with Official Journal No. 16 2020"
+    },
+    "ranges": {
+      "title": "Our 5 ranges"
+    },
+    "featured": {
+      "title": "Featured products"
+    },
+    "quality": {
+      "title": "Pharmaceutical quality, batch after batch."
+    },
+    "about": {
+      "eyebrow": "About",
+      "title": "Pharmaceutical excellence serving professional hygiene.",
+      "cta": "Our story"
+    },
+    "testimonials": {
+      "title": "They trust us"
+    },
+    "insights": {
+      "title": "Resources & expertise"
+    },
+    "events": {
+      "title": "Next event"
+    },
+    "community": {
+      "title": "Join the community",
+      "body": "Chat with our experts and share your experiences.",
+      "cta": "Ask a question"
+    },
+    "faq": {
+      "title": "Frequently asked questions"
+    },
+    "contact": {
+      "title": "A project? A question?",
+      "body": "Our team is here to listen and support you.",
+      "ctaPrimary": "Contact us",
+      "ctaSecondary": "Request a quote"
+    }
+  },
+  "products": {
+    "title": "Product catalog",
+    "subtitle": "Discover our complete range of hygiene, disinfection, and cleaning products.",
+    "stats": "products across 5 ranges",
+    "grid": "Grid",
+    "table": "Table",
+    "filter": {
+      "range": "Range",
+      "scent": "Scent",
+      "conditionnement": "Packaging",
+      "hauteGamme": "Premium",
+      "sort": "Sort by",
+      "reset": "Reset"
+    },
+    "empty": "No products match your criteria.",
+    "addToCart": "Add to cart",
+    "requestQuote": "Request a quote",
+    "priceOnRequest": "Price on request"
+  },
+  "productDetail": {
+    "description": "Description",
+    "composition": "Composition",
+    "indications": "Indications",
+    "modeEmploi": "Instructions for use",
+    "microbiologie": "Microbiology",
+    "downloads": "Downloads",
+    "qa": "Q&A",
+    "related": "Related products",
+    "download": "Download",
+    "tabHeaders": {
+      "germes": "Germs",
+      "methode": "Method",
+      "limite": "Limit",
+      "resultats": "Results"
+    }
+  },
+  "auth": {
+    "signin": {
+      "title": "Sign in",
+      "email": "Email",
+      "password": "Password",
+      "submit": "Sign in",
+      "forgotPassword": "Forgot password?",
+      "noAccount": "Don't have an account?",
+      "signupLink": "Sign up"
+    },
+    "signup": {
+      "title": "Create an account",
+      "name": "Full name",
+      "email": "Email",
+      "password": "Password",
+      "confirmPassword": "Confirm password",
+      "submit": "Create my account",
+      "hasAccount": "Already have an account?",
+      "signinLink": "Sign in"
+    }
+  },
+  "account": {
+    "dashboard": "Dashboard",
+    "myOrders": "My orders",
+    "myArticles": "My articles",
+    "myComments": "My comments",
+    "settings": "Settings",
+    "signout": "Sign out"
+  },
+  "cart": {
+    "title": "My cart",
+    "empty": "Your cart is empty",
+    "continueShopping": "Continue shopping",
+    "viewCart": "View cart",
+    "checkout": "Checkout",
+    "subtotal": "Subtotal",
+    "remove": "Remove"
+  },
+  "errors": {
+    "404": {
+      "title": "Page not found",
+      "message": "The page you are looking for does not exist or has been moved."
+    },
+    "generic": {
+      "title": "An error occurred",
+      "message": "Please try again later."
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "MM Pharma — Manufacturer of hygiene and disinfection products in Morocco",
+      "description": "MM Pharma designs and manufactures hygiene, disinfection, and cleaning products for professionals in Morocco."
+    }
+  },
+  "footer": {
+    "about": "About",
+    "products": "Products",
+    "resources": "Resources",
+    "contact": "Contact",
+    "legal": "Legal notices",
+    "privacy": "Privacy policy",
+    "terms": "Terms of use",
+    "cookies": "Cookie policy",
+    "copyright": "MM Pharma. All rights reserved."
+  }
+}

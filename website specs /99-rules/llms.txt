@@ -1,0 +1,344 @@
+# MM Pharma — llms.txt
+# Authoritative knowledge base for the MM Pharma marketing & commerce website.
+# Every prompt in /specs/* references this file. Update it whenever the product catalog or
+# company information changes. Hand this file (and the design-system.md + seo-instructions.md
+# files) to any LLM before generating copy, product descriptions, FAQs, or SEO metadata.
+
+> **Project name:** MM Pharma
+> **Industry:** Pharmaceutical manufacturer & supplier (Morocco, French-speaking market)
+> **Website purpose:** Marketing + light e-commerce (catalog → inquiry → cart → order)
+> **Languages:** French (primary, FR-FR/FR-MA), Arabic (FR-MA Darija + MSA), English (fallback)
+> **Stack:** Next.js 16 (App Router) · React 19 · TypeScript · Mongoose 8 · MongoDB 7 · Cloudinary · MUI 6 · DeepSeek API for hidden SEO
+> **Architecture:** Clean Architecture + Atomic Design · Frontend-only repo, backend exposed as REST under `/api/*` Next.js Route Handlers (separated `lib/server` modules with strict server-only boundary). Backend DB layer is fully decoupled via repositories so it can be lifted into a standalone Node service later without changing the frontend.
+
+---
+
+## 1. Company snapshot
+
+- **Legal name:** MM Pharma (société de fabrication et de commercialisation de produits pharmaceutiques, d'hygiène et de désinfection).
+- **Markets served:** Morocco (primary), Maghreb, West Africa, export on demand.
+- **Quality commitment:** Conforme à l'arrêté du 21/10/2019 (JO N°16 du 24 mars 2020). Every batch is microbiologically tested against ISO 21149 / 16212 / 21150 / 22717 / 22718 / 18416.
+- **Manufacturing:** Internal factory, ISO-aligned processes, batch traceability, dossier technique for each SKU.
+- **Distribution:** B2B (hôpitaux, cliniques, hôtellerie, restauration, industries, écoles, administrations) + B2C (pharmacies, parapharmacies, e-commerce).
+- **Differentiation:** Formulations équilibrées, ingrédients de qualité supérieure, emballages élégants, traçabilité microbiologique par lot.
+
+---
+
+## 2. Product catalog (32 SKUs across 5 ranges)
+
+### Range I — Produits d'hygiène et de nettoyage personnel (12 SKUs)
+Hand hygiene and skin cleansing products. Used by healthcare workers, food handlers, public-facing staff, and end consumers.
+
+| # | Code | Name | Scent / Variant | Conditionnement |
+|---|------|------|-----------------|-----------------|
+| 1 | HYDRO-CLEAN | Gel hydroalcoolique désinfectant pour les mains *HAUTE GAMME* | — | 5 L · 1 L · 500 mL · 250 mL · 100 mL |
+| 2 | — | Gel hydroalcoolique désinfectant pour les mains | — | 5 L |
+| 3 | SAV-NET | Savon liquide pour les mains | Lavande | 5 L · 1 L · 500 mL |
+| 4 | DERMACIDE | Solution moussante nettoyante pour les mains (antiseptique) | — | 1 L |
+| 5 | SAV-SAIN | Savon liquide désinfectant pour les mains | Lavande | 5 L · 1 L · 500 mL |
+| 6 | SAV-SAIN | Savon liquide désinfectant pour les mains | Citron | 5 L · 1 L · 500 mL |
+| 7 | SAV-DOUX | Savon liquide ultra-doux pour les mains | Citron | 5 L · 1 L · 500 mL |
+| 8 | SAV-DOUX | Savon liquide ultra hydratant pour les mains | Lavande | 5 L · 1 L · 500 mL |
+| 9 | — | Solution hydroalcoolique désinfectante pour les mains | — | 5 L · 1 L · 500 mL · 250 mL · 100 mL |
+| 10 | HYDRO-SAFE | Solution hydroalcoolique désinfectante pour les mains *HAUTE GAMME* | — | 5 L · 1 L · 500 mL · 250 mL · 100 mL |
+| 11 | SAV-PROTECT | Savon liquide antibactérien pour les mains | Lavande | 5 L · 1 L · 500 mL |
+| 12 | SAV-PROTECT | Savon liquide antibactérien pour les mains | Citron | 5 L · 1 L · 500 mL |
+
+### Range II — Produits détergents et nettoyants à usage professionnel (5 SKUs)
+For hospitality, restaurants, hospitals, schools, offices, factories. Higher concentration, professional-grade.
+
+| # | Code | Name | Variant | Conditionnement |
+|---|------|------|---------|-----------------|
+| 1 | ECLA-PURE | Savon liquide pour machine à laver | Citron | 5 L |
+| 2 | — | Nettoyant et désinfectant de WC et salle de bain (moussant) | — | 1 L |
+| 3 | — | Désodorisant d'ambiance | Citron | 5 L · 1 L · 500 mL |
+| 4 | — | Désodorisant d'ambiance | Lavande | 5 L · 1 L · 500 mL |
+| 5 | BETA-CLEANER | Détachant des taches d'iode | — | 500 mL · 100 mL |
+
+### Range III — Produits désinfectants (textiles, surfaces, sols, instruments) (9 SKUs)
+Critical for healthcare and food-processing environments. Eliminates pathogenic micro-organisms (bacteria, viruses, fungi).
+
+| # | Code | Name | Variant | Conditionnement |
+|---|------|------|---------|-----------------|
+| 1 | STERI'LINGE | Lave-linge désinfectant pour machine à laver | Citron | 5 L |
+| 2 | — | Savon pré-désinfectant des instruments chirurgicaux | — | — |
+| 3 | — | Pré-désinfectant des instruments chirurgicaux | — | — |
+| 4 | — | Pré-désinfectant concentré des instruments chirurgicaux | — | — |
+| 5 | — | Désinfectant multi-surface | — | — |
+| 6 | — | Désinfectant de surface concentré | — | — |
+| 7 | — | Désinfectant par voie aérienne (DVA) | — | — |
+| 8 | — | Solution nettoyante et désinfectante pour équipements médicaux | — | — |
+| 9 | — | Désinfectant d'instruments chirurgicaux et médicaux | — | — |
+
+### Range IV — Produits d'entretien pour inox (3 SKUs)
+For stainless-steel surfaces: rust removal, renovation, polish.
+
+| # | Code | Name | Conditionnement |
+|---|------|------|-----------------|
+| 1 | — | Antirouille pour surfaces et sols | — |
+| 2 | — | Rénovateur d'inox (bain de trempage) | — |
+| 3 | P-N-D | Polish d'inox | 500 mL |
+
+### Range V — Divers (3 SKUs)
+
+| # | Code | Name | Conditionnement |
+|---|------|------|-----------------|
+| 1 | — | Eau distillée (double osmose + adoucisseur) | 1 L · 5 L |
+| 2 | — | Glycérine végétale (glycérol 99.5 %) | 5 kg · 1 kg · 500 g · 60 mL |
+| 3 | — | Gel échographique (ultrasonique) — bleu ou transparent | 5 L · 225 mL |
+
+---
+
+## 3. Product detail schema (for every SKU)
+
+Every product has these fields in the database. Use them verbatim:
+
+```ts
+{
+  code: string;             // e.g. "HYDRO-CLEAN" — null if no commercial code
+  name: string;             // e.g. "Gel hydroalcoolique désinfectant pour les mains *HAUTE GAMME*"
+  range: ProductRange;      // enum I–V
+  category: ProductCategory;// enum: HAND_HYGIENE | PRO_DETERGENT | DISINFECTANT | INOX_MAINTENANCE | MISC
+  scent?: string;           // null if none
+  description: string;      // long-form marketing copy (2–4 paragraphs)
+  indications: string[];    // use cases / when to use
+  composition: string[];    // ingredients, ordered by %
+  conditionnement: string[];// packaging sizes
+  modeUtilisation: string[];// step-by-step instructions
+  microbiologie?: {         // optional, present for hygiene & disinfectant SKUs
+    germes: string;
+    levures: string;
+    escherichiaColi: string;
+    pseudomonasAeruginosa: string;
+    staphylococcusAureus: string;
+    candidaAlbicans: string;
+    conclusion?: string;
+  };
+  images: CloudinaryAsset[]; // hero, gallery, lifestyle — all on Cloudinary
+  pdfs: CloudinaryAsset[];   // technical sheets, MSDS — on Cloudinary
+  tags: string[];            // search & SEO
+  isHauteGamme: boolean;
+  isActive: boolean;
+  createdAt: Date;
+  updatedAt: Date;
+}
+```
+
+---
+
+## 4. Compliance & trust copy (use these exact phrases where indicated)
+
+- ✅ **Conforme à l'arrêté du 21/10/2019 (JO N°16 du 24 mars 2020)** — for products with microbiological data.
+- ✅ **Qualité bactériologique satisfaisante** — for products tested under the framework above.
+- ✅ **Usage externe** — for every cosmetic / cleaning product (never ingest).
+- ✅ **ISO 21149 / 16212 / 21150 / 22717 / 22718 / 18416** — methods used in microbiological analysis.
+
+---
+
+## 5. Brand voice & tone
+
+- **Tone:** Professional, scientific, reassuring, clean. Think "pharmaceutical-grade hygiene brand".
+- **Voice rules:**
+  - French first, no franglais unless it's a brand name.
+  - Use the active voice.
+  - Avoid superlatives without data ("le meilleur" → "une efficacité prouvée").
+  - Always mention microbiological compliance when relevant.
+  - Never make medical claims beyond what's in the regulatory text.
+  - Address both B2B (decision-makers, acheteurs) and B2C (pharmaciens, consommateurs avertis).
+- **Forbidden words:** "pas cher", "discount", "promotion", "gratuit" (unless it's an actual campaign).
+- **Preferred words:** "qualité supérieure", "formulation équilibrée", "efficacité prouvée", "traçabilité", "conformité", "haute gamme", "sécurité".
+
+---
+
+## 6. Personas (use to inform UX & micro-copy)
+
+1. **Acheteur hospitalier** — Procurement manager at a clinic/hospital. Wants technical sheets, MSDS, conformity certificates, volume pricing, fast quote turnaround.
+2. **Pharmacien d'officine** — Wants shelf-ready SKUs, visual merchandising assets, competitive margin, training material for the team.
+3. **Responsable HSE** — Health/Safety/Environment manager in a factory or hotel. Wants disinfection protocols, training, audit trail.
+4. **Consommateur final** — End consumer buying online. Wants clear usage instructions, visible quality marks, fast delivery.
+5. **Visiteur professionnel / Recruteur** — Looking for partnerships, careers, events, sustainability commitments.
+
+---
+
+## 7. Site map (definitive)
+
+### Public side
+- `/` — Home
+- `/products` — Product catalog (filterable, searchable)
+- `/products/[slug]` — Product detail
+- `/blog` — Blog index (articles, news)
+- `/article/[slug]` — Article detail
+- `/events` — Events index (webinars, salons, conférences)
+- `/events/[slug]` — Event detail
+- `/community` — Community (forum, Q&A, success stories)
+- `/cart` — Cart (privileged → redirect to /auth/signin if not logged in)
+- `/about` — About the company
+- `/contact` — Contact
+- `/faq` — FAQ
+- `/auth/signin` — Sign in
+- `/auth/signup` — Sign up
+- `/legal/privacy` — Privacy policy
+- `/legal/terms` — Terms of service
+- `/legal/cookies` — Cookie policy
+
+### Privileged side (auth required — otherwise redirect to /auth/signin)
+- `/account` — Account dashboard
+- `/account/my-orders` — My orders
+- `/account/cart` — Persistent cart (alternative entry)
+- `/account/my-articles` — Articles I've authored/contributed to
+- `/account/comments` — My comments (moderation)
+- `/account/settings` — Profile, address book, password
+
+### Hidden / admin (out of scope for now, placeholders only)
+- `/admin/*` — Admin dashboard (separate app later)
+
+---
+
+## 8. Privilege matrix (CRITICAL — enforce everywhere)
+
+| Action | Anonymous | Authenticated | Admin |
+|--------|-----------|---------------|-------|
+| Browse home, products, blog, articles, events, community | ✅ | ✅ | ✅ |
+| Search products | ✅ | ✅ | ✅ |
+| Add to cart (instant) | ✅ (session cart) | ✅ (persistent cart) | ✅ |
+| View cart | ⚠️ redirect /auth/signin | ✅ | ✅ |
+| Checkout / place order | ⚠️ redirect /auth/signin | ✅ | ✅ |
+| View my orders | ⚠️ redirect /auth/signin | ✅ | ✅ |
+| Post comment on article | ⚠️ redirect /auth/signin | ✅ | ✅ |
+| View my comments | ⚠️ redirect /auth/signin | ✅ | ✅ |
+| View my articles | ⚠️ redirect /auth/signin | ✅ | ✅ |
+| Publish article | ❌ | ❌ | ✅ |
+
+**Rule:** if the user is not authenticated and triggers one of the ⚠️ actions, redirect to `/auth/signin?next=<original-path>` and **do not** show a modal. The redirect is silent and the URL changes.
+
+---
+
+## 9. Navigation (navbar — public side, in order)
+
+`Home | Blog | Articles | Products | Events | Community | Cart | Sign in | Sign up`
+
+When authenticated: replace `Sign in | Sign up` with avatar menu: `My account | My orders | My articles | My comments | Sign out`.
+
+---
+
+## 10. SEO keyword universe (seed list — expand per page via DeepSeek API)
+
+- French (primary): produits d'hygiène, gel hydroalcoolique Maroc, savon antibactérien, désinfectant surfaces, gel échographie, eau distillée, glycérine végétale, détergent professionnel, polish inox, pré-désinfectant chirurgical.
+- Arabic (secondary): معقم اليدين, صابون مطهر, مطهر الأسطح, ماء مقطر.
+- English (export): hand sanitizer Morocco, professional disinfectant supplier, stainless steel polish.
+
+---
+
+## 11. Internal content pillars (blog & article topics)
+
+1. **Education hygiène** — best practices, regulations, training material.
+2. **Innovation R&D** — new formulations, manufacturing process, quality control.
+3. **Études de cas** — client success stories, before/after audits.
+4. **Réglementation** — compliance updates, ISO norms, arrêté updates.
+5. **Événements** — webinars, salon presence, training sessions.
+6. **Carrières** — recruitment, behind-the-scenes, employee stories.
+
+---
+
+## 12. Analytics events (minimum set)
+
+| Event | When | Payload |
+|-------|------|---------|
+| `page_view` | every route change | path, referrer, locale |
+| `product_view` | product detail mount | productId, slug, range |
+| `add_to_cart` | click "Add to cart" | productId, qty, conditionnement |
+| `remove_from_cart` | click "Remove" | productId, qty |
+| `checkout_start` | /checkout mount | cart total, item count |
+| `signup_complete` | after email verify | source, role |
+| `signin_complete` | after signin | method (password/oauth) |
+| `comment_posted` | comment submit | articleId |
+| `article_published` | admin publish | articleId |
+| `cta_click` | any CTA | ctaId, location, target |
+
+---
+
+## 13. Performance budget (per route)
+
+| Metric | Target | Hard limit |
+|--------|--------|------------|
+| LCP | < 1.5 s | < 2.5 s |
+| INP | < 100 ms | < 200 ms |
+| CLS | < 0.05 | < 0.1 |
+| TTFB | < 200 ms | < 600 ms |
+| JS bundle (initial) | < 90 KB gzip | < 130 KB gzip |
+| Image LCP element | < 80 KB WebP/AVIF | < 150 KB |
+
+---
+
+## 14. Security & compliance checklist
+
+- All inputs validated with Zod on both client and server.
+- All API routes use App Router Route Handlers under `app/api/*` with `runtime = 'nodejs'` and `dynamic = 'force-dynamic'` when reading DB.
+- Mongoose queries use `lean()` for read-only paths.
+- Secrets only in `process.env`, validated by `lib/env.ts` with Zod — no `process.env.X` anywhere else.
+- Cloudinary signed uploads go through `/api/upload/sign` with auth check.
+- Rate-limit `/api/auth/*` and `/api/upload/*` with Upstash or `@vercel/edge-rate-limit`.
+- CSP, HSTS, X-Frame-Options, X-Content-Type-Options, Referrer-Policy configured in `next.config.ts`.
+- All user-facing forms: CSRF token + honeypot + hCaptcha on signup.
+
+---
+
+## 15. Internationalisation (i18n) plan
+
+- Default locale: `fr-MA`.
+- Supported: `fr-MA`, `ar-MA`, `en-US`.
+- Routing: `app/[locale]/...` from day 1. Don't bolt on later.
+- Use `next-intl` (or `next-i18next` if your team prefers) — pick one and stick to it.
+- RTL support: enable MUI's `direction: 'rtl'` for `ar-MA` locale via `ThemeProvider`.
+- All copy in `messages/<locale>.json` — never inline French strings in components.
+
+---
+
+## 16. Forbidden anti-patterns (do NOT generate)
+
+- ❌ `any` type. Use `unknown` and narrow.
+- ❌ Inline styles outside `sx` prop. No `style={{ ... }}`.
+- ❌ Hard-coded color hex outside `theme/palette.ts`.
+- ❌ Direct `process.env.X` outside `lib/env.ts`.
+- ❌ `<Image src="/local-path" />` without Next/Image optimization.
+- ❌ Direct MongoDB connection in components — only in `lib/server/db/*`.
+- ❌ `useEffect` for data fetching — use RSC + Server Actions, or `react-query` if you need client-side mutation.
+- ❌ Direct MUI import in pages — only through the custom component library in `components/ui/`.
+- ❌ Inline arrow functions on `onClick` in lists — memoize.
+- ❌ Magic numbers in code — use `theme.spacing(n)` or tokens.
+
+---
+
+## 17. Pre-launch checklist
+
+- [ ] Lighthouse PWA + performance + accessibility + SEO all ≥ 95 on home and product detail.
+- [ ] All 32 products have hero + 3 gallery images + 1 technical sheet PDF on Cloudinary.
+- [ ] Hidden SEO generated for every page (visible meta + JSON-LD + AI-generated semantic block).
+- [ ] Privilege matrix verified: anonymous add-to-cart works, anonymous view-cart redirects.
+- [ ] i18n: every key exists in fr-MA + ar-MA + en-US.
+- [ ] All forms: validation errors, network errors, success states covered.
+- [ ] Sitemap.xml + robots.txt + manifest.json + llms.txt deployed.
+- [ ] CSP / HSTS / security headers verified with `securityheaders.com`.
+
+---
+
+## 18. Contact (placeholder — replace with real values)
+
+- **Email:** contact@mmpharma.ma
+- **Téléphone:** +212 5XX XX XX XX
+- **Adresse:** [adresse complète à compléter]
+- **Site:** https://www.mmpharma.ma
+- **Réseaux:** LinkedIn, Facebook, Instagram (links in footer)
+
+---
+
+## 19. Document versioning
+
+- **Version:** 1.0.0
+- **Last updated:** 2026-06-29
+- **Owner:** MM Pharma digital team
+- **Change log:** see `CHANGELOG.md` in repo root.
+
+---
+
+> **LLM instruction:** Treat this file as the single source of truth. If the user asks for content that conflicts with the catalog or compliance claims, surface the conflict instead of hallucinating. Never invent product codes or claims.

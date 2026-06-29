@@ -1,0 +1,187 @@
+{
+  "common": {
+    "loading": "Chargement...",
+    "error": "Une erreur est survenue",
+    "retry": "Réessayer",
+    "close": "Fermer",
+    "save": "Enregistrer",
+    "cancel": "Annuler",
+    "delete": "Supprimer",
+    "search": "Rechercher",
+    "noResults": "Aucun résultat",
+    "backToHome": "Retour à l'accueil",
+    "viewAll": "Voir tout",
+    "readMore": "Lire la suite"
+  },
+  "nav": {
+    "home": "Accueil",
+    "products": "Produits",
+    "blog": "Blog",
+    "articles": "Articles",
+    "events": "Événements",
+    "community": "Communauté",
+    "cart": "Panier",
+    "signin": "Connexion",
+    "signup": "Inscription",
+    "signout": "Déconnexion",
+    "myAccount": "Mon compte",
+    "myOrders": "Mes commandes",
+    "myArticles": "Mes articles",
+    "myComments": "Mes commentaires",
+    "settings": "Paramètres",
+    "searchPlaceholder": "Rechercher un produit..."
+  },
+  "home": {
+    "hero": {
+      "eyebrow": "PHARMACEUTIQUE · MAROC",
+      "title": "L'hygiène et la désinfection, par la science.",
+      "lead": "MM Pharma conçoit, fabrique et distribue une gamme complète de produits d'hygiène, de désinfection et d'entretien pour les professionnels de santé, l'hôtellerie, l'industrie et les collectivités.",
+      "ctaPrimary": "Découvrir nos produits",
+      "ctaSecondary": "Demander un devis"
+    },
+    "stats": {
+      "products": "Produits",
+      "ranges": "Gammes",
+      "years": "Années d'expertise",
+      "compliance": "Conforme JO N°16 2020"
+    },
+    "ranges": {
+      "title": "Nos 5 gammes"
+    },
+    "featured": {
+      "title": "Produits phares"
+    },
+    "quality": {
+      "title": "Une qualité pharmaceutique, lot après lot."
+    },
+    "about": {
+      "eyebrow": "À propos",
+      "title": "L'excellence pharmaceutique au service de l'hygiène professionnelle.",
+      "cta": "Notre histoire"
+    },
+    "testimonials": {
+      "title": "Ils nous font confiance"
+    },
+    "insights": {
+      "title": "Ressources & expertise"
+    },
+    "events": {
+      "title": "Prochain événement"
+    },
+    "community": {
+      "title": "Rejoignez la communauté",
+      "body": "Échangez avec nos experts et partagez vos expériences.",
+      "cta": "Poser une question"
+    },
+    "faq": {
+      "title": "Questions fréquentes"
+    },
+    "contact": {
+      "title": "Un projet ? Une question ?",
+      "body": "Notre équipe est à votre écoute pour vous accompagner.",
+      "ctaPrimary": "Nous contacter",
+      "ctaSecondary": "Demander un devis"
+    }
+  },
+  "products": {
+    "title": "Catalogue produits",
+    "subtitle": "Découvrez notre gamme complète de produits d'hygiène, de désinfection et d'entretien.",
+    "stats": "produits dans 5 gammes",
+    "grid": "Grille",
+    "table": "Tableau",
+    "filter": {
+      "range": "Gamme",
+      "scent": "Parfum",
+      "conditionnement": "Conditionnement",
+      "hauteGamme": "Haute gamme",
+      "sort": "Trier par",
+      "reset": "Réinitialiser"
+    },
+    "empty": "Aucun produit ne correspond à vos critères.",
+    "addToCart": "Ajouter au panier",
+    "requestQuote": "Demander un devis",
+    "priceOnRequest": "Prix sur devis"
+  },
+  "productDetail": {
+    "description": "Description",
+    "composition": "Composition",
+    "indications": "Indications",
+    "modeEmploi": "Mode d'emploi",
+    "microbiologie": "Microbiologie",
+    "downloads": "Téléchargements",
+    "qa": "Q&A",
+    "related": "Produits similaires",
+    "download": "Télécharger",
+    "tabHeaders": {
+      "germes": "Germes",
+      "methode": "Méthode",
+      "limite": "Limite",
+      "resultats": "Résultats"
+    }
+  },
+  "auth": {
+    "signin": {
+      "title": "Connexion",
+      "email": "Email",
+      "password": "Mot de passe",
+      "submit": "Se connecter",
+      "forgotPassword": "Mot de passe oublié ?",
+      "noAccount": "Pas encore de compte ?",
+      "signupLink": "S'inscrire"
+    },
+    "signup": {
+      "title": "Créer un compte",
+      "name": "Nom complet",
+      "email": "Email",
+      "password": "Mot de passe",
+      "confirmPassword": "Confirmer le mot de passe",
+      "submit": "Créer mon compte",
+      "hasAccount": "Déjà un compte ?",
+      "signinLink": "Se connecter"
+    }
+  },
+  "account": {
+    "dashboard": "Tableau de bord",
+    "myOrders": "Mes commandes",
+    "myArticles": "Mes articles",
+    "myComments": "Mes commentaires",
+    "settings": "Paramètres",
+    "signout": "Déconnexion"
+  },
+  "cart": {
+    "title": "Mon panier",
+    "empty": "Votre panier est vide",
+    "continueShopping": "Continuer mes achats",
+    "viewCart": "Voir le panier",
+    "checkout": "Commander",
+    "subtotal": "Sous-total",
+    "remove": "Supprimer"
+  },
+  "errors": {
+    "404": {
+      "title": "Page non trouvée",
+      "message": "La page que vous recherchez n'existe pas ou a été déplacée."
+    },
+    "generic": {
+      "title": "Une erreur est survenue",
+      "message": "Veuillez réessayer plus tard."
+    }
+  },
+  "seo": {
+    "home": {
+      "title": "MM Pharma — Fabricant de produits d'hygiène et de désinfection au Maroc",
+      "description": "MM Pharma conçoit et fabrique des produits d'hygiène, de désinfection et d'entretien pour les professionnels au Maroc."
+    }
+  },
+  "footer": {
+    "about": "À propos",
+    "products": "Produits",
+    "resources": "Ressources",
+    "contact": "Contact",
+    "legal": "Mentions légales",
+    "privacy": "Politique de confidentialité",
+    "terms": "Conditions d'utilisation",
+    "cookies": "Politique des cookies",
+    "copyright": "MM Pharma. Tous droits réservés."
+  }
+}
