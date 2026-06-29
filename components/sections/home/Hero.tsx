@@ -30,7 +30,7 @@ export function Hero() {
       }}
     >
       <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, py: { xs: 12, md: 16 } }}>
-        <Stack spacing={3} maxWidth={720}>
+        <Stack spacing={3} sx={{ maxWidth: 720 }}>
           <Typography
             variant="overline"
             sx={{

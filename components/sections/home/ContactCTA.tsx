@@ -11,7 +11,7 @@ export function ContactCTA() {
       }}
     >
       <Container maxWidth="lg">
-        <Stack spacing={3} textAlign="center" sx={{ alignItems: 'center' }}>
+        <Stack spacing={3} sx={{ textAlign: 'center', alignItems: 'center' }}>
           <Typography
             variant="h2"
             sx={{
