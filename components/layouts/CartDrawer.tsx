@@ -84,8 +84,8 @@ export function CartDrawer({ open, onClose }: Props) {
       anchor="right"
       open={open}
       onClose={onClose}
-      PaperProps={{
-        sx: { width: { xs: '100%', sm: 400 }, maxWidth: '100vw' },
+      slotProps={{
+        paper: { sx: { width: { xs: '100%', sm: 400 }, maxWidth: '100vw' } },
       }}
     >
       <Box sx={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
@@ -142,7 +142,7 @@ export function CartDrawer({ open, onClose }: Props) {
                         <Typography variant="body2" sx={{ fontWeight: 600, mt: 0.5 }}>
                           {item.unitPrice.toFixed(2)} MAD
                         </Typography>
-                        <Stack direction="row" alignItems="center" spacing={0.5} sx={{ mt: 0.5 }}>
+                        <Stack direction="row" spacing={0.5} sx={{ alignItems: 'center', mt: 0.5 }}>
                           <IconButton size="small" onClick={() => updateQuantity(item.productId, item.quantity - 1)} disabled={item.quantity <= 1}>
                             <RemoveIcon fontSize="small" />
                           </IconButton>
@@ -168,7 +168,7 @@ export function CartDrawer({ open, onClose }: Props) {
             </Box>
 
             <Box sx={{ p: 2, borderTop: 1, borderColor: 'divider' }}>
-              <Stack direction="row" justifyContent="space-between" sx={{ mb: 2 }}>
+              <Stack direction="row" sx={{ justifyContent: 'space-between', mb: 2 }}>
                 <Typography variant="body1" sx={{ fontWeight: 600 }}>
                   Sous-total
                 </Typography>

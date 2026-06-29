@@ -6,9 +6,8 @@ export function AboutPreview() {
     <Box component="section" sx={{ py: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
         <Stack
-          direction={{ xs: 'column', md: 'row' }}
           spacing={6}
-          alignItems="center"
+          sx={{ flexDirection: { xs: 'column', md: 'row' }, alignItems: 'center' }}
         >
           <Box
             sx={{

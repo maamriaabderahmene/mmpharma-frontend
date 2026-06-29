@@ -21,7 +21,7 @@ export function ArticleBody({ article, locale }: Props) {
         {article.title}
       </Typography>
 
-      <Stack direction="row" alignItems="center" spacing={1.5} sx={{ mb: 3 }}>
+      <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', mb: 3 }}>
         <Avatar src={article.author.avatar} alt={article.author.name} sx={{ width: 36, height: 36 }} />
         <Typography variant="body2" sx={{ fontWeight: 600 }}>
           {article.author.name}

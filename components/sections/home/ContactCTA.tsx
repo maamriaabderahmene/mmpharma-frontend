@@ -11,7 +11,7 @@ export function ContactCTA() {
       }}
     >
       <Container maxWidth="lg">
-        <Stack spacing={3} alignItems="center" textAlign="center">
+        <Stack spacing={3} textAlign="center" sx={{ alignItems: 'center' }}>
           <Typography
             variant="h2"
             sx={{
@@ -27,7 +27,7 @@ export function ContactCTA() {
           >
             Notre équipe est à votre écoute pour vous accompagner.
           </Typography>
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+          <Stack spacing={2} sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
             <Button
               component={Link}
               href="/contact"

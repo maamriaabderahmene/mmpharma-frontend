@@ -100,7 +100,7 @@ export function CommunityFeed({ locale }: Props) {
 
   return (
     <Box>
-      <Stack direction="row" justifyContent="space-between" alignItems="center" sx={{ mb: 4 }}>
+      <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center', mb: 4 }}>
         <Typography variant="h3" sx={{ fontSize: { xs: 22, md: 28 }, color: 'primary.main' }}>
           Questions & discussions
         </Typography>
@@ -159,7 +159,7 @@ export function CommunityFeed({ locale }: Props) {
           {posts.map((post) => (
             <Card key={post.id} sx={{ '&:hover': { borderColor: 'primary.300' } }}>
               <CardContent sx={{ p: 3 }}>
-                <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1.5 }}>
+                <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', mb: 1.5 }}>
                   <Avatar src={post.author.avatar} alt={post.author.name} sx={{ width: 32, height: 32 }} />
                   <Typography variant="body2" sx={{ fontWeight: 600 }}>
                     {post.author.name}
@@ -184,7 +184,7 @@ export function CommunityFeed({ locale }: Props) {
 
                 <Divider sx={{ mb: 1.5 }} />
 
-                <Stack direction="row" spacing={2} alignItems="center">
+                <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
                   <IconButton size="small" onClick={() => handleLike(post.id)} sx={{ color: 'text.secondary' }}>
                     {post.liked ? <ThumbUpIcon fontSize="small" color="primary" /> : <ThumbUpOutlinedIcon fontSize="small" />}
                   </IconButton>

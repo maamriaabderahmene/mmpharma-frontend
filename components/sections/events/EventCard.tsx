@@ -63,7 +63,7 @@ export function EventCard({ event, locale }: Props) {
             {event.location.country ? `, ${event.location.country}` : ''}
           </Typography>
         )}
-        <Stack direction="row" justifyContent="space-between" alignItems="center">
+        <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
           <Typography variant="caption" sx={{ color: 'text.secondary' }}>
             {event.registrations}/{event.capacity || '—'} inscrits
           </Typography>

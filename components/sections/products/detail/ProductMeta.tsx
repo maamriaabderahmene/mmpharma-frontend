@@ -75,7 +75,7 @@ export async function ProductMeta({ product, locale }: Props) {
 
       <Divider sx={{ mb: 3 }} />
 
-      <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
+      <Stack spacing={2} sx={{ flexDirection: { xs: 'column', sm: 'row' } }}>
         <Button variant="primary" size="large" sx={{ flex: 1 }}>
           {t('addToCart')}
         </Button>

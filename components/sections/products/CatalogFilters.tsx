@@ -97,9 +97,8 @@ export function CatalogFilters({ locale, scents }: Props) {
     <Box component="section" sx={{ pb: 3 }}>
       <Container maxWidth="lg">
         <Stack
-          direction={{ xs: 'column', md: 'row' }}
           spacing={2}
-          sx={{ alignItems: { xs: 'stretch', md: 'center' }, flexWrap: 'wrap' }}
+          sx={{ flexDirection: { xs: 'column', md: 'row' }, alignItems: { xs: 'stretch', md: 'center' }, flexWrap: 'wrap' }}
         >
           <ToggleButtonGroup
             value={currentRange}

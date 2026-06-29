@@ -12,14 +12,12 @@ export function Stats() {
     <Box component="section" sx={{ py: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
         <Stack
-          direction={{ xs: 'column', sm: 'row' }}
           spacing={{ xs: 4, sm: 2 }}
-          justifyContent="space-around"
-          alignItems="center"
           divider={<Box sx={{ width: 1, height: 32, borderRight: '1px solid', borderColor: 'rgba(212, 168, 83, 0.15)' }} />}
+          sx={{ flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-around', alignItems: 'center' }}
         >
           {stats.map((stat) => (
-            <Stack key={stat.label} spacing={0.5} alignItems="center">
+            <Stack key={stat.label} spacing={0.5} sx={{ alignItems: 'center' }}>
               <Typography
                 variant="h3"
                 sx={{

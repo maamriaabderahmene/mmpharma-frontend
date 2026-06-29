@@ -54,7 +54,7 @@ function CommentCard({
         borderColor: 'divider',
       }}
     >
-      <Stack direction="row" spacing={1.5} alignItems="center" sx={{ mb: 1 }}>
+      <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center', mb: 1 }}>
         <Avatar src={comment.author.avatar} alt={comment.author.name} sx={{ width: 32, height: 32 }} />
         <Typography variant="body2" sx={{ fontWeight: 600 }}>
           {comment.author.name}
@@ -71,7 +71,7 @@ function CommentCard({
         {comment.body}
       </Typography>
 
-      <Stack direction="row" spacing={1} alignItems="center">
+      <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
         <IconButton size="small" onClick={() => onReact(comment.id)} sx={{ color: 'text.secondary' }}>
           {comment.reactions?.length > 0 ? <ThumbUpIcon fontSize="small" /> : <ThumbUpOutlinedIcon fontSize="small" />}
         </IconButton>
@@ -191,7 +191,7 @@ export function CommentThread({ articleId, locale }: Props) {
               fullWidth
               sx={{ mb: 1.5 }}
             />
-            <Stack direction="row" justifyContent="space-between" alignItems="center">
+            <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'center' }}>
               <Typography variant="caption" sx={{ color: 'text.secondary' }}>
                 Votre commentaire sera modéré avant publication.
               </Typography>

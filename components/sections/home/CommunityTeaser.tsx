@@ -5,7 +5,7 @@ export function CommunityTeaser() {
   return (
     <Box component="section" sx={{ py: { xs: 8, md: 12 } }}>
       <Container maxWidth="lg">
-        <Stack spacing={3} alignItems="center" textAlign="center" maxWidth={600} mx="auto">
+        <Stack spacing={3} textAlign="center" maxWidth={600} mx="auto" sx={{ alignItems: 'center' }}>
           <Typography
             variant="h2"
             sx={{
