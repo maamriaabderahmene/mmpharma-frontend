@@ -2,7 +2,8 @@ import 'server-only';
 import { v2 as cloudinary } from 'cloudinary';
 import { ApiError } from '@/lib/shared/utils/ApiError';
 import { UserRole } from '@/lib/shared/constants/UserRole';
-import type { Product, ProductFilter, ProductFacets, Paginated, CreateProductInput, UpdateProductInput } from '@/lib/shared/types/Product';
+import type { Product, ProductFilter, ProductFacets, CreateProductInput, UpdateProductInput } from '@/lib/shared/types/Product';
+import type { Paginated } from '@/lib/shared/types/Paginated';
 import type { SessionPayload } from '@/lib/shared/types/Session';
 import * as productsRepo from './products.repo';
 import * as seoRepo from './seo.repo';
@@ -56,7 +57,7 @@ export async function create(input: CreateProductInput, session: SessionPayload)
         height: result.height,
         format: result.format,
         bytes: result.bytes,
-        folder: 'products' as const,
+        folder: 'product' as const,
         kind: 'image' as const,
         alt: product.name,
         productId: product.id,

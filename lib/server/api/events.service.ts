@@ -34,9 +34,9 @@ export async function create(input: CreateEventInput, session: SessionPayload): 
     throw new ApiError(403, 'FORBIDDEN', 'Only admins can create events');
   }
 
-  const parsed = createEventSchema.parse(input);
+  createEventSchema.parse(input);
 
-  const event = await eventsRepo.create(parsed as CreateEventInput);
+  const event = await eventsRepo.create(input);
 
   await createAuditLog({
     userId: session.userId,

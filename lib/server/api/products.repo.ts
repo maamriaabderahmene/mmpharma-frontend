@@ -1,7 +1,10 @@
 import 'server-only';
 import { connectDB } from '@/lib/server/db/connection';
 import { ApiError } from '@/lib/shared/utils/ApiError';
-import type { Product, ProductFilter, ProductFacets, Paginated } from '@/lib/shared/types/Product';
+import type { Product, ProductFilter, ProductFacets } from '@/lib/shared/types/Product';
+import type { ProductRange } from '@/lib/shared/constants/ProductRange';
+import type { ProductCategory } from '@/lib/shared/constants/ProductCategory';
+import type { Paginated } from '@/lib/shared/types/Paginated';
 import { createProductSchema, updateProductSchema, productFilterSchema } from '@/lib/shared/schemas/product';
 import ProductModel from '@/lib/server/db/models/Product';
 
@@ -11,18 +14,18 @@ import ProductModel from '@/lib/server/db/models/Product';
  * const result = await list({ range: 'hygiene', page: 1, limit: 20 });
  */
 export async function list(filter: ProductFilter): Promise<Paginated<Product>> {
-  const parsed = productFilterSchema.parse(filter);
+  productFilterSchema.parse(filter);
   await connectDB();
 
   const query: Record<string, unknown> = { deletedAt: null, isActive: true };
-  if (parsed.range) query.range = parsed.range;
-  if (parsed.scent) query.scent = parsed.scent;
-  if (parsed.conditionnement) query.conditionnement = parsed.conditionnement;
-  if (parsed.haute !== undefined) query.isHauteGamme = parsed.haute;
-  if (parsed.q) query.name = { $regex: parsed.q, $options: 'i' };
+  if (filter.range) query.range = filter.range;
+  if (filter.scent) query.scent = filter.scent;
+  if (filter.conditionnement) query.conditionnement = filter.conditionnement;
+  if (filter.haute !== undefined) query.isHauteGamme = filter.haute;
+  if (filter.q) query.name = { $regex: filter.q, $options: 'i' };
 
-  const page = parsed.page ?? 1;
-  const limit = parsed.limit ?? 20;
+  const page = filter.page ?? 1;
+  const limit = filter.limit ?? 20;
   const skip = (page - 1) * limit;
 
   const [data, total] = await Promise.all([
@@ -160,8 +163,8 @@ export async function facets(): Promise<ProductFacets> {
   ]);
 
   return {
-    ranges: ranges.map((r) => ({ value: r._id, count: r.count })),
-    categories: categories.map((c) => ({ value: c._id, count: c.count })),
+    ranges: ranges.map((r) => ({ value: r._id as ProductRange, count: r.count })),
+    categories: categories.map((c) => ({ value: c._id as ProductCategory, count: c.count })),
     scents: scents.map((s) => ({ value: s._id, count: s.count })),
     conditionnements: conditionnements.map((c) => ({ value: c._id, count: c.count })),
   };
