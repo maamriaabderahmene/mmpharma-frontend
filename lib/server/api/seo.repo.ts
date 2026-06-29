@@ -24,11 +24,11 @@ export async function byPath(pagePath: string, locale: string): Promise<SeoEntry
  * const seo = await upsert({ pagePath: '/products', locale: 'fr-MA', title: 'Produits', ... });
  */
 export async function upsert(input: CreateSeoEntryInput): Promise<SeoEntry> {
-  const parsed = createSeoEntrySchema.parse(input);
+  createSeoEntrySchema.parse(input);
   await connectDB();
   const entry = await SeoModel.findOneAndUpdate(
-    { pagePath: parsed.pagePath, locale: parsed.locale },
-    { $set: parsed },
+    { pagePath: input.pagePath, locale: input.locale },
+    { $set: input },
     { upsert: true, new: true },
   ).exec();
   return entry.toObject() as unknown as SeoEntry;

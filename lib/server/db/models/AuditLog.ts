@@ -26,9 +26,10 @@ const auditLogSchema = new Schema<AuditLogDocument>(
     timestamps: { createdAt: true, updatedAt: false },
     toJSON: {
       transform(_doc, ret) {
-        ret.id = ret._id.toString();
-        delete ret._id;
-        delete ret.__v;
+        const r = ret as Record<string, unknown>;
+        r.id = ret._id.toString();
+        delete r._id;
+        delete r.__v;
         return ret;
       },
     },

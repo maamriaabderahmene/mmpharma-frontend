@@ -1,7 +1,8 @@
 import 'server-only';
 import mongoose, { Schema, Document, Types } from 'mongoose';
 import { ArticleStatus, ArticleStatusValues } from '@/lib/shared/constants/ArticleStatus';
-import type { ArticleBody, CloudinaryAsset } from '@/lib/shared/types/Article';
+import type { ArticleBody } from '@/lib/shared/types/Article';
+import type { CloudinaryAsset } from '@/lib/shared/types/MediaAsset';
 
 export interface ArticleDocument extends Document {
   title: string;
@@ -59,9 +60,10 @@ const articleSchema = new Schema<ArticleDocument>(
     timestamps: true,
     toJSON: {
       transform(_doc, ret) {
-        ret.id = ret._id.toString();
-        delete ret._id;
-        delete ret.__v;
+        const r = ret as Record<string, unknown>;
+        r.id = ret._id.toString();
+        delete r._id;
+        delete r.__v;
         return ret;
       },
     },

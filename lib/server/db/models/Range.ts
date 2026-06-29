@@ -21,9 +21,10 @@ const rangeSchema = new Schema<RangeDocument>(
     timestamps: true,
     toJSON: {
       transform(_doc, ret) {
-        ret.id = ret._id.toString();
-        delete ret._id;
-        delete ret.__v;
+        const r = ret as Record<string, unknown>;
+        r.id = ret._id.toString();
+        delete r._id;
+        delete r.__v;
         return ret;
       },
     },

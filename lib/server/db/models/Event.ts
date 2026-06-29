@@ -2,7 +2,8 @@ import 'server-only';
 import mongoose, { Schema, Document } from 'mongoose';
 import { EventFormat, EventFormatValues } from '@/lib/shared/constants/EventFormat';
 import { EventStatus, EventStatusValues } from '@/lib/shared/constants/EventStatus';
-import type { EventSession, EventLocation, CloudinaryAsset } from '@/lib/shared/types/Event';
+import type { EventSession, EventLocation } from '@/lib/shared/types/Event';
+import type { CloudinaryAsset } from '@/lib/shared/types/MediaAsset';
 
 export interface EventDocument extends Document {
   title: string;
@@ -78,9 +79,10 @@ const eventSchema = new Schema<EventDocument>(
     timestamps: true,
     toJSON: {
       transform(_doc, ret) {
-        ret.id = ret._id.toString();
-        delete ret._id;
-        delete ret.__v;
+        const r = ret as Record<string, unknown>;
+        r.id = ret._id.toString();
+        delete r._id;
+        delete r.__v;
         return ret;
       },
     },

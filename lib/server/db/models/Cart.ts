@@ -10,7 +10,7 @@ export interface CartDocument extends Document {
   updatedAt: Date;
 }
 
-const cartLineItemSchema = new Schema<CartLineItem>(
+const cartLineItemSchema = new Schema(
   {
     productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
     productName: { type: String, required: true },
@@ -35,9 +35,10 @@ const cartSchema = new Schema<CartDocument>(
     timestamps: true,
     toJSON: {
       transform(_doc, ret) {
-        ret.id = ret._id.toString();
-        delete ret._id;
-        delete ret.__v;
+        const r = ret as Record<string, unknown>;
+        r.id = ret._id.toString();
+        delete r._id;
+        delete r.__v;
         return ret;
       },
     },

@@ -31,7 +31,7 @@ const commentAuthorSchema = new Schema<CommentAuthor>(
   { _id: false }
 );
 
-const commentReactionSchema = new Schema<CommentReaction>(
+const commentReactionSchema = new Schema(
   {
     type: { type: String, required: true },
     userId: { type: Schema.Types.ObjectId, ref: 'User', required: true },
@@ -54,9 +54,10 @@ const commentSchema = new Schema<CommentDocument>(
     timestamps: true,
     toJSON: {
       transform(_doc, ret) {
-        ret.id = ret._id.toString();
-        delete ret._id;
-        delete ret.__v;
+        const r = ret as Record<string, unknown>;
+        r.id = ret._id.toString();
+        delete r._id;
+        delete r.__v;
         return ret;
       },
     },
