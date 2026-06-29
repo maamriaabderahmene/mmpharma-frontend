@@ -35,14 +35,15 @@ export async function byId(id: string): Promise<Address> {
  * const address = await create({ userId: '64a...', line1: '123 Main St', ... });
  */
 export async function create(input: CreateAddressInput): Promise<Address> {
-  const parsed = createAddressSchema.parse(input);
+  const { userId, ...rest } = input;
+  const parsed = createAddressSchema.parse(rest);
   await connectDB();
 
   if (parsed.isDefault) {
-    await AddressModel.updateMany({ userId: parsed.userId }, { $set: { isDefault: false } }).exec();
+    await AddressModel.updateMany({ userId }, { $set: { isDefault: false } }).exec();
   }
 
-  const address = await AddressModel.create(parsed);
+  const address = await AddressModel.create({ ...parsed, userId });
   return address.toObject() as unknown as Address;
 }
 
