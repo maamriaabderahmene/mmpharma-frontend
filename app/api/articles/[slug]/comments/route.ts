@@ -17,7 +17,7 @@ export const GET = withApi(async (req: NextRequest, { params }: { params: Promis
     page: searchParams.get('page') ? Number(searchParams.get('page')) : 1,
     limit: searchParams.get('limit') ? Number(searchParams.get('limit')) : 20,
   };
-  const result = await commentsRepo.byArticle(article._id?.toString() ?? article.id.toString(), filter);
+  const result = await commentsRepo.byArticle(article.id, filter);
   return NextResponse.json({ data: result });
 });
 
@@ -29,7 +29,7 @@ export const POST = withApi(async (req: NextRequest, { params }: { params: Promi
   const body = await req.json();
   const comment = await commentsRepo.create({
     ...body,
-    articleId: article._id?.toString() ?? article.id.toString(),
+    articleId: article.id,
     author: { name: user.name, email: user.email },
   });
   return NextResponse.json({ data: comment }, { status: 201 });

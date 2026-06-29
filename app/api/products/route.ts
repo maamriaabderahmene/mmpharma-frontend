@@ -2,6 +2,8 @@ import { NextRequest, NextResponse } from 'next/server';
 import { withApi } from '@/lib/server/api/withApi';
 import { requireRole } from '@/lib/server/api/session';
 import { UserRole } from '@/lib/shared/constants/UserRole';
+import { ProductRangeValues } from '@/lib/shared/constants/ProductRange';
+import type { ProductRange } from '@/lib/shared/constants/ProductRange';
 import * as productsRepo from '@/lib/server/api/products.repo';
 
 export const runtime = 'nodejs';
@@ -9,9 +11,13 @@ export const dynamic = 'force-dynamic';
 
 export const GET = withApi(async (req: NextRequest) => {
   const { searchParams } = new URL(req.url);
+  const rawRange = searchParams.get('range');
+  const range = rawRange && ProductRangeValues.includes(rawRange as ProductRange)
+    ? (rawRange as ProductRange)
+    : undefined;
   const filter = {
     q: searchParams.get('q') ?? undefined,
-    range: searchParams.get('range') ?? undefined as never,
+    range,
     scent: searchParams.get('scent') ?? undefined,
     conditionnement: searchParams.get('conditionnement') ?? undefined,
     haute: searchParams.has('haute') ? searchParams.get('haute') === 'true' : undefined,
