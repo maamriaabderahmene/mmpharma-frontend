@@ -176,7 +176,7 @@ export function CommunityFeed({ locale }: Props) {
                   {post.body}
                 </Typography>
 
-                <Stack direction="row" spacing={1} sx={{ mb: 1.5 }} flexWrap="wrap" useFlexGap>
+                <Stack direction="row" spacing={1} sx={{ mb: 1.5, flexWrap: 'wrap' }}>
                   {post.tags?.map((tag) => (
                     <Chip key={tag} label={tag} size="small" variant="outlined" />
                   ))}

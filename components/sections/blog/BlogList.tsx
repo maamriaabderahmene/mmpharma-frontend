@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import { Grid, Card, CardContent, Typography, Box, Chip, Pagination, Stack } from '@mui/material';
+import { Grid, Card, CardContent, Typography, Box, Chip, Pagination, PaginationItem, Stack } from '@mui/material';
 import type { Article } from '@/lib/shared/types/Article';
 
 type Props = {
@@ -58,7 +58,7 @@ export async function BlogList({ locale, page }: Props) {
                 }}
               />
               <CardContent sx={{ p: 3 }}>
-                <Stack direction="row" spacing={1} sx={{ mb: 1.5 }} flexWrap="wrap" useFlexGap>
+                <Stack direction="row" spacing={1} sx={{ mb: 1.5, flexWrap: 'wrap' }}>
                   {article.tags?.slice(0, 2).map((tag) => (
                     <Chip key={tag} label={tag} size="small" variant="outlined" />
                   ))}
@@ -103,14 +103,9 @@ export async function BlogList({ locale, page }: Props) {
             color="primary"
             siblingCount={1}
             boundaryCount={1}
-            component={Link as unknown as React.ElementType}
-            // @ts-expect-error - MUI Pagination accepts `component` override
             renderItem={(item) => (
-              <Link
-                href={`/${locale}/blog${item.page === 1 ? '' : `?page=${item.page}`}`}
-                style={{ textDecoration: 'none' }}
-              >
-                {item.page}
+              <Link href={`/${locale}/blog${item.page === 1 ? '' : `?page=${item.page}`}`} style={{ textDecoration: 'none' }}>
+                <PaginationItem {...item} />
               </Link>
             )}
           />

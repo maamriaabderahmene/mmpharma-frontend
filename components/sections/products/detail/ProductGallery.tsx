@@ -62,7 +62,7 @@ export function ProductGallery({ images, name }: Props) {
       </Box>
 
       {images.length > 1 && (
-        <Stack direction="row" spacing={1} useFlexGap>
+        <Stack direction="row" spacing={1}>
           {images.map((img, idx) => (
             <Box
               key={img.publicId}

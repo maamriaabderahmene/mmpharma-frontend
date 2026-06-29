@@ -28,7 +28,7 @@ export function ArticleBody({ article, locale }: Props) {
         </Typography>
       </Stack>
 
-      <Stack direction="row" spacing={1} sx={{ mb: 4 }} flexWrap="wrap" useFlexGap>
+      <Stack direction="row" spacing={1} sx={{ mb: 4, flexWrap: 'wrap' }}>
         {article.tags.map((tag) => (
           <Chip key={tag} label={tag} size="small" variant="outlined" />
         ))}

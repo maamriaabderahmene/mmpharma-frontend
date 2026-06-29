@@ -138,7 +138,7 @@ export function ProductCard({ product, locale }: Props) {
           )}
 
           {product.conditionnement && product.conditionnement.length > 0 && (
-            <Stack direction="row" spacing={0.5} useFlexGap sx={{ flexWrap: 'wrap' }}>
+            <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }}>
               {product.conditionnement.map((c) => (
                 <Chip
                   key={c}

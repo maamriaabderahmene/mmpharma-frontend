@@ -60,7 +60,7 @@ export async function ProductMeta({ product, locale }: Props) {
           <Typography variant="subtitle2" sx={{ color: 'text.primary', mb: 1 }}>
             Conditionnements disponibles
           </Typography>
-          <Stack direction="row" spacing={1} useFlexGap sx={{ flexWrap: 'wrap' }}>
+          <Stack direction="row" spacing={1} sx={{ flexWrap: 'wrap' }}>
             {product.conditionnement.map((c) => (
               <Chip
                 key={c}

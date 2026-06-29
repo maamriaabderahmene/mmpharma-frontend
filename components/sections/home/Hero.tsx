@@ -87,7 +87,7 @@ export function Hero() {
             </Button>
           </Stack>
 
-          <Stack direction="row" spacing={4} pt={4} flexWrap="wrap" useFlexGap>
+          <Stack direction="row" spacing={4} pt={4} sx={{ flexWrap: 'wrap' }}>
             {trustPills.map((pill) => (
               <Stack key={pill} direction="row" spacing={1} sx={{ alignItems: 'center' }}>
                 <Box
