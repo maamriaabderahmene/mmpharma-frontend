@@ -27,10 +27,10 @@ export function track(eventName: EventName, properties?: EventProperties): void 
 
   try {
     if (typeof window !== 'undefined' && 'gtag' in window) {
-      (window as unknown as Record<string, unknown>).gtag('event', eventName, properties);
+      (window as unknown as { gtag: (...args: unknown[]) => void }).gtag('event', eventName, properties);
     }
     if (typeof window !== 'undefined' && 'fbq' in window) {
-      (window as unknown as Record<string, unknown>).fbq('track', eventName, properties);
+      (window as unknown as { fbq: (...args: unknown[]) => void }).fbq('track', eventName, properties);
     }
   } catch {
     // Silently fail in production
