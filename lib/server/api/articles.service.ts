@@ -42,11 +42,11 @@ export async function create(input: CreateArticleInput, authorId: string): Promi
     ...parsed,
     author: {
       id: authorId,
-      name: '',
+      name: authorId,
       avatar: '',
     },
-    heroImage: parsed.heroImage ?? { publicId: '', url: '', secureUrl: '', width: 0, height: 0, format: '', bytes: 0 },
-    body: parsed.body ?? { markdown: '', wordCount: 0, readingTime: 0 },
+    heroImage: input.heroImage ?? { publicId: '', url: '', secureUrl: '', width: 0, height: 0, format: '', bytes: 0 },
+    body: input.body ?? { markdown: '', wordCount: 0, readingTime: 0 },
     commentCount: 0,
     status: 'draft' as const,
   } as CreateArticleInput);
