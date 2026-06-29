@@ -36,8 +36,9 @@ export async function post(input: CreateCommentInput, userId: string): Promise<C
   const status = hasApproved ? CommentStatus.APPROVED : CommentStatus.PENDING;
 
   const comment = await commentsRepo.create({
-    ...parsed,
-    articleId: parsed.articleId ?? '',
+    body: input.body,
+    articleId: input.articleId ?? '',
+    parentId: input.parentId,
     author: {
       name: user.name,
       email: user.email,
