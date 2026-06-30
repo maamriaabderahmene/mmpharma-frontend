@@ -20,11 +20,15 @@ type Props = {
 export const revalidate = 120;
 
 export async function generateStaticParams() {
-  const { allSlugs } = await import('@/lib/server/api/products.service');
-  const slugs = await allSlugs();
-  return slugs.flatMap(({ slug }) =>
-    LocaleValues.map((locale) => ({ locale, slug })),
-  );
+  try {
+    const { allSlugs } = await import('@/lib/server/api/products.service');
+    const slugs = await allSlugs();
+    return slugs.flatMap(({ slug }) =>
+      LocaleValues.map((locale) => ({ locale, slug })),
+    );
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

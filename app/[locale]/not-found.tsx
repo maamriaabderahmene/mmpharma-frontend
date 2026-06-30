@@ -1,11 +1,17 @@
 import Link from 'next/link';
 
 type Props = {
-  params: Promise<{ locale: string }>;
+  params?: Promise<{ locale: string }>;
 };
 
 export default async function NotFoundPage({ params }: Props) {
-  const { locale } = await params;
+  let locale = 'fr-MA';
+  try {
+    const resolved = await params;
+    if (resolved?.locale) locale = resolved.locale;
+  } catch {
+    // fallback during static generation
+  }
 
   return (
     <div className="min-h-screen bg-deep-navy bg-mesh flex flex-col items-center justify-center p-4 text-center">

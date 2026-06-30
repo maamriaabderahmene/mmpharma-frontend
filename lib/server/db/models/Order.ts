@@ -20,7 +20,7 @@ export interface OrderDocument extends Document {
   deletedAt: Date | null;
 }
 
-const orderLineItemSchema = new Schema<OrderLineItem>(
+const orderLineItemSchema = new Schema(
   {
     productId: { type: Schema.Types.ObjectId, ref: 'Product', required: true },
     productName: { type: String, required: true },
@@ -50,7 +50,7 @@ const orderAddressSnapshotSchema = new Schema<OrderAddressSnapshot>(
   { _id: false }
 );
 
-const orderTimelineSchema = new Schema<OrderTimeline>(
+const orderTimelineSchema = new Schema(
   {
     status: { type: String, required: true, enum: OrderStatusValues },
     timestamp: { type: Date, required: true },

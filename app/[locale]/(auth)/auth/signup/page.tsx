@@ -2,7 +2,11 @@ import { Suspense } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import { SignupForm } from '@/components/auth/SignupForm';
 
-export default function SignupPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default function SignupPage({ params }: Props) {
   return (
     <Suspense
       fallback={

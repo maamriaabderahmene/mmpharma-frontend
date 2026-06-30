@@ -34,72 +34,72 @@ const theme = createTheme({
     divider: palette.neutral[200],
   },
   typography: {
-    fontFamily: 'var(--font-inter)',
+    fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
     h1: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 700,
       fontSize: '3.052rem',
       lineHeight: 1.1,
       letterSpacing: '-0.02em',
     },
     h2: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 700,
       fontSize: '2.441rem',
       lineHeight: 1.15,
       letterSpacing: '-0.02em',
     },
     h3: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 700,
       fontSize: '1.953rem',
       lineHeight: 1.2,
       letterSpacing: '-0.015em',
     },
     h4: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 700,
       fontSize: '1.563rem',
       lineHeight: 1.25,
       letterSpacing: '-0.01em',
     },
     h5: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 600,
       fontSize: '1.25rem',
       lineHeight: 1.3,
       letterSpacing: '-0.005em',
     },
     h6: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 600,
       fontSize: '1.05rem',
       lineHeight: 1.4,
       letterSpacing: 0,
     },
     subtitle1: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 400,
       fontSize: '1.125rem',
       lineHeight: 1.6,
       letterSpacing: 0,
     },
     body1: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 400,
       fontSize: '1rem',
       lineHeight: 1.6,
       letterSpacing: 0,
     },
     body2: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 400,
       fontSize: '0.875rem',
       lineHeight: 1.55,
       letterSpacing: 0,
     },
     button: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 600,
       fontSize: '0.875rem',
       lineHeight: 1.4,
@@ -107,7 +107,7 @@ const theme = createTheme({
       textTransform: 'none',
     },
     caption: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 500,
       fontSize: '0.75rem',
       lineHeight: 1.4,
@@ -115,7 +115,7 @@ const theme = createTheme({
       textTransform: 'uppercase',
     },
     overline: {
-      fontFamily: 'var(--font-inter)',
+      fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
       fontWeight: 600,
       fontSize: '0.6875rem',
       lineHeight: 1.4,
@@ -127,7 +127,7 @@ const theme = createTheme({
     MuiCssBaseline: {
       styleOverrides: {
         body: {
-          fontFamily: 'var(--font-inter)',
+          fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           backgroundColor: palette.neutral[50],
           color: palette.neutral[700],
           WebkitFontSmoothing: 'antialiased',
@@ -146,7 +146,7 @@ const theme = createTheme({
         root: {
           minWidth: 120,
           borderRadius: 8,
-          fontFamily: 'var(--font-inter)',
+          fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           fontWeight: 600,
           textTransform: 'none',
         },
@@ -230,7 +230,7 @@ const theme = createTheme({
         root: {
           '& .MuiOutlinedInput-root': {
             borderRadius: 8,
-            fontFamily: 'var(--font-inter)',
+            fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           },
         },
       },
@@ -240,14 +240,14 @@ const theme = createTheme({
       styleOverrides: {
         root: {
           color: palette.primary[500],
-          fontFamily: 'var(--font-inter)',
+          fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
         },
       },
     },
     MuiChip: {
       styleOverrides: {
         root: {
-          fontFamily: 'var(--font-inter)',
+          fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           fontWeight: 500,
           fontSize: '0.75rem',
           letterSpacing: '0.02em',
@@ -259,7 +259,7 @@ const theme = createTheme({
       defaultProps: { enterDelay: 400 },
       styleOverrides: {
         tooltip: {
-          fontFamily: 'var(--font-inter)',
+          fontFamily: "'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif",
           fontSize: '0.75rem',
           borderRadius: 4,
         },

@@ -2,7 +2,11 @@ import { Suspense } from 'react';
 import { Box, CircularProgress } from '@mui/material';
 import { ForgotPasswordForm } from '@/components/auth/ForgotPasswordForm';
 
-export default function ForgotPasswordPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default function ForgotPasswordPage({ params }: Props) {
   return (
     <Suspense
       fallback={

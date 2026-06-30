@@ -14,6 +14,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 }
 
 export default async function PrivacyPage({ params }: Props) {
+  const { locale } = await params;
   return (
     <Container maxWidth="md" sx={{ py: { xs: 6, md: 10 } }}>
       <Typography variant="h1" sx={{ fontSize: { xs: 28, md: 40 }, color: 'primary.main', mb: 6 }}>

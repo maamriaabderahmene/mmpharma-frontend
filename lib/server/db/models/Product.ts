@@ -1,6 +1,7 @@
 import 'server-only';
 import mongoose, { Schema, Document, Types } from 'mongoose';
-import type { ProductMicrobio, CloudinaryAsset } from '@/lib/shared/types/Product';
+import type { ProductMicrobio } from '@/lib/shared/types/Product';
+import type { CloudinaryAsset } from '@/lib/shared/types/MediaAsset';
 import { ProductRangeValues } from '@/lib/shared/constants/ProductRange';
 
 export interface ProductDocument extends Document {

@@ -1,5 +1,4 @@
 import type { Metadata } from 'next';
-import { Inter, JetBrains_Mono } from 'next/font/google';
 import { notFound } from 'next/navigation';
 import { LocaleValues } from '@/lib/shared/constants/Locale';
 import ThemeRegistry from '@/components/providers/ThemeRegistry';
@@ -8,20 +7,6 @@ type Props = {
   children: React.ReactNode;
   params: Promise<{ locale: string }>;
 };
-
-const inter = Inter({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-inter',
-  weight: ['400', '500', '600', '700'],
-});
-
-const jetbrainsMono = JetBrains_Mono({
-  subsets: ['latin'],
-  display: 'swap',
-  variable: '--font-jetbrains-mono',
-  weight: ['400', '600'],
-});
 
 const isRtl = (locale: string) => locale === 'ar-MA';
 
@@ -45,7 +30,7 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={locale} dir={isRtl(locale) ? 'rtl' : 'ltr'} className={`${inter.variable} ${jetbrainsMono.variable}`}>
+    <html lang={locale} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
       <body style={{ margin: 0 }}>
         <ThemeRegistry>
           {children}

@@ -57,7 +57,11 @@ const faqs = [
   },
 ];
 
-export default function FAQPage() {
+type Props = {
+  params: Promise<{ locale: string }>;
+};
+
+export default function FAQPage({ params }: Props) {
   const [search, setSearch] = useState('');
   const [expanded, setExpanded] = useState<string | false>(false);
 

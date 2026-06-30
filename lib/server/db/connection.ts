@@ -3,20 +3,24 @@ import mongoose from 'mongoose';
 import { env } from '@/lib/env';
 
 let isConnected = false;
+let connectionFailed = false;
 
-export async function connectDB(): Promise<void> {
-  if (isConnected) return;
+export async function connectDB(): Promise<boolean> {
+  if (isConnected) return true;
+  if (connectionFailed) return false;
   if (mongoose.connection.readyState >= 1) {
     isConnected = true;
-    return;
+    return true;
   }
   try {
     await mongoose.connect(env.MONGO_URI, { dbName: env.MONGO_DB_NAME });
     isConnected = true;
     console.log(`[DB] Connected to MongoDB — db: ${env.MONGO_DB_NAME}`);
+    return true;
   } catch (err) {
     console.error('[DB] Connection error:', err);
-    throw err;
+    connectionFailed = true;
+    return false;
   }
 }
 
