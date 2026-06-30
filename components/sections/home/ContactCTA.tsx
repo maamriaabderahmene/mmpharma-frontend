@@ -1,5 +1,6 @@
 import { Container, Typography, Button, Stack, Box } from '@mui/material';
 import Link from 'next/link';
+import { palette } from '@/theme/palette';
 
 export function ContactCTA() {
   return (
@@ -7,7 +8,7 @@ export function ContactCTA() {
       component="section"
       sx={{
         py: { xs: 8, md: 12 },
-        bgcolor: 'primary.500',
+        bgcolor: palette.primary[500],
       }}
     >
       <Container maxWidth="lg">
@@ -16,14 +17,14 @@ export function ContactCTA() {
             variant="h2"
             sx={{
               fontSize: { xs: 28, md: 36 },
-              color: 'deepNavy',
+              color: palette.neutral[0],
             }}
           >
             Un projet ? Une question ?
           </Typography>
           <Typography
             variant="body1"
-            sx={{ color: 'rgba(10, 10, 26, 0.7)', maxWidth: 500, lineHeight: 1.7 }}
+            sx={{ color: 'rgba(255, 255, 255, 0.8)', maxWidth: 500, lineHeight: 1.7 }}
           >
             Notre équipe est à votre écoute pour vous accompagner.
           </Typography>
@@ -33,9 +34,12 @@ export function ContactCTA() {
               href="/contact"
               variant="contained"
               sx={{
-                bgcolor: 'deepNavy',
-                color: 'white',
-                '&:hover': { bgcolor: '#1a1a3a' },
+                bgcolor: palette.neutral[0],
+                color: palette.primary[900],
+                fontWeight: 600,
+                borderRadius: 28,
+                px: 4,
+                '&:hover': { bgcolor: palette.neutral[100] },
               }}
             >
               Nous contacter
@@ -45,11 +49,14 @@ export function ContactCTA() {
               href="/contact?intent=quote"
               variant="outlined"
               sx={{
-                borderColor: 'deepNavy',
-                color: 'deepNavy',
+                borderColor: palette.neutral[0],
+                color: palette.neutral[0],
+                fontWeight: 600,
+                borderRadius: 28,
+                px: 4,
                 '&:hover': {
-                  borderColor: 'deepNavy',
-                  bgcolor: 'rgba(10, 10, 26, 0.08)',
+                  borderColor: palette.neutral[0],
+                  bgcolor: 'rgba(255, 255, 255, 0.1)',
                 },
               }}
             >
