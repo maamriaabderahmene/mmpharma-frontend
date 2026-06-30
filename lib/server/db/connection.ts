@@ -6,6 +6,8 @@ let isConnected = false;
 let connectionFailed = false;
 let connecting: Promise<boolean> | null = null;
 
+mongoose.set('bufferTimeoutMS', 500);
+
 export async function connectDB(): Promise<boolean> {
   if (isConnected) return true;
   if (connectionFailed) return false;
@@ -16,7 +18,7 @@ export async function connectDB(): Promise<boolean> {
   }
   const promise: Promise<boolean> = (async (): Promise<boolean> => {
     try {
-      await mongoose.connect(env.MONGO_URI, { dbName: env.MONGO_DB_NAME, serverSelectionTimeoutMS: 2000 });
+      await mongoose.connect(env.MONGO_URI, { dbName: env.MONGO_DB_NAME, serverSelectionTimeoutMS: 1000 });
       isConnected = true;
       console.log(`[DB] Connected to MongoDB — db: ${env.MONGO_DB_NAME}`);
       return true;
