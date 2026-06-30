@@ -5,6 +5,7 @@ import Link from 'next/link';
 import { useParams, usePathname } from 'next/navigation';
 import { ROUTES } from '@/lib/shared/routes';
 import type { SessionPayload } from '@/lib/shared/types/Session';
+import { palette } from '@/theme/palette';
 
 type Props = {
   session: SessionPayload | null;
@@ -31,17 +32,25 @@ export function NavbarClient({ session }: Props) {
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
+  const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
+  const activeColor = palette.primary[500];
+  const hoverBg = 'rgba(14, 90, 167, 0.05)';
+
   return (
     <>
       <header
-        className={`fixed top-0 left-0 right-0 z-40 h-14 md:h-16 flex items-center transition-shadow duration-200 ${
-          scrolled ? 'shadow-md bg-deep-navy/95 backdrop-blur border-b border-gold/10' : 'bg-transparent'
-        }`}
+        className="fixed top-0 left-0 right-0 z-40 h-14 md:h-16 flex items-center transition-shadow duration-200"
+        style={{
+          backgroundColor: scrolled ? palette.neutral[0] : 'transparent',
+          boxShadow: scrolled ? '0 2px 8px rgba(15, 22, 32, 0.08)' : undefined,
+          borderBottom: scrolled ? `1px solid ${palette.neutral[200]}` : undefined,
+        }}
       >
         <div className="mx-auto w-full max-w-7xl px-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <button
-              className="md:hidden p-2 text-gold"
+              className="md:hidden p-2"
+              style={{ color: activeColor }}
               onClick={() => setDrawerOpen(true)}
               aria-label="Menu"
             >
@@ -50,21 +59,23 @@ export function NavbarClient({ session }: Props) {
               </svg>
             </button>
 
-            <Link href={ROUTES.home(locale)} className="font-heading text-xl text-gold tracking-wider logo-glow">
+            <Link href={ROUTES.home(locale)} className="font-heading text-xl" style={{ color: activeColor }}>
               MM Pharma
             </Link>
 
             <nav className="hidden md:flex items-center gap-1">
               {publicLinks.map((link) => {
                 const href = link.href(locale);
-                const isActive = pathname === href || pathname.startsWith(href + '/');
+                const active = isActive(href);
                 return (
                   <Link
                     key={link.label}
                     href={href}
-                    className={`px-3 py-2 rounded text-sm transition-colors ${
-                      isActive ? 'text-gold bg-gold/5' : 'text-gray-300 hover:text-gold'
-                    }`}
+                    className="px-3 py-2 rounded text-sm transition-colors"
+                    style={{
+                      backgroundColor: active ? hoverBg : undefined,
+                      color: active ? activeColor : palette.neutral[700],
+                    }}
                   >
                     {link.label}
                   </Link>
@@ -76,7 +87,8 @@ export function NavbarClient({ session }: Props) {
           <div className="flex items-center gap-3">
             <Link
               href={ROUTES.cart(locale)}
-              className="relative p-2 text-gray-300 hover:text-gold transition-colors"
+              className="relative p-2 transition-colors"
+              style={{ color: palette.neutral[500] }}
               aria-label="Panier"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -87,28 +99,43 @@ export function NavbarClient({ session }: Props) {
 
             {session ? (
               <div className="relative group">
-                <button className="w-8 h-8 rounded-full bg-gold/20 border border-gold/30 flex items-center justify-center text-gold text-sm font-semibold">
+                <button
+                  className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold"
+                  style={{
+                    backgroundColor: 'rgba(14, 90, 167, 0.12)',
+                    border: `1px solid ${palette.neutral[200]}`,
+                    color: activeColor,
+                  }}
+                >
                   {session.email.charAt(0).toUpperCase()}
                 </button>
-                <div className="absolute right-0 top-full mt-2 w-48 py-2 bg-deep-navy border border-gold/10 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all">
-                  <Link href={ROUTES.account(locale)} className="block px-4 py-2 text-sm text-gray-300 hover:text-gold">Mon compte</Link>
-                  <Link href={ROUTES.myOrders(locale)} className="block px-4 py-2 text-sm text-gray-300 hover:text-gold">Mes commandes</Link>
-                  <Link href={ROUTES.myArticles(locale)} className="block px-4 py-2 text-sm text-gray-300 hover:text-gold">Mes articles</Link>
-                  <Link href={ROUTES.myComments(locale)} className="block px-4 py-2 text-sm text-gray-300 hover:text-gold">Mes commentaires</Link>
-                  <hr className="my-2 border-gold/10" />
+                <div
+                  className="absolute right-0 top-full mt-2 w-48 py-2 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all"
+                  style={{ backgroundColor: palette.neutral[0], border: `1px solid ${palette.neutral[200]}` }}
+                >
+                  <Link href={ROUTES.account(locale)} className="block px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mon compte</Link>
+                  <Link href={ROUTES.myOrders(locale)} className="block px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mes commandes</Link>
+                  <Link href={ROUTES.myArticles(locale)} className="block px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mes articles</Link>
+                  <Link href={ROUTES.myComments(locale)} className="block px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mes commentaires</Link>
+                  <hr className="my-2" style={{ borderColor: palette.neutral[200] }} />
                   <form action={`/${locale}/api/auth/signout`} method="POST">
-                    <button type="submit" className="w-full text-left px-4 py-2 text-sm text-red-400 hover:text-red-300">Déconnexion</button>
+                    <button type="submit" className="w-full text-left px-4 py-2 text-sm transition-colors" style={{ color: palette.error[500] }}>Déconnexion</button>
                   </form>
                 </div>
               </div>
             ) : (
               <div className="hidden md:flex items-center gap-2">
-                <Link href={ROUTES.signin(locale)} className="px-4 py-2 text-sm text-gray-300 hover:text-gold transition-colors">
+                <Link href={ROUTES.signin(locale)} className="px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>
                   Connexion
                 </Link>
                 <Link
                   href={ROUTES.signup(locale)}
-                  className="px-4 py-2 text-sm bg-gold/10 border border-gold/30 text-gold rounded hover:bg-gold/20 transition-colors"
+                  className="px-4 py-2 text-sm rounded transition-colors"
+                  style={{
+                    backgroundColor: 'rgba(14, 90, 167, 0.08)',
+                    border: `1px solid ${palette.neutral[300]}`,
+                    color: activeColor,
+                  }}
                 >
                   Inscription
                 </Link>
@@ -121,10 +148,16 @@ export function NavbarClient({ session }: Props) {
       {drawerOpen && (
         <div className="fixed inset-0 z-50 md:hidden">
           <div className="absolute inset-0 bg-black/50" onClick={() => setDrawerOpen(false)} />
-          <aside className="absolute left-0 top-0 bottom-0 w-72 bg-deep-navy border-r border-gold/10 p-6 overflow-y-auto">
+          <aside
+            className="absolute left-0 top-0 bottom-0 w-72 p-6 overflow-y-auto"
+            style={{
+              backgroundColor: palette.neutral[0],
+              borderRight: `1px solid ${palette.neutral[200]}`,
+            }}
+          >
             <div className="flex justify-between items-center mb-8">
-              <span className="font-heading text-lg text-gold">Menu</span>
-              <button onClick={() => setDrawerOpen(false)} className="text-gray-400 hover:text-gold" aria-label="Fermer">
+              <span className="font-heading text-lg" style={{ color: activeColor }}>Menu</span>
+              <button onClick={() => setDrawerOpen(false)} className="transition-colors" style={{ color: palette.neutral[500] }} aria-label="Fermer">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -134,15 +167,17 @@ export function NavbarClient({ session }: Props) {
             <nav className="space-y-1">
               {publicLinks.map((link) => {
                 const href = link.href(locale);
-                const isActive = pathname === href || pathname.startsWith(href + '/');
+                const active = isActive(href);
                 return (
                   <Link
                     key={link.label}
                     href={href}
                     onClick={() => setDrawerOpen(false)}
-                    className={`block px-4 py-3 rounded text-sm transition-colors ${
-                      isActive ? 'text-gold bg-gold/5' : 'text-gray-300 hover:text-gold'
-                    }`}
+                    className="block px-4 py-3 rounded text-sm transition-colors"
+                    style={{
+                      backgroundColor: active ? hoverBg : undefined,
+                      color: active ? activeColor : palette.neutral[700],
+                    }}
                   >
                     {link.label}
                   </Link>
@@ -155,14 +190,22 @@ export function NavbarClient({ session }: Props) {
                 <Link
                   href={ROUTES.signin(locale)}
                   onClick={() => setDrawerOpen(false)}
-                  className="block w-full text-center px-4 py-2 text-sm border border-gold/30 text-gold rounded hover:bg-gold/10 transition-colors"
+                  className="block w-full text-center px-4 py-2 text-sm rounded transition-colors"
+                  style={{
+                    border: `1px solid ${palette.neutral[300]}`,
+                    color: activeColor,
+                  }}
                 >
                   Connexion
                 </Link>
                 <Link
                   href={ROUTES.signup(locale)}
                   onClick={() => setDrawerOpen(false)}
-                  className="block w-full text-center px-4 py-2 text-sm bg-gold text-deep-navy rounded hover:bg-amber transition-colors"
+                  className="block w-full text-center px-4 py-2 text-sm rounded transition-colors"
+                  style={{
+                    backgroundColor: activeColor,
+                    color: palette.neutral[0],
+                  }}
                 >
                   Inscription
                 </Link>
