@@ -65,7 +65,7 @@ export function Hero() {
           {/* Eyebrow Label */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
             <Box sx={{ width: 40, height: 2, bgcolor: palette.accent[500] }} />
-            <Typography variant="overline" sx={{ color: palette.accent[600], fontWeight: 700, letterSpacing: 2, fontSize: '0.85rem' }}>
+            <Typography variant="overline" sx={{ color: palette.accent[700], fontWeight: 700, letterSpacing: 2, fontSize: '0.85rem' }}>
               PHARMACEUTIQUE · MAROC
             </Typography>
           </Box>
