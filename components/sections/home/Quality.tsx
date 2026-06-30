@@ -1,26 +1,30 @@
 import { Container, Typography, Grid, Card, CardContent, Stack, Box } from '@mui/material';
+import ScienceIcon from '@mui/icons-material/Science';
+import VerifiedIcon from '@mui/icons-material/Verified';
+import FactoryIcon from '@mui/icons-material/Factory';
+import { palette } from '@/theme/palette';
 
 const pillars = [
   {
-    icon: '🔬',
+    icon: <ScienceIcon sx={{ fontSize: 48, color: palette.primary[500] }} />,
     heading: 'Contrôle microbiologique',
-    description: 'Chaque lot est analysé en laboratoire pour garantir l\'absence de germes pathogènes, levures et moisissures.',
+    description: "Chaque lot est analysé en laboratoire pour garantir l'absence de germes pathogènes, levures et moisissures.",
   },
   {
-    icon: '📋',
+    icon: <VerifiedIcon sx={{ fontSize: 48, color: palette.secondary[500] }} />,
     heading: 'Conformité réglementaire',
     description: 'Tous nos produits respectent le Journal Officiel n°16 2020 et les normes pharmaceutiques marocaines en vigueur.',
   },
   {
-    icon: '🏭',
+    icon: <FactoryIcon sx={{ fontSize: 48, color: palette.accent[500] }} />,
     heading: 'Fabrication locale',
     description: 'Produits conçus et fabriqués dans notre unité de production au Maroc, avec un contrôle qualité rigoureux à chaque étape.',
   },
-];
+] as const;
 
 export function Quality() {
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[0] }}>
       <Container maxWidth="lg">
         <Typography
           variant="h2"
@@ -28,7 +32,7 @@ export function Quality() {
             textAlign: 'center',
             mb: 6,
             fontSize: { xs: 28, md: 36 },
-            color: 'primary.main',
+            color: palette.primary[900],
           }}
         >
           Une qualité pharmaceutique, lot après lot.
@@ -37,15 +41,13 @@ export function Quality() {
         <Grid container spacing={4}>
           {pillars.map((pillar) => (
             <Grid size={{ xs: 12, md: 4 }} key={pillar.heading}>
-              <Card sx={{ height: '100%', textAlign: 'center', p: 2 }}>
+              <Card sx={{ height: '100%', textAlign: 'center', p: 4, borderRadius: 12 }}>
                 <CardContent>
-                  <Typography variant="h3" sx={{ fontSize: 40, mb: 2 }}>
-                    {pillar.icon}
-                  </Typography>
+                  <Box sx={{ mb: 3 }}>{pillar.icon}</Box>
                   <Typography
                     variant="h5"
                     sx={{
-                      color: 'primary.main',
+                      color: palette.primary[900],
                       mb: 1.5,
                       fontSize: { xs: 18, md: 20 },
                     }}
@@ -54,7 +56,7 @@ export function Quality() {
                   </Typography>
                   <Typography
                     variant="body2"
-                    sx={{ color: 'text.secondary', lineHeight: 1.7 }}
+                    sx={{ color: palette.neutral[700], lineHeight: 1.7 }}
                   >
                     {pillar.description}
                   </Typography>

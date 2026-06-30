@@ -1,17 +1,18 @@
 import { Container, Typography, Grid, Card, CardContent, Box } from '@mui/material';
 import Link from 'next/link';
+import { palette } from '@/theme/palette';
 
 const ranges = [
   { id: 'hygiene', name: 'Hygiène', description: 'Savons, gels et solutions hydroalcooliques pour les soins et la prophylaxie.', count: 8 },
   { id: 'detergent', name: 'Détergents', description: 'Nettoyants puissants pour les surfaces, les sols et le linge.', count: 7 },
   { id: 'disinfectant', name: 'Désinfectants', description: 'Solutions bactéricides, virucides et fongicides à large spectre.', count: 10 },
-  { id: 'inox', name: 'Inox', description: 'Produits dédiés à l\'entretien et à la protection des surfaces inox.', count: 4 },
+  { id: 'inox', name: 'Inox', description: "Produits dédiés à l'entretien et à la protection des surfaces inox.", count: 4 },
   { id: 'misc', name: 'Divers', description: 'Accessoires et consommables complémentaires pour professionnels.', count: 3 },
-];
+] as const;
 
 export function Ranges() {
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[0] }}>
       <Container maxWidth="lg">
         <Typography
           variant="h2"
@@ -19,7 +20,7 @@ export function Ranges() {
             textAlign: 'center',
             mb: 6,
             fontSize: { xs: 28, md: 36 },
-            color: 'primary.main',
+            color: palette.primary[900],
           }}
         >
           Nos 5 gammes
@@ -34,12 +35,13 @@ export function Ranges() {
                 sx={{
                   textDecoration: 'none',
                   height: '100%',
-                  transition: 'all 0.3s ease',
+                  transition: 'all 200ms cubic-bezier(0.2, 0, 0, 1)',
                   cursor: 'pointer',
+                  borderRadius: 12,
                   '&:hover': {
-                    borderColor: 'primary.main',
+                    borderColor: palette.primary[500],
                     transform: 'translateY(-4px)',
-                    boxShadow: '0 12px 40px rgba(212, 168, 83, 0.15)',
+                    boxShadow: '0 12px 40px rgba(14, 90, 167, 0.12)',
                   },
                 }}
               >
@@ -47,7 +49,7 @@ export function Ranges() {
                   <Typography
                     variant="h5"
                     sx={{
-                      color: 'primary.main',
+                      color: palette.primary[900],
                       mb: 1.5,
                       fontSize: { xs: 20, md: 22 },
                     }}
@@ -56,14 +58,11 @@ export function Ranges() {
                   </Typography>
                   <Typography
                     variant="body2"
-                    sx={{ color: 'text.secondary', mb: 2, lineHeight: 1.6 }}
+                    sx={{ color: palette.neutral[700], mb: 2, lineHeight: 1.6 }}
                   >
                     {range.description}
                   </Typography>
-                  <Typography
-                    variant="caption"
-                    sx={{ color: 'neutral.500' }}
-                  >
+                  <Typography variant="caption" sx={{ color: palette.neutral[500] }}>
                     {range.count} produits
                   </Typography>
                 </CardContent>

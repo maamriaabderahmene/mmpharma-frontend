@@ -1,28 +1,29 @@
 'use client';
 
 import { Container, Typography, Grid, Card, CardContent, Avatar, Stack, Box } from '@mui/material';
+import { palette } from '@/theme/palette';
 
 const testimonials = [
   {
     name: 'Dr. Fatima Zohra',
     role: 'Directrice, Clinique Atlas',
-    quote: 'Les solutions de MM Pharma nous accompagnent au quotidien. Leur qualité pharmaceutique est irréprochable et la livraison est toujours fiable.',
+    quote: "Les solutions de MM Pharma nous accompagnent au quotidien. Leur qualité pharmaceutique est irréprochable et la livraison est toujours fiable.",
   },
   {
     name: 'Karim Benjelloun',
     role: 'Responsable Achats, Groupe Hôtelier',
-    quote: 'Un partenaire de confiance pour l\'hygiène de nos établissements. La gamme est complète et le rapport qualité-prix est excellent.',
+    quote: "Un partenaire de confiance pour l'hygiène de nos établissements. La gamme est complète et le rapport qualité-prix est excellent.",
   },
   {
     name: 'Nadia El Fassi',
     role: 'Pharmacienne, Officine',
-    quote: 'Je recommande MM Pharma à mes patients pour leurs besoins en hygiène et désinfection. Des produits fabriqués au Maroc d\'une qualité exceptionnelle.',
+    quote: "Je recommande MM Pharma à mes patients pour leurs besoins en hygiène et désinfection. Des produits fabriqués au Maroc d'une qualité exceptionnelle.",
   },
-];
+] as const;
 
 export function Testimonials() {
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[50] }}>
       <Container maxWidth="lg">
         <Typography
           variant="h2"
@@ -30,7 +31,7 @@ export function Testimonials() {
             textAlign: 'center',
             mb: 6,
             fontSize: { xs: 28, md: 36 },
-            color: 'primary.main',
+            color: palette.primary[900],
           }}
         >
           Ils nous font confiance
@@ -39,30 +40,28 @@ export function Testimonials() {
         <Grid container spacing={4}>
           {testimonials.map((t) => (
             <Grid size={{ xs: 12, md: 4 }} key={t.name}>
-              <Card sx={{ height: '100%', p: 2 }}>
+              <Card sx={{ height: '100%', p: 4, borderRadius: 12 }}>
                 <CardContent>
                   <Typography
-                    variant="body2"
+                    variant="body1"
                     sx={{
-                      color: 'text.secondary',
+                      color: palette.neutral[700],
                       fontStyle: 'italic',
                       lineHeight: 1.7,
                       mb: 3,
-                      '&::before': { content: '"\u201C"' },
-                      '&::after': { content: '"\u201D"' },
                     }}
                   >
-                    {' '}{t.quote}
+                    " {t.quote} "
                   </Typography>
                   <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-                    <Avatar sx={{ bgcolor: 'primary.main', color: 'deepNavy' }}>
+                    <Avatar sx={{ bgcolor: palette.primary[500], color: palette.neutral[0] }}>
                       {t.name.charAt(0)}
                     </Avatar>
                     <Box>
-                      <Typography variant="body2" sx={{ color: 'white', fontWeight: 600 }}>
+                      <Typography variant="body2" sx={{ color: palette.primary[900], fontWeight: 600 }}>
                         {t.name}
                       </Typography>
-                      <Typography variant="caption" sx={{ color: 'neutral.500' }}>
+                      <Typography variant="caption" sx={{ color: palette.neutral[500] }}>
                         {t.role}
                       </Typography>
                     </Box>
