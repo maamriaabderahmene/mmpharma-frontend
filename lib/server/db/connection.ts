@@ -6,8 +6,6 @@ let isConnected = false;
 let connectionFailed = false;
 let connecting: Promise<boolean> | null = null;
 
-mongoose.set('bufferCommands', false);
-
 export async function connectDB(): Promise<boolean> {
   if (isConnected) return true;
   if (connectionFailed) return false;

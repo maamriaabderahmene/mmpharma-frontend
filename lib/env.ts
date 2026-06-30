@@ -3,7 +3,10 @@ import { z } from 'zod';
 
 const envSchema = z.object({
   // App
-  MMP_APP_URL: z.string().url().default('http://localhost:3000'),
+  MMP_APP_URL: z.preprocess(
+    (v) => typeof v === 'string' && !v.startsWith('http://') && !v.startsWith('https://') ? `https://${v}` : v,
+    z.string().url(),
+  ).default('http://localhost:3000'),
   MMP_DEFAULT_LOCALE: z.string().default('fr-MA'),
   MMP_SUPPORTED_LOCALES: z.string().default('fr-MA,ar-MA,en-US'),
 
