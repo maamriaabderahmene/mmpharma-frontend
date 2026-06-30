@@ -90,15 +90,33 @@ export function middleware(request: NextRequest) {
     response.headers.set('X-Request-Id', incomingRequestId);
   }
 
-  // 3. i18n locale detection
-  const preferredLocale = getPreferredLocale(request);
-  if (preferredLocale) {
-    response.cookies.set(LOCALE_COOKIE, preferredLocale, {
+  // 3. i18n locale detection and redirection
+  const preferredLocale = getPreferredLocale(request) || 'fr-MA';
+  
+  let isMissingLocale = false;
+  if (!isApiRoute(pathname)) {
+    isMissingLocale = (LocaleValues as readonly string[]).every(
+      (locale) => !pathname.startsWith(`/${locale}/`) && pathname !== `/${locale}`
+    );
+  }
+
+  if (isMissingLocale) {
+    const redirectUrl = request.nextUrl.clone();
+    redirectUrl.pathname = `/${preferredLocale}${pathname}`;
+    const redirectResponse = NextResponse.redirect(redirectUrl);
+    redirectResponse.cookies.set(LOCALE_COOKIE, preferredLocale, {
       path: '/',
       sameSite: 'lax',
       maxAge: 60 * 60 * 24 * 365,
     });
+    return redirectResponse;
   }
+
+  response.cookies.set(LOCALE_COOKIE, preferredLocale, {
+    path: '/',
+    sameSite: 'lax',
+    maxAge: 60 * 60 * 24 * 365,
+  });
 
   // 4. Auth check
   if (isAuthRoute(pathname)) {

@@ -1,5 +1,6 @@
 import { Container, Typography, Accordion, AccordionSummary, AccordionDetails, Box } from '@mui/material';
 import ExpandMoreIcon from '@mui/icons-material/ExpandMore';
+import { palette } from '@/theme/palette';
 
 const faqs = [
   {
@@ -11,8 +12,8 @@ const faqs = [
     a: 'Nos produits ont une durée de conservation de 24 à 36 mois selon la gamme. La date de péremption est indiquée sur chaque conditionnement.',
   },
   {
-    q: 'Puis-je obtenir une fiche technique complète ?',
-    a: 'Absolument. Chaque produit dispose d\'une fiche technique détaillée incluant la composition, les indications, les résultats microbiologiques. Elles sont téléchargeables depuis la page produit.',
+    q: "Puis-je obtenir une fiche technique complète ?",
+    a: "Absolument. Chaque produit dispose d'une fiche technique détaillée incluant la composition, les indications, les résultats microbiologiques. Elles sont téléchargeables depuis la page produit.",
   },
   {
     q: 'Quels sont les délais et modalités de livraison ?',
@@ -24,13 +25,13 @@ const faqs = [
   },
   {
     q: 'Puis-je commander en tant que particulier ?',
-    a: 'Notre catalogue est principalement destiné aux professionnels de santé, hôteliers, industriels et collectivités. Contactez-nous pour étudier votre besoin spécifique.',
+    a: "Notre catalogue est principalement destiné aux professionnels de santé, hôteliers, industriels et collectivités. Contactez-nous pour étudier votre besoin spécifique.",
   },
-];
+] as const;
 
 export function FAQ() {
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 12 } }}>
+    <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[0] }}>
       <Container maxWidth="md">
         <Typography
           variant="h2"
@@ -38,21 +39,28 @@ export function FAQ() {
             textAlign: 'center',
             mb: 6,
             fontSize: { xs: 28, md: 36 },
-            color: 'primary.main',
+            color: palette.primary[900],
           }}
         >
           Questions fréquentes
         </Typography>
 
         {faqs.map((faq, i) => (
-          <Accordion key={i} sx={{ mb: 1 }}>
-            <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: 'primary.main' }} />}>
-              <Typography variant="body1" sx={{ fontWeight: 600, pr: 2 }}>
+          <Accordion
+            key={i}
+            sx={{
+              mb: 1,
+              borderRadius: 2,
+              '&:before': { display: 'none' },
+            }}
+          >
+            <AccordionSummary expandIcon={<ExpandMoreIcon sx={{ color: palette.primary[500] }} />}>
+              <Typography variant="body1" sx={{ fontWeight: 600, pr: 2, color: palette.primary[900] }}>
                 {faq.q}
               </Typography>
             </AccordionSummary>
             <AccordionDetails>
-              <Typography variant="body2" sx={{ lineHeight: 1.7 }}>
+              <Typography variant="body2" sx={{ lineHeight: 1.7, color: palette.neutral[700] }}>
                 {faq.a}
               </Typography>
             </AccordionDetails>
