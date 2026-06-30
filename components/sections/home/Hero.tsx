@@ -73,7 +73,7 @@ export function Hero() {
                 fontSize: 14,
               }}
             >
-              PHARMACEUTIQUE · MAROC
+              PHARMACEUTIQUE · ALGERIA
             </Typography>
           </Box>
 
