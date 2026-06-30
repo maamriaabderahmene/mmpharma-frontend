@@ -1,5 +1,6 @@
 import type { Metadata } from 'next';
 import { Container, Typography, Box, Grid, Card, CardContent, Stack, TextField, Button } from '@mui/material';
+import { palette } from '@/theme/palette';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -22,19 +23,19 @@ export default async function ContactPage({ params }: Props) {
       <Container maxWidth="lg">
         <Typography
           variant="h1"
-          sx={{ fontSize: { xs: 32, md: 48 }, color: 'primary.main', mb: 2 }}
+          sx={{ fontSize: { xs: 32, md: 48 }, color: palette.primary[900], mb: 2 }}
         >
           Contact
         </Typography>
-        <Typography variant="body1" sx={{ color: 'text.secondary', mb: 8, maxWidth: 500 }}>
+        <Typography variant="body1" sx={{ color: palette.neutral[700], mb: 8, maxWidth: 500 }}>
           Une question, un projet, une demande de devis ? Notre équipe est à votre écoute.
         </Typography>
 
         <Grid container spacing={6}>
           <Grid size={{ xs: 12, md: 7 }}>
-            <Card>
+            <Card sx={{ borderRadius: 12 }}>
               <CardContent sx={{ p: { xs: 3, md: 5 } }}>
-                <Typography variant="h5" sx={{ color: 'primary.main', mb: 4 }}>
+                <Typography variant="h5" sx={{ color: palette.primary[900], mb: 4 }}>
                   Envoyez-nous un message
                 </Typography>
                 <Stack spacing={2.5} component="form" noValidate>
@@ -51,7 +52,7 @@ export default async function ContactPage({ params }: Props) {
                   <TextField label="Téléphone" type="tel" fullWidth />
                   <TextField label="Sujet" required fullWidth />
                   <TextField label="Message" multiline rows={5} required fullWidth />
-                  <Button variant="contained" color="primary" size="large" type="submit">
+                  <Button variant="contained" color="primary" size="large" type="submit" sx={{ fontWeight: 600, borderRadius: 28 }}>
                     Envoyer
                   </Button>
                 </Stack>
@@ -61,34 +62,34 @@ export default async function ContactPage({ params }: Props) {
 
           <Grid size={{ xs: 12, md: 5 }}>
             <Stack spacing={3}>
-              <Card>
+              <Card sx={{ borderRadius: 12 }}>
                 <CardContent sx={{ p: 3 }}>
-                  <Typography variant="overline" sx={{ color: 'primary.main', letterSpacing: 1 }}>
+                  <Typography variant="overline" sx={{ color: palette.primary[500], letterSpacing: 1 }}>
                     Adresse
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
+                  <Typography variant="body2" sx={{ color: palette.neutral[700], mt: 0.5 }}>
                     MM Pharma
                     <br />
-                    Casablanca, ALGERIA
+                    Casablanca, Maroc
                   </Typography>
                 </CardContent>
               </Card>
-              <Card>
+              <Card sx={{ borderRadius: 12 }}>
                 <CardContent sx={{ p: 3 }}>
-                  <Typography variant="overline" sx={{ color: 'primary.main', letterSpacing: 1 }}>
+                  <Typography variant="overline" sx={{ color: palette.primary[500], letterSpacing: 1 }}>
                     Téléphone
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
+                  <Typography variant="body2" sx={{ color: palette.neutral[700], mt: 0.5 }}>
                     +212 5XX XX XX XX
                   </Typography>
                 </CardContent>
               </Card>
-              <Card>
+              <Card sx={{ borderRadius: 12 }}>
                 <CardContent sx={{ p: 3 }}>
-                  <Typography variant="overline" sx={{ color: 'primary.main', letterSpacing: 1 }}>
+                  <Typography variant="overline" sx={{ color: palette.primary[500], letterSpacing: 1 }}>
                     Email
                   </Typography>
-                  <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
+                  <Typography variant="body2" sx={{ color: palette.neutral[700], mt: 0.5 }}>
                     contact@mmpharma.ma
                   </Typography>
                 </CardContent>
@@ -98,14 +99,14 @@ export default async function ContactPage({ params }: Props) {
                   width: '100%',
                   height: 240,
                   borderRadius: 2,
-                  bgcolor: 'neutral.100',
+                  bgcolor: palette.neutral[100],
                   display: 'flex',
                   alignItems: 'center',
                   justifyContent: 'center',
                 }}
               >
-                <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  Carte — Casablanca, ALGERIA
+                <Typography variant="body2" sx={{ color: palette.neutral[500] }}>
+                  Carte — Casablanca, Maroc
                 </Typography>
               </Box>
             </Stack>

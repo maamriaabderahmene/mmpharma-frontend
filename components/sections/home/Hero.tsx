@@ -1,126 +1,123 @@
 import { Container, Typography, Button, Stack, Box } from '@mui/material';
 import Link from 'next/link';
 import { palette } from '@/theme/palette';
-import ScienceIcon from '@mui/icons-material/Science';
-import LocalHospitalIcon from '@mui/icons-material/LocalHospital';
-import SecurityIcon from '@mui/icons-material/Security';
+
+const trustPills = [
+  'Certifié ISO 9001',
+  'Agréé par le ministère de la Santé',
+];
 
 export function Hero() {
   return (
     <Box
       component="section"
       sx={{
-        minHeight: '100vh',
-        display: 'flex',
-        flexDirection: 'column',
-        bgcolor: '#f8fafc',
         position: 'relative',
+        minHeight: { xs: '90vh', md: '100vh' },
+        display: 'flex',
+        alignItems: 'center',
         overflow: 'hidden',
+        '&::before': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          background: `
+            radial-gradient(ellipse 80% 50% at 50% -20%, rgba(14, 90, 167, 0.12), transparent),
+            radial-gradient(ellipse 60% 40% at 80% 20%, rgba(22, 163, 122, 0.08), transparent),
+            radial-gradient(ellipse 50% 60% at 0% 80%, rgba(242, 177, 53, 0.06), transparent)
+          `,
+          zIndex: 0,
+        },
+        '&::after': {
+          content: '""',
+          position: 'absolute',
+          inset: 0,
+          background: `url("data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg opacity="0.03"%3E%3Cpath d="M0 0h60v60H0z" fill="none" stroke="%230E5AA7" stroke-width="1"/%3E%3C/g%3E%3C/svg%3E")`,
+          zIndex: 0,
+        },
       }}
     >
-      {/* Dynamic Animated Mesh Background */}
-      <Box sx={{
-        position: 'absolute',
-        top: 0,
-        left: 0,
-        right: 0,
-        bottom: 0,
-        zIndex: 0,
-        background: 'linear-gradient(135deg, rgba(224,242,254,0.6) 0%, rgba(240,242,255,0.2) 100%)',
-        overflow: 'hidden',
-        pointerEvents: 'none'
-      }}>
-        <Box sx={{
-          position: 'absolute',
-          top: '-10%',
-          right: '-5%',
-          width: '50vw',
-          height: '50vw',
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${palette.primary[500]}15 0%, rgba(255,255,255,0) 70%)`,
-          filter: 'blur(60px)',
-          animation: 'pulse 10s infinite alternate',
-          '@keyframes pulse': {
-            '0%': { transform: 'scale(1) translate(0, 0)' },
-            '100%': { transform: 'scale(1.1) translate(-20px, 20px)' },
-          },
-        }} />
-        <Box sx={{
-          position: 'absolute',
-          bottom: '-20%',
-          left: '-10%',
-          width: '60vw',
-          height: '60vw',
-          borderRadius: '50%',
-          background: `radial-gradient(circle, ${palette.secondary[500]}15 0%, rgba(255,255,255,0) 70%)`,
-          filter: 'blur(80px)',
-          animation: 'pulse 12s infinite alternate-reverse',
-        }} />
-      </Box>
-
-      {/* Hero Content */}
-      <Container maxWidth="lg" sx={{ zIndex: 1, position: 'relative', flex: 1, display: 'flex', alignItems: 'center', py: { xs: 12, md: 20 } }}>
-        <Stack spacing={4} sx={{ maxWidth: '800px' }}>
-
-          {/* Eyebrow Label */}
-          <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-            <Box sx={{ width: 40, height: 2, bgcolor: palette.accent[500] }} />
-            <Typography variant="overline" sx={{ color: palette.accent[700], fontWeight: 700, letterSpacing: 2, fontSize: '0.85rem' }}>
-              PHARMACEUTIQUE · ALGERIA
+      <Container maxWidth="lg" sx={{ position: 'relative', zIndex: 1, py: { xs: 12, md: 16 } }}>
+        <Stack spacing={3} sx={{ maxWidth: 720 }}>
+          <Box
+            sx={{
+              display: 'inline-flex',
+              alignItems: 'center',
+              gap: 2,
+              px: 3,
+              py: 1,
+              borderRadius: 20,
+              bgcolor: 'rgba(242, 177, 53, 0.12)',
+              border: '1px solid rgba(242, 177, 53, 0.3)',
+            }}
+          >
+            <Box
+              sx={{
+                width: 8,
+                height: 8,
+                borderRadius: '50%',
+                bgcolor: palette.accent[500],
+                animation: 'pulse 2s infinite',
+                '@keyframes pulse': {
+                  '0%, 100%': { opacity: 1 },
+                  '50%': { opacity: 0.4 },
+                },
+              }}
+            />
+            <Typography
+              variant="overline"
+              sx={{
+                color: palette.accent[500],
+                letterSpacing: 4,
+                fontWeight: 600,
+                fontSize: 14,
+              }}
+            >
+              PHARMACEUTIQUE · MAROC
             </Typography>
           </Box>
 
-          <Typography variant="h1" sx={{
-            fontSize: { xs: '3rem', md: '5rem', lg: '5.5rem' },
-            fontWeight: 800,
-            lineHeight: 1.05,
-            color: '#0f172a',
-            letterSpacing: '-0.03em',
-            textShadow: '0 4px 20px rgba(255,255,255,0.4)'
-          }}>
-            L'excellence en <br />
-            <Box component="span" sx={{
-              color: palette.primary[600],
-              background: `linear-gradient(to right, ${palette.primary[600]}, ${palette.primary[400]})`,
-              WebkitBackgroundClip: 'text',
-              WebkitTextFillColor: 'transparent',
-              display: 'inline-block'
-            }}>
-              hygiène médicale
-            </Box>
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: { xs: 32, md: 52, lg: 64 },
+              lineHeight: 1.1,
+              color: palette.primary[900],
+              fontWeight: 700,
+              letterSpacing: '-0.02em',
+            }}
+          >
+            L'hygiène et la désinfection, par la science.
           </Typography>
 
-          <Typography variant="h5" sx={{
-            color: '#475569',
-            fontWeight: 400,
-            lineHeight: 1.6,
-            maxWidth: '650px',
-            fontSize: { xs: '1.1rem', md: '1.25rem' }
-          }}>
-            MM Pharma conçoit et fabrique des produits de désinfection avec des standards mondiaux. Protéger la santé publique et les professionnels exige le plus haut niveau d'expertise.
+          <Typography
+            variant="body1"
+            sx={{
+              color: palette.neutral[700],
+              fontSize: { xs: 16, md: 18 },
+              maxWidth: 600,
+              lineHeight: 1.7,
+            }}
+          >
+            MM Pharma conçoit, fabrique et distribue une gamme complète de produits d'hygiène, de désinfection et d'entretien pour les professionnels de santé, l'hôtellerie, l'industrie et les collectivités.
           </Typography>
 
-          <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2.5} sx={{ pt: 2 }}>
+          <Stack spacing={2} sx={{ pt: 1, flexDirection: { xs: 'column', sm: 'row' } }}>
             <Button
               component={Link}
               href="/products"
               variant="contained"
+              color="primary"
               size="large"
               sx={{
-                px: 5,
-                py: 2,
-                borderRadius: '50px',
-                fontSize: '1.1rem',
-                textTransform: 'none',
+                px: 4,
                 fontWeight: 600,
-                boxShadow: `0 10px 25px -5px ${palette.primary[500]}40`,
-                bgcolor: palette.primary[600],
+                borderRadius: 28,
+                transition: 'all 200ms cubic-bezier(0.2, 0, 0, 1)',
                 '&:hover': {
-                  bgcolor: palette.primary[700],
-                  boxShadow: `0 15px 35px -5px ${palette.primary[500]}60`,
-                  transform: 'translateY(-2px)'
+                  transform: 'translateY(-2px)',
+                  boxShadow: '0 12px 24px -6px rgba(14, 90, 167, 0.2)',
                 },
-                transition: 'all 0.3s ease'
               }}
             >
               Découvrir nos produits
@@ -129,56 +126,42 @@ export function Hero() {
               component={Link}
               href="/contact"
               variant="outlined"
+              color="primary"
               size="large"
               sx={{
-                px: 5,
-                py: 2,
-                borderRadius: '50px',
-                fontSize: '1.1rem',
-                textTransform: 'none',
+                px: 4,
                 fontWeight: 600,
+                borderRadius: 28,
                 borderWidth: 2,
-                color: palette.primary[900],
-                borderColor: 'rgba(15, 23, 42, 0.15)',
+                transition: 'all 200ms cubic-bezier(0.2, 0, 0, 1)',
                 '&:hover': {
                   borderWidth: 2,
-                  borderColor: palette.primary[900],
                   bgcolor: 'transparent',
-                  transform: 'translateY(-2px)'
                 },
-                transition: 'all 0.3s ease'
               }}
             >
               Demander un devis
             </Button>
           </Stack>
 
-          {/* Features Bottom Row */}
-          <Box sx={{ display: 'flex', gap: { xs: 3, md: 5 }, mt: { xs: 6, md: 8 }, flexWrap: 'wrap' }}>
-            {[
-              { icon: <ScienceIcon sx={{ color: palette.primary[600] }} />, text: 'Formules certifiées' },
-              { icon: <LocalHospitalIcon sx={{ color: palette.primary[600] }} />, text: 'Normes ISO 9001' },
-              { icon: <SecurityIcon sx={{ color: palette.primary[600] }} />, text: 'Protection 24/7' }
-            ].map((feature, i) => (
-              <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                <Box sx={{
-                  p: 1.5,
-                  borderRadius: '12px',
-                  bgcolor: 'rgba(255,255,255,0.7)',
-                  backdropFilter: 'blur(10px)',
-                  border: '1px solid rgba(255,255,255,0.5)',
-                  boxShadow: '0 4px 15px -3px rgba(0,0,0,0.03)',
-                  display: 'flex'
-                }}>
-                  {feature.icon}
-                </Box>
-                <Typography variant="body1" sx={{ fontWeight: 600, color: '#334155', fontSize: '0.95rem' }}>
-                  {feature.text}
+          <Stack direction="row" spacing={4} sx={{ pt: 4, flexWrap: 'wrap' }}>
+            {trustPills.map((pill) => (
+              <Stack key={pill} direction="row" spacing={1} sx={{ alignItems: 'center' }}>
+                <Box
+                  component="span"
+                  sx={{
+                    width: 6,
+                    height: 6,
+                    borderRadius: '50%',
+                    bgcolor: palette.primary[500],
+                  }}
+                />
+                <Typography variant="caption" sx={{ color: palette.neutral[500], fontWeight: 500 }}>
+                  {pill}
                 </Typography>
-              </Box>
+              </Stack>
             ))}
-          </Box>
-
+          </Stack>
         </Stack>
       </Container>
     </Box>

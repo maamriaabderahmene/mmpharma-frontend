@@ -32,7 +32,7 @@ export function Stats() {
               >
                 {stat.value}
               </Typography>
-              <Typography variant="body2" sx={{ color: 'text.secondary', textAlign: 'center' }}>
+              <Typography variant="body2" sx={{ color: palette.neutral[700], textAlign: 'center' }}>
                 {stat.label}
               </Typography>
             </Stack>
