@@ -3,7 +3,7 @@ import "./globals.css";
 
 export const metadata: Metadata = {
   title: "MM Pharma",
-  description: "Fabricant de produits d'hygiène et de désinfection au Maroc",
+  description: "Fabricant de produits d'hygiène et de désinfection au ALGERIA",
 };
 
 export default function RootLayout({

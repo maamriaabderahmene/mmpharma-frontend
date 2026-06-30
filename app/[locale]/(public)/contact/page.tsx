@@ -69,7 +69,7 @@ export default async function ContactPage({ params }: Props) {
                   <Typography variant="body2" sx={{ color: 'text.secondary', mt: 0.5 }}>
                     MM Pharma
                     <br />
-                    Casablanca, Maroc
+                    Casablanca, ALGERIA
                   </Typography>
                 </CardContent>
               </Card>
@@ -105,7 +105,7 @@ export default async function ContactPage({ params }: Props) {
                 }}
               >
                 <Typography variant="body2" sx={{ color: 'text.secondary' }}>
-                  Carte — Casablanca, Maroc
+                  Carte — Casablanca, ALGERIA
                 </Typography>
               </Box>
             </Stack>

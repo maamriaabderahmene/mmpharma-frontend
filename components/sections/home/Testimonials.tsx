@@ -17,7 +17,7 @@ const testimonials = [
   {
     name: 'Nadia El Fassi',
     role: 'Pharmacienne, Officine',
-    quote: "Je recommande MM Pharma à mes patients pour leurs besoins en hygiène et désinfection. Des produits fabriqués au Maroc d'une qualité exceptionnelle.",
+    quote: "Je recommande MM Pharma à mes patients pour leurs besoins en hygiène et désinfection. Des produits fabriqués au ALGERIA d'une qualité exceptionnelle.",
   },
 ] as const;
 

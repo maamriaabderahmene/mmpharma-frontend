@@ -223,7 +223,7 @@ When authenticated: replace `Sign in | Sign up` with avatar menu: `My account | 
 
 ## 10. SEO keyword universe (seed list — expand per page via DeepSeek API)
 
-- French (primary): produits d'hygiène, gel hydroalcoolique Maroc, savon antibactérien, désinfectant surfaces, gel échographie, eau distillée, glycérine végétale, détergent professionnel, polish inox, pré-désinfectant chirurgical.
+- French (primary): produits d'hygiène, gel hydroalcoolique ALGERIA, savon antibactérien, désinfectant surfaces, gel échographie, eau distillée, glycérine végétale, détergent professionnel, polish inox, pré-désinfectant chirurgical.
 - Arabic (secondary): معقم اليدين, صابون مطهر, مطهر الأسطح, ماء مقطر.
 - English (export): hand sanitizer Morocco, professional disinfectant supplier, stainless steel polish.
 

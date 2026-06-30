@@ -61,25 +61,25 @@ export function Hero() {
       {/* Hero Content */}
       <Container maxWidth="lg" sx={{ zIndex: 1, position: 'relative', flex: 1, display: 'flex', alignItems: 'center', py: { xs: 12, md: 20 } }}>
         <Stack spacing={4} sx={{ maxWidth: '800px' }}>
-          
+
           {/* Eyebrow Label */}
           <Box sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
             <Box sx={{ width: 40, height: 2, bgcolor: palette.accent[500] }} />
             <Typography variant="overline" sx={{ color: palette.accent[700], fontWeight: 700, letterSpacing: 2, fontSize: '0.85rem' }}>
-              PHARMACEUTIQUE · MAROC
+              PHARMACEUTIQUE · ALGERIA
             </Typography>
           </Box>
-          
-          <Typography variant="h1" sx={{ 
-            fontSize: { xs: '3rem', md: '5rem', lg: '5.5rem' }, 
-            fontWeight: 800, 
+
+          <Typography variant="h1" sx={{
+            fontSize: { xs: '3rem', md: '5rem', lg: '5.5rem' },
+            fontWeight: 800,
             lineHeight: 1.05,
             color: '#0f172a',
             letterSpacing: '-0.03em',
             textShadow: '0 4px 20px rgba(255,255,255,0.4)'
           }}>
             L'excellence en <br />
-            <Box component="span" sx={{ 
+            <Box component="span" sx={{
               color: palette.primary[600],
               background: `linear-gradient(to right, ${palette.primary[600]}, ${palette.primary[400]})`,
               WebkitBackgroundClip: 'text',
@@ -89,9 +89,9 @@ export function Hero() {
               hygiène médicale
             </Box>
           </Typography>
-          
-          <Typography variant="h5" sx={{ 
-            color: '#475569', 
+
+          <Typography variant="h5" sx={{
+            color: '#475569',
             fontWeight: 400,
             lineHeight: 1.6,
             maxWidth: '650px',
@@ -99,16 +99,16 @@ export function Hero() {
           }}>
             MM Pharma conçoit et fabrique des produits de désinfection avec des standards mondiaux. Protéger la santé publique et les professionnels exige le plus haut niveau d'expertise.
           </Typography>
-          
+
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2.5} sx={{ pt: 2 }}>
-            <Button 
+            <Button
               component={Link}
               href="/products"
-              variant="contained" 
+              variant="contained"
               size="large"
-              sx={{ 
-                px: 5, 
-                py: 2, 
+              sx={{
+                px: 5,
+                py: 2,
                 borderRadius: '50px',
                 fontSize: '1.1rem',
                 textTransform: 'none',
@@ -125,14 +125,14 @@ export function Hero() {
             >
               Découvrir nos produits
             </Button>
-            <Button 
+            <Button
               component={Link}
               href="/contact"
-              variant="outlined" 
+              variant="outlined"
               size="large"
-              sx={{ 
-                px: 5, 
-                py: 2, 
+              sx={{
+                px: 5,
+                py: 2,
                 borderRadius: '50px',
                 fontSize: '1.1rem',
                 textTransform: 'none',
@@ -161,9 +161,9 @@ export function Hero() {
               { icon: <SecurityIcon sx={{ color: palette.primary[600] }} />, text: 'Protection 24/7' }
             ].map((feature, i) => (
               <Box key={i} sx={{ display: 'flex', alignItems: 'center', gap: 1.5 }}>
-                <Box sx={{ 
-                  p: 1.5, 
-                  borderRadius: '12px', 
+                <Box sx={{
+                  p: 1.5,
+                  borderRadius: '12px',
                   bgcolor: 'rgba(255,255,255,0.7)',
                   backdropFilter: 'blur(10px)',
                   border: '1px solid rgba(255,255,255,0.5)',

@@ -9,7 +9,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
     title: 'À propos',
-    description: 'MM Pharma — fabricant de produits d\'hygiène et de désinfection au Maroc.',
+    description: 'MM Pharma — fabricant de produits d\'hygiène et de désinfection au ALGERIA.',
     alternates: { canonical: `https://www.mmpharma.ma/${locale}/about` },
   };
 }
@@ -31,7 +31,7 @@ export default async function AboutPage({ params }: Props) {
             L'excellence pharmaceutique au service de l'hygiène professionnelle.
           </Typography>
           <Typography variant="body1" sx={{ color: 'text.secondary', lineHeight: 1.8, fontSize: 16, mb: 3 }}>
-            MM Pharma est un fabricant marocain spécialisé dans la conception, la fabrication et la distribution
+            MM Pharma est un fabricant ALGERIAain spécialisé dans la conception, la fabrication et la distribution
             de produits d'hygiène, de désinfection et d'entretien. Nous accompagnons les professionnels de santé,
             l'hôtellerie, l'industrie et les collectivités depuis plus de 15 ans.
           </Typography>
@@ -55,7 +55,7 @@ export default async function AboutPage({ params }: Props) {
               { title: 'Qualité', body: 'Chaque lot est soumis à des contrôles microbiologiques et physico-chimiques rigoureux.' },
               { title: 'Innovation', body: 'Nous investissons dans la R&D pour développer des formulations toujours plus performantes.' },
               { title: 'Engagement', body: 'Certifiés ISO 9001, nous respectons les normes les plus strictes de l\'industrie pharmaceutique.' },
-              { title: 'Proximité', body: 'Fabrication locale au Maroc pour un service réactif et une empreinte carbone réduite.' },
+              { title: 'Proximité', body: 'Fabrication locale au ALGERIA pour un service réactif et une empreinte carbone réduite.' },
             ].map((value) => (
               <Grid size={{ xs: 12, sm: 6, md: 3 }} key={value.title}>
                 <Card sx={{ height: '100%', textAlign: 'center' }}>

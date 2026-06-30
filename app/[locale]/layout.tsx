@@ -18,7 +18,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
   const { locale } = await params;
   return {
     title: { default: 'MM Pharma', template: '%s | MM Pharma' },
-    description: "Fabricant de produits d'hygiène et de désinfection au Maroc",
+    description: "Fabricant de produits d'hygiène et de désinfection au ALGERIA",
     alternates: { canonical: `https://www.mmpharma.ma/${locale}` },
   };
 }

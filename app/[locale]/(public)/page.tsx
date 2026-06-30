@@ -26,12 +26,12 @@ type Props = {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: 'MM Pharma — Fabricant de produits d\'hygiène et de désinfection au Maroc',
-    description: 'MM Pharma conçoit et fabrique des produits d\'hygiène, de désinfection et d\'entretien pour les professionnels au Maroc.',
+    title: 'MM Pharma — Fabricant de produits d\'hygiène et de désinfection au ALGERIA',
+    description: 'MM Pharma conçoit et fabrique des produits d\'hygiène, de désinfection et d\'entretien pour les professionnels au ALGERIA.',
     alternates: { canonical: `https://www.mmpharma.ma/${locale}` },
     openGraph: {
-      title: 'MM Pharma — Fabricant de produits d\'hygiène et de désinfection au Maroc',
-      description: 'MM Pharma conçoit et fabrique des produits d\'hygiène, de désinfection et d\'entretien pour les professionnels au Maroc.',
+      title: 'MM Pharma — Fabricant de produits d\'hygiène et de désinfection au ALGERIA',
+      description: 'MM Pharma conçoit et fabrique des produits d\'hygiène, de désinfection et d\'entretien pour les professionnels au ALGERIA.',
       locale,
       siteName: 'MM Pharma',
     },

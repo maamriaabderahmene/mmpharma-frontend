@@ -16,8 +16,8 @@ import SearchIcon from '@mui/icons-material/Search';
 
 const faqs = [
   {
-    q: 'Vos produits sont-ils conformes à la réglementation marocaine ?',
-    a: 'Oui, tous nos produits respectent le Journal Officiel n°16 2020 et les normes pharmaceutiques en vigueur au Maroc. Nous effectuons des contrôles microbiologiques rigoureux sur chaque lot.',
+    q: 'Vos produits sont-ils conformes à la réglementation ALGERIAaine ?',
+    a: 'Oui, tous nos produits respectent le Journal Officiel n°16 2020 et les normes pharmaceutiques en vigueur au ALGERIA. Nous effectuons des contrôles microbiologiques rigoureux sur chaque lot.',
     category: 'réglementation',
   },
   {
@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     q: 'Quels sont les délais et modalités de livraison ?',
-    a: 'Nous livrons partout au Maroc sous 24 à 72 heures. Un devis personnalisé vous est adressé sous 48 heures ouvrées.',
+    a: 'Nous livrons partout au ALGERIA sous 24 à 72 heures. Un devis personnalisé vous est adressé sous 48 heures ouvrées.',
     category: 'commandes',
   },
   {

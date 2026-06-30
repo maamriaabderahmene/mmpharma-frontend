@@ -13,12 +13,12 @@ const pillars = [
   {
     icon: <VerifiedIcon sx={{ fontSize: 48, color: palette.secondary[500] }} />,
     heading: 'Conformité réglementaire',
-    description: 'Tous nos produits respectent le Journal Officiel n°16 2020 et les normes pharmaceutiques marocaines en vigueur.',
+    description: 'Tous nos produits respectent le Journal Officiel n°16 2020 et les normes pharmaceutiques ALGERIAaines en vigueur.',
   },
   {
     icon: <FactoryIcon sx={{ fontSize: 48, color: palette.accent[500] }} />,
     heading: 'Fabrication locale',
-    description: 'Produits conçus et fabriqués dans notre unité de production au Maroc, avec un contrôle qualité rigoureux à chaque étape.',
+    description: 'Produits conçus et fabriqués dans notre unité de production au ALGERIA, avec un contrôle qualité rigoureux à chaque étape.',
   },
 ] as const;
 
