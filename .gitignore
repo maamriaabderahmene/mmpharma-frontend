@@ -58,6 +58,7 @@ Thumbs.db
 *.sublime-workspace
 
 # ===== Misc =====
+ui-ux-pro-max-skill/
 *.pem
 *.log
 .cache/
