@@ -54,7 +54,6 @@ const mediaAssetSchema = new Schema<MediaAssetDocument>(
 mediaAssetSchema.index({ folder: 1, kind: 1 });
 mediaAssetSchema.index({ productId: 1 });
 mediaAssetSchema.index({ articleId: 1 });
-mediaAssetSchema.index({ publicId: 1 });
 
 const MediaAsset = mongoose.models.MediaAsset ?? mongoose.model<MediaAssetDocument>('MediaAsset', mediaAssetSchema);
 
