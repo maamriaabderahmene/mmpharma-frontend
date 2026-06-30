@@ -16,19 +16,20 @@ export async function connectDB(): Promise<boolean> {
     isConnected = true;
     return true;
   }
-  connecting = (async () => {
+  const promise: Promise<boolean> = (async (): Promise<boolean> => {
     try {
       await mongoose.connect(env.MONGO_URI, { dbName: env.MONGO_DB_NAME, serverSelectionTimeoutMS: 2000 });
       isConnected = true;
       console.log(`[DB] Connected to MongoDB — db: ${env.MONGO_DB_NAME}`);
+      return true;
     } catch (err) {
       connectionFailed = true;
-      throw new Error(`MongoDB connection failed: ${(err as Error)?.message ?? err}`);
-    } finally {
-      connecting = null;
+      console.error('[DB] Connection error:', (err as Error)?.message ?? err);
+      return false;
     }
   })();
-  return connecting;
+  connecting = promise;
+  return promise;
 }
 
 export async function disconnectDB(): Promise<void> {
