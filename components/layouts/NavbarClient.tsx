@@ -33,8 +33,8 @@ export function NavbarClient({ session }: Props) {
   }, []);
 
   const isActive = (href: string) => pathname === href || pathname.startsWith(href + '/');
-  const activeColor = palette.primary[500];
-  const hoverBg = 'rgba(14, 90, 167, 0.05)';
+  const primaryColor = palette.primary[500];
+  const hoverBg = palette.primary[50];
 
   return (
     <>
@@ -46,11 +46,11 @@ export function NavbarClient({ session }: Props) {
           borderBottom: scrolled ? `1px solid ${palette.neutral[200]}` : undefined,
         }}
       >
-        <div className="mx-auto w-full max-w-7xl px-4 flex items-center justify-between">
+        <div className="mx-auto w-full max-w-6xl px-4 flex items-center justify-between">
           <div className="flex items-center gap-6">
             <button
-              className="md:hidden p-2"
-              style={{ color: activeColor }}
+              className="md:hidden w-11 h-11 flex items-center justify-center rounded"
+              style={{ color: primaryColor, minHeight: 44 }}
               onClick={() => setDrawerOpen(true)}
               aria-label="Menu"
             >
@@ -59,7 +59,7 @@ export function NavbarClient({ session }: Props) {
               </svg>
             </button>
 
-            <Link href={ROUTES.home(locale)} className="font-heading text-xl" style={{ color: activeColor }}>
+            <Link href={ROUTES.home(locale)} className="font-heading text-xl" style={{ color: primaryColor, fontWeight: 700 }}>
               MM Pharma
             </Link>
 
@@ -74,7 +74,8 @@ export function NavbarClient({ session }: Props) {
                     className="px-3 py-2 rounded text-sm transition-colors"
                     style={{
                       backgroundColor: active ? hoverBg : undefined,
-                      color: active ? activeColor : palette.neutral[700],
+                      color: active ? primaryColor : palette.neutral[700],
+                      minHeight: 44,
                     }}
                   >
                     {link.label}
@@ -87,8 +88,8 @@ export function NavbarClient({ session }: Props) {
           <div className="flex items-center gap-3">
             <Link
               href={ROUTES.cart(locale)}
-              className="relative p-2 transition-colors"
-              style={{ color: palette.neutral[500] }}
+              className="relative w-11 h-11 flex items-center justify-center rounded"
+              style={{ color: palette.neutral[500], minHeight: 44 }}
               aria-label="Panier"
             >
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
@@ -100,41 +101,43 @@ export function NavbarClient({ session }: Props) {
             {session ? (
               <div className="relative group">
                 <button
-                  className="w-8 h-8 rounded-full flex items-center justify-center text-sm font-semibold"
+                  className="w-10 h-10 rounded-full flex items-center justify-center text-sm font-semibold"
                   style={{
-                    backgroundColor: 'rgba(14, 90, 167, 0.12)',
+                    backgroundColor: palette.primary[50],
                     border: `1px solid ${palette.neutral[200]}`,
-                    color: activeColor,
+                    color: primaryColor,
+                    minHeight: 44,
                   }}
                 >
                   {session.email.charAt(0).toUpperCase()}
                 </button>
                 <div
-                  className="absolute right-0 top-full mt-2 w-48 py-2 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all"
+                  className="absolute right-0 top-full mt-2 w-56 py-2 rounded-lg shadow-xl opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all"
                   style={{ backgroundColor: palette.neutral[0], border: `1px solid ${palette.neutral[200]}` }}
                 >
-                  <Link href={ROUTES.account(locale)} className="block px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mon compte</Link>
-                  <Link href={ROUTES.myOrders(locale)} className="block px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mes commandes</Link>
-                  <Link href={ROUTES.myArticles(locale)} className="block px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mes articles</Link>
-                  <Link href={ROUTES.myComments(locale)} className="block px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mes commentaires</Link>
+                  <Link href={ROUTES.account(locale)} className="block px-4 py-3 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mon compte</Link>
+                  <Link href={ROUTES.myOrders(locale)} className="block px-4 py-3 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mes commandes</Link>
+                  <Link href={ROUTES.myArticles(locale)} className="block px-4 py-3 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mes articles</Link>
+                  <Link href={ROUTES.myComments(locale)} className="block px-4 py-3 text-sm transition-colors" style={{ color: palette.neutral[700] }}>Mes commentaires</Link>
                   <hr className="my-2" style={{ borderColor: palette.neutral[200] }} />
                   <form action={`/${locale}/api/auth/signout`} method="POST">
-                    <button type="submit" className="w-full text-left px-4 py-2 text-sm transition-colors" style={{ color: palette.error[500] }}>Déconnexion</button>
+                    <button type="submit" className="w-full text-left px-4 py-3 text-sm transition-colors" style={{ color: palette.error[500] }}>Déconnexion</button>
                   </form>
                 </div>
               </div>
             ) : (
               <div className="hidden md:flex items-center gap-2">
-                <Link href={ROUTES.signin(locale)} className="px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700] }}>
+                <Link href={ROUTES.signin(locale)} className="px-4 py-2 text-sm transition-colors" style={{ color: palette.neutral[700], minHeight: 44 }}>
                   Connexion
                 </Link>
                 <Link
                   href={ROUTES.signup(locale)}
                   className="px-4 py-2 text-sm rounded transition-colors"
                   style={{
-                    backgroundColor: 'rgba(14, 90, 167, 0.08)',
+                    backgroundColor: palette.primary[50],
                     border: `1px solid ${palette.neutral[300]}`,
-                    color: activeColor,
+                    color: primaryColor,
+                    minHeight: 44,
                   }}
                 >
                   Inscription
@@ -156,8 +159,8 @@ export function NavbarClient({ session }: Props) {
             }}
           >
             <div className="flex justify-between items-center mb-8">
-              <span className="font-heading text-lg" style={{ color: activeColor }}>Menu</span>
-              <button onClick={() => setDrawerOpen(false)} className="transition-colors" style={{ color: palette.neutral[500] }} aria-label="Fermer">
+              <span className="font-heading text-lg" style={{ color: primaryColor, fontWeight: 700 }}>Menu</span>
+              <button onClick={() => setDrawerOpen(false)} className="w-11 h-11 flex items-center justify-center rounded transition-colors" style={{ color: palette.neutral[500], minHeight: 44 }} aria-label="Fermer">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
                   <path d="M18 6L6 18M6 6l12 12" />
                 </svg>
@@ -176,7 +179,8 @@ export function NavbarClient({ session }: Props) {
                     className="block px-4 py-3 rounded text-sm transition-colors"
                     style={{
                       backgroundColor: active ? hoverBg : undefined,
-                      color: active ? activeColor : palette.neutral[700],
+                      color: active ? primaryColor : palette.neutral[700],
+                      minHeight: 44,
                     }}
                   >
                     {link.label}
@@ -193,7 +197,8 @@ export function NavbarClient({ session }: Props) {
                   className="block w-full text-center px-4 py-2 text-sm rounded transition-colors"
                   style={{
                     border: `1px solid ${palette.neutral[300]}`,
-                    color: activeColor,
+                    color: primaryColor,
+                    minHeight: 44,
                   }}
                 >
                   Connexion
@@ -203,8 +208,9 @@ export function NavbarClient({ session }: Props) {
                   onClick={() => setDrawerOpen(false)}
                   className="block w-full text-center px-4 py-2 text-sm rounded transition-colors"
                   style={{
-                    backgroundColor: activeColor,
+                    backgroundColor: primaryColor,
                     color: palette.neutral[0],
+                    minHeight: 44,
                   }}
                 >
                   Inscription

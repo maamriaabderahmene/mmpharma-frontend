@@ -10,24 +10,20 @@ const stats = [
 
 export function Stats() {
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[0] }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 8 }, bgcolor: palette.neutral[0] }}>
       <Container maxWidth="lg">
         <Stack
-          spacing={{ xs: 4, sm: 2 }}
-          divider={<Box sx={{ width: 1, height: 32, borderRight: '1px solid', borderColor: 'rgba(14, 90, 167, 0.15)' }} />}
-          sx={{ flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-around', alignItems: 'center' }}
+          divider={<Box sx={{ width: 1, height: 28, borderRight: '1px solid', borderColor: palette.neutral[200] }} />}
+          sx={{ flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-around', alignItems: 'center', gap: { xs: 4, sm: 2 } }}
         >
           {stats.map((stat) => (
             <Stack key={stat.label} spacing={0.5} sx={{ alignItems: 'center' }}>
               <Typography
                 variant="h3"
                 sx={{
-                  fontSize: { xs: 36, md: 48 },
+                  fontSize: { xs: 32, md: 42 },
                   fontWeight: 700,
-                  background: `linear-gradient(135deg, ${palette.primary[500]}, ${palette.accent[500]})`,
-                  WebkitBackgroundClip: 'text',
-                  WebkitTextFillColor: 'transparent',
-                  backgroundClip: 'text',
+                  color: palette.primary[900],
                 }}
               >
                 {stat.value}

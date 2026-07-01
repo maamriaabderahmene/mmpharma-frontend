@@ -17,19 +17,19 @@ const testimonials = [
   {
     name: 'Nadia El Fassi',
     role: 'Pharmacienne, Officine',
-    quote: "Je recommande MM Pharma à mes patients pour leurs besoins en hygiène et désinfection. Des produits fabriqués au ALGERIA d'une qualité exceptionnelle.",
+    quote: "Je recommande MM Pharma à mes patients pour leurs besoins en hygiène et désinfection. Des produits fabriqués au Maroc d'une qualité exceptionnelle.",
   },
 ] as const;
 
 export function Testimonials() {
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[50] }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 8 } }}>
       <Container maxWidth="lg">
         <Typography
           variant="h2"
           sx={{
             textAlign: 'center',
-            mb: 6,
+            mb: 5,
             fontSize: { xs: 28, md: 36 },
             color: palette.primary[900],
           }}
@@ -37,31 +37,31 @@ export function Testimonials() {
           Ils nous font confiance
         </Typography>
 
-        <Grid container spacing={4}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {testimonials.map((t) => (
             <Grid size={{ xs: 12, md: 4 }} key={t.name}>
-              <Card sx={{ height: '100%', p: 4, borderRadius: 12 }}>
-                <CardContent>
+              <Card sx={{ height: '100%', p: { xs: 3, md: 4 }, borderRadius: 12 }}>
+                <CardContent sx={{ p: 0 }}>
                   <Typography
-                    variant="body1"
+                    variant="body2"
                     sx={{
                       color: palette.neutral[700],
                       fontStyle: 'italic',
                       lineHeight: 1.7,
-                      mb: 3,
+                      mb: 2,
                     }}
                   >
                     " {t.quote} "
                   </Typography>
-                  <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
-                    <Avatar sx={{ bgcolor: palette.primary[500], color: palette.neutral[0] }}>
+                  <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
+                    <Avatar sx={{ width: 32, height: 32, fontSize: 14, bgcolor: palette.primary[500], color: palette.neutral[0] }}>
                       {t.name.charAt(0)}
                     </Avatar>
                     <Box>
-                      <Typography variant="body2" sx={{ color: palette.primary[900], fontWeight: 600 }}>
+                      <Typography variant="body2" sx={{ color: palette.primary[900], fontWeight: 600, fontSize: 14 }}>
                         {t.name}
                       </Typography>
-                      <Typography variant="caption" sx={{ color: palette.neutral[500] }}>
+                      <Typography variant="caption" sx={{ color: palette.neutral[500], fontSize: 12 }}>
                         {t.role}
                       </Typography>
                     </Box>

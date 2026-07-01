@@ -11,7 +11,7 @@ export function EventsTeaser({ event }: Props) {
   if (!event) return null;
 
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[0] }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 8 } }}>
       <Container maxWidth="lg">
         <Typography
           variant="h2"
@@ -27,22 +27,20 @@ export function EventsTeaser({ event }: Props) {
 
         <Box
           sx={{
-            maxWidth: 640,
+            maxWidth: 560,
             mx: 'auto',
-            p: { xs: 4, md: 6 },
-            borderRadius: 2,
-            border: '1px solid',
-            borderColor: 'rgba(14, 90, 167, 0.15)',
-            background: palette.neutral[0],
+            p: { xs: 4, md: 5 },
+            borderRadius: 8,
+            border: `1px solid ${palette.neutral[200]}`,
+            bgcolor: palette.neutral[0],
             textAlign: 'center',
-            boxShadow: '0 4px 12px rgba(15, 22, 32, 0.04)',
           }}
         >
-          <Typography variant="overline" sx={{ color: palette.primary[500], letterSpacing: 2 }}>
+          <Typography variant="overline" sx={{ color: palette.primary[500], letterSpacing: 1, fontSize: 12 }}>
             {new Date(event.startDate).toLocaleDateString('fr-MA', { day: 'numeric', month: 'long', year: 'numeric' })}
           </Typography>
 
-          <Typography variant="h4" sx={{ color: palette.primary[900], my: 2, fontWeight: 600 }}>
+          <Typography variant="h5" sx={{ color: palette.primary[900], my: 2, fontWeight: 600 }}>
             {event.title}
           </Typography>
 
@@ -57,7 +55,7 @@ export function EventsTeaser({ event }: Props) {
             href={`/events/${event.slug}`}
             variant="contained"
             color="primary"
-            sx={{ fontWeight: 600, borderRadius: 28, px: 4 }}
+            sx={{ fontWeight: 600, borderRadius: 8, px: 4, height: 44 }}
           >
             S'inscrire
           </Button>

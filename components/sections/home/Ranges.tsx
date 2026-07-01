@@ -12,13 +12,13 @@ const ranges = [
 
 export function Ranges() {
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[0] }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 8 }, bgcolor: palette.neutral[0] }}>
       <Container maxWidth="lg">
         <Typography
           variant="h2"
           sx={{
             textAlign: 'center',
-            mb: 6,
+            mb: 5,
             fontSize: { xs: 28, md: 36 },
             color: palette.primary[900],
           }}
@@ -26,32 +26,30 @@ export function Ranges() {
           Nos 5 gammes
         </Typography>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {ranges.map((range) => (
-            <Grid size={{ xs: 12, sm: 6, md: 4, lg: 4 }} key={range.id}>
+            <Grid size={{ xs: 12, sm: 6, md: 4 }} key={range.id}>
               <Card
                 component={Link}
                 href={`/products?range=${range.id}`}
                 sx={{
                   textDecoration: 'none',
                   height: '100%',
-                  transition: 'all 200ms cubic-bezier(0.2, 0, 0, 1)',
+                  transition: 'all 150ms ease',
                   cursor: 'pointer',
                   borderRadius: 12,
                   '&:hover': {
                     borderColor: palette.primary[500],
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 12px 40px rgba(14, 90, 167, 0.12)',
                   },
                 }}
               >
-                <CardContent sx={{ p: 4 }}>
+                <CardContent sx={{ p: { xs: 3, md: 4 } }}>
                   <Typography
                     variant="h5"
                     sx={{
                       color: palette.primary[900],
                       mb: 1.5,
-                      fontSize: { xs: 20, md: 22 },
+                      fontSize: { xs: 18, md: 20 },
                     }}
                   >
                     {range.name}

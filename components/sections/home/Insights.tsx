@@ -9,9 +9,9 @@ type Props = {
 
 export function Insights({ articles }: Props) {
   return (
-    <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[0] }}>
+    <Box component="section" sx={{ py: { xs: 6, md: 8 } }}>
       <Container maxWidth="lg">
-        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 6, flexWrap: 'wrap', gap: 2 }}>
+        <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 5, flexWrap: 'wrap', gap: 2 }}>
           <Typography
             variant="h2"
             sx={{
@@ -26,13 +26,13 @@ export function Insights({ articles }: Props) {
             href="/blog"
             variant="outlined"
             color="primary"
-            sx={{ fontWeight: 600, borderRadius: 28, px: 3 }}
+            sx={{ fontWeight: 600, borderRadius: 8, px: 3 }}
           >
             Tous les articles
           </Button>
         </Box>
 
-        <Grid container spacing={3}>
+        <Grid container spacing={{ xs: 2, md: 3 }}>
           {articles.map((article) => (
             <Grid size={{ xs: 12, sm: 6, md: 4 }} key={article.id}>
               <Card
@@ -41,20 +41,15 @@ export function Insights({ articles }: Props) {
                 sx={{
                   textDecoration: 'none',
                   height: '100%',
-                  transition: 'all 200ms cubic-bezier(0.2, 0, 0, 1)',
+                  transition: 'all 150ms ease',
                   cursor: 'pointer',
                   borderRadius: 12,
-                  '&:hover': {
-                    borderColor: palette.primary[500],
-                    transform: 'translateY(-4px)',
-                    boxShadow: '0 12px 40px rgba(14, 90, 167, 0.12)',
-                  },
                 }}
               >
                 <Box
                   sx={{
-                    height: 180,
-                    background: 'linear-gradient(135deg, rgba(14, 90, 167, 0.08), rgba(22, 163, 122, 0.05))',
+                    height: 160,
+                    bgcolor: palette.neutral[50],
                     display: 'flex',
                     alignItems: 'center',
                     justifyContent: 'center',
@@ -65,7 +60,7 @@ export function Insights({ articles }: Props) {
                     {article.heroImage?.url ? 'Image' : 'Illustration'}
                   </Typography>
                 </Box>
-                <CardContent sx={{ p: 3 }}>
+                <CardContent sx={{ p: { xs: 2, md: 3 } }}>
                   <Typography
                     variant="overline"
                     sx={{ color: palette.neutral[500], letterSpacing: 1, fontSize: 11 }}
@@ -78,7 +73,7 @@ export function Insights({ articles }: Props) {
                       color: palette.primary[900],
                       mt: 0.5,
                       mb: 1,
-                      fontSize: 16,
+                      fontSize: 15,
                       lineHeight: 1.3,
                     }}
                   >
