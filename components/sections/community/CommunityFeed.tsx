@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Typography,
@@ -45,11 +45,7 @@ export function CommunityFeed({ locale }: Props) {
   const [body, setBody] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    fetchPosts();
-  }, []);
-
-  const fetchPosts = async () => {
+  const fetchPosts = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/community/posts`);
@@ -62,7 +58,11 @@ export function CommunityFeed({ locale }: Props) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    fetchPosts();
+  }, [fetchPosts]);
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();

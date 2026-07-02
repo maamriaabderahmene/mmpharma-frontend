@@ -57,7 +57,7 @@ export function EventsTeaser({ event }: Props) {
             color="primary"
             sx={{ fontWeight: 600, borderRadius: 8, px: 4, height: 44 }}
           >
-            S'inscrire
+            S&apos;inscrire
           </Button>
         </Box>
       </Container>

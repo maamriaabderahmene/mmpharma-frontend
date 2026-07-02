@@ -1,0 +1,17 @@
+{
+  "id": "019f2355-3756-7588-b1f1-3ece5dadb7f7",
+  "name": "exit",
+  "description": "exit",
+  "status": "draft",
+  "worktree": {
+    "path": "/home/maamria/Desktop/MMPHARMA/prod/mmpharma-frontend",
+    "branch": "master",
+    "commit": "46543caa9e0eb5c0e6ae49d4ac749919e55be091"
+  },
+  "scoping": {},
+  "phases": [],
+  "decisions": [],
+  "memories": [],
+  "createdAt": "2026-07-02T14:56:55.126Z",
+  "updatedAt": "2026-07-02T14:56:55.126Z"
+}

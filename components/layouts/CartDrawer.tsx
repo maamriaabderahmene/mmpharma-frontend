@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useParams, useRouter } from 'next/navigation';
 import Link from 'next/link';
 import {
@@ -34,11 +34,7 @@ export function CartDrawer({ open, onClose }: Props) {
   const [items, setItems] = useState<CartLineItem[]>([]);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    if (open) fetchCart();
-  }, [open]);
-
-  const fetchCart = async () => {
+  const fetchCart = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch('/api/cart');
@@ -51,7 +47,11 @@ export function CartDrawer({ open, onClose }: Props) {
     } finally {
       setLoading(false);
     }
-  };
+  }, []);
+
+  useEffect(() => {
+    if (open) fetchCart();
+  }, [open, fetchCart]);
 
   const updateQuantity = async (productId: string, quantity: number) => {
     if (quantity < 1) return;

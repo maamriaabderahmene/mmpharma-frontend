@@ -1,6 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
-import { Container, Box, Grid, Breadcrumbs, Link, Typography } from '@mui/material';
+import { Container, Grid, Breadcrumbs, Link, Typography } from '@mui/material';
 import NextLink from 'next/link';
 import { LocaleValues } from '@/lib/shared/constants/Locale';
 import { getTranslations } from '@/lib/i18n/server';
@@ -73,46 +73,52 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
+  let product: Awaited<ReturnType<typeof import('@/lib/server/api/products.service').getDetail>>['product'];
+  let related: Awaited<ReturnType<typeof import('@/lib/server/api/products.service').getDetail>>['related'];
+  let seoData: SeoEntry | null = null;
+
   try {
     const { getDetail } = await import('@/lib/server/api/products.service');
-    const { product, related, seo } = await getDetail(slug, locale);
-    const seoData = seo as SeoEntry | null;
-
-    const t = await getTranslations(locale, 'nav');
-
-    return (
-      <>
-        <ProductJsonLd product={product} locale={locale} />
-
-        <Container maxWidth="lg" sx={{ pt: { xs: 3, md: 5 }, pb: 6 }}>
-          <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
-            <Link component={NextLink} underline="hover" color="inherit" href={`/${locale}`}>
-              {t('home')}
-            </Link>
-            <Link component={NextLink} underline="hover" color="inherit" href={`/${locale}/products`}>
-              {t('products')}
-            </Link>
-            <Typography color="text.primary">{product.name}</Typography>
-          </Breadcrumbs>
-
-          <Grid container spacing={{ xs: 3, md: 6 }}>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <ProductGallery images={product.images} name={product.name} />
-            </Grid>
-            <Grid size={{ xs: 12, md: 6 }}>
-              <ProductMeta product={product} locale={locale} />
-            </Grid>
-          </Grid>
-
-          <ProductTabs product={product} locale={locale} />
-        </Container>
-
-        <RelatedProducts products={related} locale={locale} />
-
-        {seoData?.hiddenHtml && <HiddenSEO html={seoData.hiddenHtml} />}
-      </>
-    );
+    const result = await getDetail(slug, locale);
+    product = result.product;
+    related = result.related;
+    seoData = result.seo as SeoEntry | null;
   } catch {
     notFound();
   }
+
+  const t = await getTranslations(locale, 'nav');
+
+  return (
+    <>
+      <ProductJsonLd product={product} locale={locale} />
+
+      <Container maxWidth="lg" sx={{ pt: { xs: 3, md: 5 }, pb: 6 }}>
+        <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
+          <Link component={NextLink} underline="hover" color="inherit" href={`/${locale}`}>
+            {t('home')}
+          </Link>
+          <Link component={NextLink} underline="hover" color="inherit" href={`/${locale}/products`}>
+            {t('products')}
+          </Link>
+          <Typography color="text.primary">{product.name}</Typography>
+        </Breadcrumbs>
+
+        <Grid container spacing={{ xs: 3, md: 6 }}>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <ProductGallery images={product.images} name={product.name} />
+          </Grid>
+          <Grid size={{ xs: 12, md: 6 }}>
+            <ProductMeta product={product} locale={locale} />
+          </Grid>
+        </Grid>
+
+        <ProductTabs product={product} locale={locale} />
+      </Container>
+
+      <RelatedProducts products={related} locale={locale} />
+
+      {seoData?.hiddenHtml && <HiddenSEO html={seoData.hiddenHtml} />}
+    </>
+  );
 }

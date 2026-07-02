@@ -1,17 +1,363 @@
 {
   "id": "019f2331-fc83-70a1-83da-52295ad12070",
-  "name": "hi",
+  "name": "Full Frontend Modernization",
   "description": "hi",
-  "status": "draft",
+  "status": "paused",
   "worktree": {
     "path": "/home/maamria/Desktop/MMPHARMA/prod/mmpharma-frontend",
     "branch": "master",
     "commit": "9090f1146ec86ea72f091c2f16399442ae69f095"
   },
-  "scoping": {},
-  "phases": [],
+  "scoping": {
+    "goal": {
+      "answer": "Execute the complete MM Pharma frontend modernization across the Next.js App Router, implementing the design system, navbar/footer, SEO/titles, products UX, home sections, admin dashboard, and build hardening defined in the project specs.",
+      "confirmedAt": "2026-07-02T14:40:13.827Z"
+    },
+    "criteria": {
+      "answer": "Admin dashboard exists with guarded route group, shell, and overview KPIs; verified by build and manual navigation check\nNavbar and footer match spec-compliant, accessible, token-driven design; verified by visual QA and lint\nDesign tokens centralized in `theme/` and applied; verified by `scripts/check-tokens.ts` or grep audit\nPage titles/metadata follow centralized `lib/seo` convention across all locales; verified by build output and manual inspection\nProducts pages stabilized with safe DB wrappers, error/empty states, and modernized catalog UI; verified by happy-path test and build\nHome page and key sections refreshed with new primitives; verified by visual QA and Lighthouse\nBuild, lint, and typecheck all pass with warnings mitigated; verified by `next build`, `next lint`, and `tsc --noEmit`\nRTL/responsive/a11y validated across locales; verified by Lighthouse >= 90 on key pages",
+      "confirmedAt": "2026-07-02T14:40:13.827Z"
+    },
+    "constraints": {
+      "answer": "No new runtime dependencies without explicit user approval, Preserve existing App Router architecture and server/client boundaries, Follow website specs in `website specs/99-rules/*` for spacing, tokens, navbar behavior, and metadata formulas, Maintain tri-locale support (`fr-MA`, `ar-MA`, `en-US`) and RTL behavior, Keep changes surgical but complete across shared layout surfaces",
+      "confirmedAt": "2026-07-02T14:40:13.827Z"
+    },
+    "phases": {
+      "answer": "Baseline and build hardening, Design system primitives, Navbar and footer modernization, Page titles and SEO metadata, Products page stabilization and modernization, Admin dashboard implementation, Final polish and validation",
+      "confirmedAt": "2026-07-02T14:40:13.827Z"
+    },
+    "assumptions": {
+      "answer": "User has approved the full modernization plan described in AGENTS.md and confirmed completion criteria; The MongoDB URI and Cloudinary credentials exist in the runtime environment even if not present locally; MUI 9 + React 19 + Tailwind 4 are the target stack and will not be downgraded; Admin role constant `UserRole.ADMIN` exists in the codebase (to be verified during Phase 1); Design direction is *Laboratoire éditorial* with navy/gold/bone palette and Fraunces/Inter/JetBrains Mono type system",
+      "confirmedAt": "2026-07-02T14:40:13.827Z"
+    }
+  },
+  "phases": [
+    {
+      "id": "phase-1",
+      "index": 1,
+      "name": "Baseline and build hardening",
+      "goal": "Stabilize the build, establish token compliance baseline, and create the foundation for modernization",
+      "description": "Wrap DB calls with safe wrappers, flip products to force-dynamic, initialize ESLint, add env example, inventory layout styling violations, and define the token system target before any UI changes.",
+      "parallel": false,
+      "status": "active",
+      "steps": [
+        {
+          "id": "step-1",
+          "index": 1,
+          "description": "Inventory layout/page styling primitives and map violations (inline hex, non-grid spacing, missing tokens)",
+          "status": "verified",
+          "verification": {
+            "command": "grep -R \"style={{\" components/ app/ | head -20 && grep -R \"#[0-9A-Fa-f]\" components/layouts | head -20",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false,
+          "startedAt": "2026-07-02T14:41:46.985Z",
+          "completedAt": "2026-07-02T14:54:04.180Z",
+          "result": {
+            "success": true,
+            "exitCode": 0,
+            "stdout": "",
+            "stderr": "",
+            "completedAt": "2026-07-02T14:54:04.180Z"
+          }
+        },
+        {
+          "id": "step-2",
+          "index": 2,
+          "description": "Wrap products search/detail in safe wrappers; switch /products to force-dynamic; guard generateStaticParams",
+          "status": "pending",
+          "verification": {
+            "command": "next build exits 0 and /products loads without DB connection warnings",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false,
+          "startedAt": "2026-07-02T14:54:55.749Z"
+        },
+        {
+          "id": "step-3",
+          "index": 3,
+          "description": "Initialize ESLint config, add typecheck script, update .env.example",
+          "status": "pending",
+          "verification": {
+            "command": "npm run lint && npx tsc --noEmit",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        }
+      ],
+      "startedAt": "2026-07-02T14:40:18.763Z"
+    },
+    {
+      "id": "phase-2",
+      "index": 2,
+      "name": "Design system primitives",
+      "goal": "Create the centralized design system and reusable UI primitives",
+      "description": "Add CSS tokens (colors, type, motion), next/font setup, and primitives (Container, SectionLabel, Button, Chip, Heading, Rule, Marquee, GrainLayer, ScrollProgress, Reveal, Magnetic).",
+      "parallel": false,
+      "status": "planned",
+      "steps": [
+        {
+          "id": "step-1",
+          "index": 1,
+          "description": "Create theme tokens files: theme/tokens.css, theme/motion.ts, theme/typography.ts",
+          "status": "pending",
+          "verification": {
+            "command": "ls theme/tokens.css theme/motion.ts theme/typography.ts",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        },
+        {
+          "id": "step-2",
+          "index": 2,
+          "description": "Wire fonts via next/font/google (Fraunces, Inter Tight, JetBrains Mono)",
+          "status": "pending",
+          "verification": {
+            "command": "grep -R \"Fraunces\\|Inter Tight\\|JetBrains Mono\" app/",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        },
+        {
+          "id": "step-3",
+          "index": 3,
+          "description": "Build primitives in components/ui/primitives/",
+          "status": "pending",
+          "verification": {
+            "command": "ls components/ui/primitives/ | wc -l && next build",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        }
+      ]
+    },
+    {
+      "id": "phase-3",
+      "index": 3,
+      "name": "Navbar and footer modernization",
+      "goal": "Rewrite shared layout shell to match the spec-compliant editorial aesthetic",
+      "description": "Rebuild NavbarClient with transparent/solid/condensed states, top strip, scroll progress, mobile drawer, and accessibility; rewrite Footer as editorial colophon with manifesto, newsletter, certifications, and parallax wordmark.",
+      "parallel": false,
+      "status": "planned",
+      "steps": [
+        {
+          "id": "step-1",
+          "index": 1,
+          "description": "Rewrite navbar components and supporting layout integration",
+          "status": "pending",
+          "verification": {
+            "command": "next build and visual smoke test of navbar states",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        },
+        {
+          "id": "step-2",
+          "index": 2,
+          "description": "Rewrite footer components and layout integration",
+          "status": "pending",
+          "verification": {
+            "command": "next build and visual smoke test of footer sections",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        }
+      ]
+    },
+    {
+      "id": "phase-4",
+      "index": 4,
+      "name": "Page titles and SEO metadata",
+      "goal": "Centralize metadata generation across all locales",
+      "description": "Create lib/seo helpers (title, alternates, defaults), add PageHeader pattern, and apply consistent metadata to public/account/admin pages with canonical + hreflang + x-default.",
+      "parallel": false,
+      "status": "planned",
+      "steps": [
+        {
+          "id": "step-1",
+          "index": 1,
+          "description": "Create lib/seo/ helpers and apply to public pages",
+          "status": "pending",
+          "verification": {
+            "command": "grep -R \"buildPageMetadata\" app/[locale]/ --include=\"*.tsx\" | wc -l && next build",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        },
+        {
+          "id": "step-2",
+          "index": 2,
+          "description": "Apply PageHeader pattern to products, about, blog, contact, account, admin",
+          "status": "pending",
+          "verification": {
+            "command": "grep -R \"PageHeader\" app/[locale]/ --include=\"*.tsx\" | wc -l",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        }
+      ]
+    },
+    {
+      "id": "phase-5",
+      "index": 5,
+      "name": "Products page stabilization and modernization",
+      "goal": "Fix products reliability and modernize catalog/detail UX",
+      "description": "Apply safe service wrappers, modernize catalog header/filters/results/pagination/cards, add empty/error/skeleton states, modernize product detail, and harden the build.",
+      "parallel": false,
+      "status": "planned",
+      "steps": [
+        {
+          "id": "step-1",
+          "index": 1,
+          "description": "Stabilize products service and page data fetching",
+          "status": "pending",
+          "verification": {
+            "command": "next build and /products loads with DB unavailable fallback",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        },
+        {
+          "id": "step-2",
+          "index": 2,
+          "description": "Implement modern catalog components and product detail refresh",
+          "status": "pending",
+          "verification": {
+            "command": "visual QA on /products and /products/[slug] and Lighthouse check",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        }
+      ]
+    },
+    {
+      "id": "phase-6",
+      "index": 6,
+      "name": "Admin dashboard implementation",
+      "goal": "Build the initial real admin dashboard shell with guarded access",
+      "description": "Create (admin) route group, role guard, admin shell/sidebar/topbar, overview KPIs, data table primitives, and product/article/event admin CRUD stubs.",
+      "parallel": false,
+      "status": "planned",
+      "steps": [
+        {
+          "id": "step-1",
+          "index": 1,
+          "description": "Create admin route group, layout, role guard, shell, sidebar, topbar",
+          "status": "pending",
+          "verification": {
+            "command": "next build and /admin redirects non-admin, renders for admin role",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        },
+        {
+          "id": "step-2",
+          "index": 2,
+          "description": "Build admin overview KPIs and data table primitives",
+          "status": "pending",
+          "verification": {
+            "command": "visual QA of /admin overview and table interactions",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        },
+        {
+          "id": "step-3",
+          "index": 3,
+          "description": "Implement products admin list/new/edit and stubs for articles/events/orders/users/media/seo/settings",
+          "status": "pending",
+          "verification": {
+            "command": "next build and navigation across admin routes",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        }
+      ]
+    },
+    {
+      "id": "phase-7",
+      "index": 7,
+      "name": "Final polish and validation",
+      "goal": "Validate the entire modernization across locales, RTL, responsiveness, accessibility, and performance",
+      "description": "Audit i18n keys, RTL layouts, a11y landmarks/focus, SEO sitemap/robots/JSON-LD, run Lighthouse, add smoke tests, and finalize CI workflow.",
+      "parallel": false,
+      "status": "planned",
+      "steps": [
+        {
+          "id": "step-1",
+          "index": 1,
+          "description": "i18n audit and RTL fixes across ar-MA locale",
+          "status": "pending",
+          "verification": {
+            "command": "grep -R \"dir=\\\"rtl\\\"\" app/ && manual ar-MA smoke test",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        },
+        {
+          "id": "step-2",
+          "index": 2,
+          "description": "SEO finalization (sitemap, robots, JSON-LD)",
+          "status": "pending",
+          "verification": {
+            "command": "ls app/sitemap.ts app/robots.ts",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        },
+        {
+          "id": "step-3",
+          "index": 3,
+          "description": "Lighthouse and cross-browser/responsive validation",
+          "status": "pending",
+          "verification": {
+            "command": "Lighthouse mobile score >= 90 on /, /products, /products/[slug], /contact, /admin",
+            "retries": 2,
+            "retryDelayMs": 1000
+          },
+          "parallel": false
+        }
+      ]
+    }
+  ],
   "decisions": [],
   "memories": [],
   "createdAt": "2026-07-02T14:18:26.307Z",
-  "updatedAt": "2026-07-02T14:18:26.307Z"
+  "updatedAt": "2026-07-02T14:56:47.258Z",
+  "goal": "Execute the complete MM Pharma frontend modernization across the Next.js App Router, implementing the design system, navbar/footer, SEO/titles, products UX, home sections, admin dashboard, and build hardening defined in the project specs.",
+  "successCriteria": [
+    "Admin dashboard exists with guarded route group, shell, and overview KPIs; verified by build and manual navigation check",
+    "Navbar and footer match spec-compliant, accessible, token-driven design; verified by visual QA and lint",
+    "Design tokens centralized in `theme/` and applied; verified by `scripts/check-tokens.ts` or grep audit",
+    "Page titles/metadata follow centralized `lib/seo` convention across all locales; verified by build output and manual inspection",
+    "Products pages stabilized with safe DB wrappers, error/empty states, and modernized catalog UI; verified by happy-path test and build",
+    "Home page and key sections refreshed with new primitives; verified by visual QA and Lighthouse",
+    "Build, lint, and typecheck all pass with warnings mitigated; verified by `next build`, `next lint`, and `tsc --noEmit`",
+    "RTL/responsive/a11y validated across locales; verified by Lighthouse >= 90 on key pages"
+  ],
+  "constraints": [
+    "No new runtime dependencies without explicit user approval",
+    "Preserve existing App Router architecture and server/client boundaries",
+    "Follow website specs in `website specs/99-rules/*` for spacing, tokens, navbar behavior, and metadata formulas",
+    "Maintain tri-locale support (`fr-MA`, `ar-MA`, `en-US`) and RTL behavior",
+    "Keep changes surgical but complete across shared layout surfaces"
+  ],
+  "lastActiveAt": "2026-07-02T14:40:18.763Z",
+  "activePhaseId": "phase-1"
 }

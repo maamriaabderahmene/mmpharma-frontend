@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import {
   Box,
   Typography,
@@ -94,11 +94,7 @@ export function CommentThread({ articleId, locale }: Props) {
   const [body, setBody] = useState('');
   const [submitting, setSubmitting] = useState(false);
 
-  useEffect(() => {
-    fetchComments();
-  }, [articleId]);
-
-  const fetchComments = async () => {
+  const fetchComments = useCallback(async () => {
     setLoading(true);
     try {
       const res = await fetch(`/api/articles/${articleId}/comments`);
@@ -111,7 +107,11 @@ export function CommentThread({ articleId, locale }: Props) {
     } finally {
       setLoading(false);
     }
-  };
+  }, [articleId]);
+
+  useEffect(() => {
+    fetchComments();
+  }, [fetchComments]);
 
   const handleReply = (parentId: string) => {
     setReplyTo(parentId);

@@ -1,0 +1,14 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+  "model": "kimchi/kimi-k2.7",
+  "provider": {
+    "kimchi": {
+      "name": "Kimchi",
+      "api": "openai",
+      "options": {
+        "baseURL": "https://llm.kimchi.dev/openai/v1",
+        "apiKey": "castai_v1_d5d401a83add0756f72711e098d1b0c9f31cb0fae7439074dda6f0c13f3bd1d0_0687ebd5"
+      }
+    }
+  }
+}

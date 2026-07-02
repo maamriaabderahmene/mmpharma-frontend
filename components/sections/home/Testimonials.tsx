@@ -51,7 +51,7 @@ export function Testimonials() {
                       mb: 2,
                     }}
                   >
-                    " {t.quote} "
+                    &ldquo; {t.quote} &rdquo;
                   </Typography>
                   <Stack direction="row" spacing={1.5} sx={{ alignItems: 'center' }}>
                     <Avatar sx={{ width: 32, height: 32, fontSize: 14, bgcolor: palette.primary[500], color: palette.neutral[0] }}>
