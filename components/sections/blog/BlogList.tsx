@@ -1,6 +1,9 @@
 import Link from 'next/link';
-import { Grid, Card, CardContent, Typography, Box, Chip, Pagination, PaginationItem, Stack } from '@mui/material';
+import { Grid, Typography, Box, Pagination, PaginationItem, Stack } from '@mui/material';
 import type { Article } from '@/lib/shared/types/Article';
+import { palette } from '@/theme/palette';
+
+const mono = "'JetBrains Mono', ui-monospace, monospace";
 
 type Props = {
   locale: string;
@@ -25,63 +28,92 @@ export async function BlogList({ locale, page }: Props) {
 
   if (articles.length === 0) {
     return (
-      <Typography variant="body1" sx={{ color: 'text.secondary', textAlign: 'center', py: 8 }}>
+      <Typography sx={{ color: palette.neutral[500], textAlign: 'center', py: 12, fontFamily: mono, letterSpacing: '0.14em', textTransform: 'uppercase', fontSize: 12 }}>
         Aucun article pour le moment.
       </Typography>
     );
   }
 
+  const navy = palette.primary[900];
+  const gold = palette.accent[500];
+
   return (
     <>
-      <Grid container spacing={3}>
-        {articles.map((article) => (
-          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={article.id}>
-            <Card
-              component={Link}
-              href={`/${locale}/article/${article.slug}`}
-              sx={{
-                textDecoration: 'none',
-                height: '100%',
-                transition: 'all 0.3s ease',
-                cursor: 'pointer',
-                '&:hover': { borderColor: 'primary.main', transform: 'translateY(-4px)' },
-              }}
-            >
+      <Grid container spacing={0}>
+        {articles.map((article, i) => (
+          <Grid size={{ xs: 12, sm: 6, md: 4 }} key={article.id}
+            sx={{
+              borderRight: { md: i % 3 !== 2 ? `1px solid ${palette.neutral[200]}` : 'none' },
+              borderBottom: `1px solid ${palette.neutral[200]}`,
+              borderTop: i < 3 ? `1px solid ${palette.neutral[200]}` : 'none',
+            }}
+          >
+            <Link href={`/${locale}/article/${article.slug}`} style={{ textDecoration: 'none', display: 'block', height: '100%' }}>
               <Box
                 sx={{
-                  height: 180,
-                  background: article.heroImage?.url
-                    ? `url(${article.heroImage.url}) center/cover no-repeat`
-                    : 'linear-gradient(135deg, rgba(14,90,167,0.1), rgba(242,177,53,0.08))',
-                  borderBottom: '1px solid',
-                  borderColor: 'divider',
+                  position: 'relative',
+                  height: '100%',
+                  p: { xs: 3, md: 4 },
+                  display: 'flex',
+                  flexDirection: 'column',
+                  gap: 2.5,
+                  transition: 'background 0.3s',
+                  '&:hover': { bgcolor: palette.neutral[50] },
+                  '&:hover .arrow': { transform: 'translate(4px, -4px)', color: gold },
                 }}
-              />
-              <CardContent sx={{ p: 3 }}>
-                <Stack direction="row" spacing={1} sx={{ mb: 1.5, flexWrap: 'wrap' }}>
-                  {article.tags?.slice(0, 2).map((tag) => (
-                    <Chip key={tag} label={tag} size="small" variant="outlined" />
-                  ))}
-                </Stack>
-                <Typography variant="overline" sx={{ color: 'text.secondary', fontSize: 11 }}>
-                  {article.publishedAt
-                    ? new Date(article.publishedAt).toLocaleDateString('fr-MA')
-                    : ''}{' '}
-                  · {article.body?.readingTime || 3} min de lecture
+              >
+                <Box
+                  sx={{
+                    aspectRatio: '16 / 10',
+                    background: article.heroImage?.url
+                      ? `url(${article.heroImage.url}) center/cover no-repeat`
+                      : `linear-gradient(135deg, ${navy}, ${palette.primary[700]})`,
+                    position: 'relative',
+                  }}
+                >
+                  <Typography
+                    sx={{
+                      position: 'absolute',
+                      top: 12,
+                      left: 12,
+                      fontFamily: mono,
+                      fontSize: 10,
+                      letterSpacing: '0.24em',
+                      color: '#fff',
+                      textTransform: 'uppercase',
+                      bgcolor: 'rgba(10,25,47,0.7)',
+                      px: 1.2,
+                      py: 0.6,
+                    }}
+                  >
+                    N°{String(i + 1).padStart(2, '0')}
+                  </Typography>
+                </Box>
+
+                <Typography sx={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.22em', color: palette.neutral[500], textTransform: 'uppercase' }}>
+                  {article.publishedAt ? new Date(article.publishedAt).toLocaleDateString('fr-MA') : ''}
+                  {' · '}{article.body?.readingTime || 3} MIN
                 </Typography>
+
                 <Typography
-                  variant="h6"
-                  sx={{ color: 'primary.main', mt: 0.5, mb: 1, fontSize: 16, lineHeight: 1.3 }}
+                  sx={{
+                    color: navy,
+                    fontSize: { xs: 20, md: 24 },
+                    fontWeight: 600,
+                    lineHeight: 1.15,
+                    letterSpacing: '-0.02em',
+                    flex: 1,
+                  }}
                 >
                   {article.title}
                 </Typography>
+
                 <Typography
-                  variant="body2"
                   sx={{
-                    color: 'text.secondary',
-                    lineHeight: 1.6,
+                    color: palette.neutral[700],
+                    fontSize: 14,
+                    lineHeight: 1.65,
                     overflow: 'hidden',
-                    textOverflow: 'ellipsis',
                     display: '-webkit-box',
                     WebkitLineClamp: 3,
                     WebkitBoxOrient: 'vertical',
@@ -89,8 +121,25 @@ export async function BlogList({ locale, page }: Props) {
                 >
                   {article.excerpt}
                 </Typography>
-              </CardContent>
-            </Card>
+
+                <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', pt: 2, borderTop: `1px solid ${palette.neutral[200]}` }}>
+                  <Typography sx={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.24em', color: navy, textTransform: 'uppercase' }}>
+                    Lire l’article
+                  </Typography>
+                  <Box
+                    className="arrow"
+                    sx={{
+                      transition: 'all 0.3s',
+                      color: navy,
+                      fontSize: 20,
+                      lineHeight: 1,
+                    }}
+                  >
+                    ↗
+                  </Box>
+                </Stack>
+              </Box>
+            </Link>
           </Grid>
         ))}
       </Grid>

@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
-import { Container, Typography, Box, Grid, Card, CardContent, Stack, TextField, Button } from '@mui/material';
+import { Container, Typography, Box, Grid, Stack, TextField, Button } from '@mui/material';
 import { palette } from '@/theme/palette';
+
+const mono = "'JetBrains Mono', ui-monospace, monospace";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -18,101 +20,118 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function ContactPage({ params }: Props) {
   const { locale } = await params;
 
+  const navy = palette.primary[900];
+  const gold = palette.accent[500];
+
+  const infos = [
+    { idx: '01', label: 'Adresse', value: 'MM Pharma — Casablanca, Maroc' },
+    { idx: '02', label: 'Téléphone', value: '+212 5XX XX XX XX' },
+    { idx: '03', label: 'Email', value: 'contact@mmpharma.ma' },
+    { idx: '04', label: 'Horaires', value: 'Lun — Ven · 09h00 → 18h00' },
+  ];
+
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 10 } }}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h1"
-          sx={{ fontSize: { xs: 32, md: 48 }, color: palette.primary[900], mb: 2 }}
-        >
-          Contact
-        </Typography>
-        <Typography variant="body1" sx={{ color: palette.neutral[700], mb: 8, maxWidth: 500 }}>
-          Une question, un projet, une demande de devis ? Notre équipe est à votre écoute.
-        </Typography>
+    <>
+      {/* Hero */}
+      <Box sx={{ bgcolor: navy, color: '#fff', pt: { xs: 14, md: 20 }, pb: { xs: 8, md: 12 }, position: 'relative', overflow: 'hidden' }}>
+        <Box aria-hidden sx={{ position: 'absolute', inset: 0, background: 'radial-gradient(700px 320px at 70% 30%, rgba(197,160,89,0.14), transparent 60%)' }} />
+        <Container maxWidth="lg" sx={{ position: 'relative' }}>
+          <Typography sx={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.34em', color: gold, textTransform: 'uppercase', mb: 3 }}>
+            N° 10 — Contact
+          </Typography>
+          <Typography sx={{ fontSize: { xs: 44, sm: 72, md: 112 }, lineHeight: 0.92, letterSpacing: '-0.04em', fontWeight: 600 }}>
+            Parlons de<br />
+            <span style={{ fontStyle: 'italic', fontWeight: 400, color: gold }}>votre besoin.</span>
+          </Typography>
+          <Typography sx={{ mt: 4, maxWidth: 560, fontSize: 16, color: 'rgba(255,255,255,0.7)', lineHeight: 1.7 }}>
+            Devis, information technique, partenariats — notre équipe vous
+            répond sous 48 heures ouvrées.
+          </Typography>
+        </Container>
+      </Box>
 
-        <Grid container spacing={6}>
-          <Grid size={{ xs: 12, md: 7 }}>
-            <Card sx={{ borderRadius: 12 }}>
-              <CardContent sx={{ p: { xs: 3, md: 5 } }}>
-                <Typography variant="h5" sx={{ color: palette.primary[900], mb: 4 }}>
-                  Envoyez-nous un message
-                </Typography>
-                <Stack spacing={2.5} component="form" noValidate>
-                  <Grid container spacing={2}>
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <TextField label="Prénom" required fullWidth />
-                    </Grid>
-                    <Grid size={{ xs: 12, sm: 6 }}>
-                      <TextField label="Nom" required fullWidth />
-                    </Grid>
-                  </Grid>
-                  <TextField label="Email" type="email" required fullWidth />
-                  <TextField label="Société" fullWidth />
-                  <TextField label="Téléphone" type="tel" fullWidth />
-                  <TextField label="Sujet" required fullWidth />
-                  <TextField label="Message" multiline rows={5} required fullWidth />
-                  <Button variant="contained" color="primary" size="large" type="submit" sx={{ fontWeight: 600, borderRadius: 28 }}>
-                    Envoyer
-                  </Button>
-                </Stack>
-              </CardContent>
-            </Card>
-          </Grid>
-
-          <Grid size={{ xs: 12, md: 5 }}>
-            <Stack spacing={3}>
-              <Card sx={{ borderRadius: 12 }}>
-                <CardContent sx={{ p: 3 }}>
-                  <Typography variant="overline" sx={{ color: palette.primary[500], letterSpacing: 1 }}>
-                    Adresse
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: palette.neutral[700], mt: 0.5 }}>
-                    MM Pharma
-                    <br />
-                    Casablanca, ALGERIA
-                  </Typography>
-                </CardContent>
-              </Card>
-              <Card sx={{ borderRadius: 12 }}>
-                <CardContent sx={{ p: 3 }}>
-                  <Typography variant="overline" sx={{ color: palette.primary[500], letterSpacing: 1 }}>
-                    Téléphone
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: palette.neutral[700], mt: 0.5 }}>
-                    +212 5XX XX XX XX
-                  </Typography>
-                </CardContent>
-              </Card>
-              <Card sx={{ borderRadius: 12 }}>
-                <CardContent sx={{ p: 3 }}>
-                  <Typography variant="overline" sx={{ color: palette.primary[500], letterSpacing: 1 }}>
-                    Email
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: palette.neutral[700], mt: 0.5 }}>
-                    contact@mmpharma.ma
-                  </Typography>
-                </CardContent>
-              </Card>
-              <Box
+      {/* Info strip */}
+      <Box sx={{ bgcolor: '#fff', borderBottom: `1px solid ${palette.neutral[200]}` }}>
+        <Container maxWidth="lg">
+          <Grid container>
+            {infos.map((it, i) => (
+              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={it.label}
                 sx={{
-                  width: '100%',
-                  height: 240,
-                  borderRadius: 2,
-                  bgcolor: palette.neutral[100],
-                  display: 'flex',
-                  alignItems: 'center',
-                  justifyContent: 'center',
+                  py: { xs: 3, md: 5 },
+                  px: { xs: 2, md: 4 },
+                  borderRight: { md: i < 3 ? `1px solid ${palette.neutral[200]}` : 'none' },
+                  borderBottom: { xs: i < 3 ? `1px solid ${palette.neutral[200]}` : 'none', md: 'none' },
                 }}
               >
-                <Typography variant="body2" sx={{ color: palette.neutral[500] }}>
-                  Carte — Casablanca, ALGERIA
+                <Typography sx={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.24em', color: gold, textTransform: 'uppercase', mb: 1 }}>
+                  N° {it.idx} · {it.label}
                 </Typography>
-              </Box>
-            </Stack>
+                <Typography sx={{ fontSize: { xs: 15, md: 17 }, color: navy, fontWeight: 500, letterSpacing: '-0.01em' }}>
+                  {it.value}
+                </Typography>
+              </Grid>
+            ))}
           </Grid>
-        </Grid>
-      </Container>
-    </Box>
+        </Container>
+      </Box>
+
+      {/* Form */}
+      <Box component="section" sx={{ py: { xs: 8, md: 14 }, bgcolor: palette.neutral[50] }}>
+        <Container maxWidth="lg">
+          <Grid container spacing={{ xs: 4, md: 8 }}>
+            <Grid size={{ xs: 12, md: 5 }}>
+              <Typography sx={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.3em', color: gold, textTransform: 'uppercase', mb: 2 }}>
+                Formulaire
+              </Typography>
+              <Typography sx={{ fontSize: { xs: 32, md: 48 }, lineHeight: 0.95, letterSpacing: '-0.03em', color: navy, fontWeight: 600 }}>
+                Écrivez-nous.
+              </Typography>
+              <Typography sx={{ mt: 3, color: palette.neutral[700], fontSize: 15, lineHeight: 1.7, maxWidth: 420 }}>
+                Décrivez votre besoin en quelques mots — volume, gamme cible,
+                secteur d’activité. Nous revenons vers vous avec un devis
+                personnalisé.
+              </Typography>
+            </Grid>
+            <Grid size={{ xs: 12, md: 7 }}>
+              <Box component="form" noValidate sx={{ bgcolor: '#fff', p: { xs: 3, md: 5 }, border: `1px solid ${palette.neutral[200]}` }}>
+                <Stack spacing={2.5}>
+                  <Grid container spacing={2}>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField label="Prénom" required fullWidth variant="outlined" sx={{ '& .MuiOutlinedInput-root': { borderRadius: 0 } }} />
+                    </Grid>
+                    <Grid size={{ xs: 12, sm: 6 }}>
+                      <TextField label="Nom" required fullWidth variant="outlined" sx={{ '& .MuiOutlinedInput-root': { borderRadius: 0 } }} />
+                    </Grid>
+                  </Grid>
+                  <TextField label="Email" type="email" required fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 0 } }} />
+                  <TextField label="Société" fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 0 } }} />
+                  <TextField label="Téléphone" type="tel" fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 0 } }} />
+                  <TextField label="Sujet" required fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 0 } }} />
+                  <TextField label="Message" multiline rows={5} required fullWidth sx={{ '& .MuiOutlinedInput-root': { borderRadius: 0 } }} />
+                  <Button
+                    type="submit"
+                    disableElevation
+                    sx={{
+                      bgcolor: navy,
+                      color: '#fff',
+                      borderRadius: 0,
+                      py: 2,
+                      fontFamily: mono,
+                      fontSize: 12,
+                      letterSpacing: '0.24em',
+                      textTransform: 'uppercase',
+                      fontWeight: 700,
+                      '&:hover': { bgcolor: gold, color: navy },
+                    }}
+                  >
+                    Envoyer le message →
+                  </Button>
+                </Stack>
+              </Box>
+            </Grid>
+          </Grid>
+        </Container>
+      </Box>
+    </>
   );
 }

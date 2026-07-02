@@ -1,5 +1,6 @@
 import Link from 'next/link';
 import { requireAuth } from '@/lib/server/auth/guards';
+import { ROUTES } from '@/lib/shared/routes';
 
 type Props = {
   children: React.ReactNode;
@@ -7,11 +8,12 @@ type Props = {
 };
 
 const sidebarLinks = [
-  { href: '/account', label: 'Dashboard' },
-  { href: '/account/my-orders', label: 'Mes commandes' },
-  { href: '/account/my-articles', label: 'Mes articles' },
-  { href: '/account/comments', label: 'Mes commentaires' },
-  { href: '/account/settings', label: 'Paramètres' },
+  { href: ROUTES.account, label: 'Dashboard' },
+  { href: ROUTES.myOrders, label: 'Mes commandes' },
+  { href: ROUTES.myArticles, label: 'Mes articles' },
+  { href: ROUTES.myComments, label: 'Mes commentaires' },
+  { href: ROUTES.settings, label: 'Paramètres' },
+  { href: ROUTES.admin, label: 'Admin' },
 ];
 
 export default async function AccountLayout({ children, params }: Props) {
@@ -24,8 +26,8 @@ export default async function AccountLayout({ children, params }: Props) {
         <nav className="space-y-1">
           {sidebarLinks.map((link) => (
             <Link
-              key={link.href}
-              href={`/${locale}${link.href}`}
+              key={link.label}
+              href={link.href(locale)}
               className="block px-4 py-2 rounded text-sm text-gray-300 hover:text-gold hover:bg-gold/5 transition-colors"
             >
               {link.label}

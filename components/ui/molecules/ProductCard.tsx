@@ -1,28 +1,19 @@
 'use client';
 
-import {
-  Card,
-  CardMedia,
-  CardContent,
-  CardActions,
-  Typography,
-  Chip,
-  Button,
-  Box,
-  Stack,
-  Badge,
-} from '@mui/material';
+import { Typography, Box, Stack } from '@mui/material';
 import { useRouter } from 'next/navigation';
 import type { Product } from '@/lib/shared/types/Product';
-import { useTranslations } from '@/lib/i18n/client';
+import { palette } from '@/theme/palette';
 
 const RANGE_LABELS: Record<string, string> = {
-  hygiene: 'Gamme I — Hygiène',
-  detergent: 'Gamme II — Détergent',
-  disinfectant: 'Gamme III — Désinfectant',
-  inox: 'Gamme IV — Inox',
-  misc: 'Gamme V — Divers',
+  hygiene: 'Gamme I',
+  detergent: 'Gamme II',
+  disinfectant: 'Gamme III',
+  inox: 'Gamme IV',
+  misc: 'Gamme V',
 };
+
+const mono = "'JetBrains Mono', ui-monospace, monospace";
 
 type Props = {
   product: Product;
@@ -31,140 +22,108 @@ type Props = {
 
 export function ProductCard({ product, locale }: Props) {
   const router = useRouter();
-  const t = useTranslations('products');
-
   const imageUrl = product.images?.[0]?.secureUrl;
   const detailUrl = `/${locale}/products/${product.slug}`;
+  const navy = palette.primary[900];
+  const gold = palette.accent[500];
 
   return (
-    <Badge
-      badgeContent="Haute gamme"
-      color="warning"
-      invisible={!product.isHauteGamme}
-      slotProps={{
-        badge: {
-          sx: {
-            top: 12,
-            right: 12,
-            fontSize: 10,
-            fontWeight: 700,
-            letterSpacing: '0.04em',
-            px: 1,
-            py: 0.5,
-            textTransform: 'uppercase',
-          },
+    <Box
+      onClick={() => router.push(detailUrl)}
+      sx={{
+        cursor: 'pointer',
+        display: 'flex',
+        flexDirection: 'column',
+        height: '100%',
+        bgcolor: '#fff',
+        border: `1px solid ${palette.neutral[200]}`,
+        transition: 'all 0.35s cubic-bezier(.2,.6,.2,1)',
+        position: 'relative',
+        '&:hover': {
+          borderColor: navy,
+          transform: 'translateY(-4px)',
+          boxShadow: '0 20px 40px -20px rgba(10,25,47,0.25)',
         },
+        '&:hover .arrow': { transform: 'translate(4px,-4px)', color: gold },
+        '&:hover .imgwrap': { bgcolor: palette.neutral[100] },
       }}
     >
-      <Card
-        sx={{
-          width: '100%',
-          cursor: 'pointer',
-          transition: 'all 0.3s ease',
-          display: 'flex',
-          flexDirection: 'column',
-          '&:hover': {
-            borderColor: 'primary.main',
-            transform: 'translateY(-4px)',
-            boxShadow: '0 12px 40px rgba(14, 90, 167, 0.12)',
-          },
-        }}
-        onClick={() => router.push(detailUrl)}
-      >
-        <Box sx={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', bgcolor: 'neutral.100' }}>
-          {imageUrl ? (
-            <CardMedia
-              component="img"
-              image={imageUrl}
-              alt={product.name}
-              sx={{ width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-          ) : (
-            <Box
-              sx={{
-                width: '100%',
-                height: '100%',
-                display: 'flex',
-                alignItems: 'center',
-                justifyContent: 'center',
-                bgcolor: 'neutral.100',
-              }}
-            >
-              <Typography variant="caption" sx={{ color: 'neutral.500' }}>
-                {product.code}
-              </Typography>
-            </Box>
-          )}
+      {product.isHauteGamme && (
+        <Box
+          sx={{
+            position: 'absolute',
+            top: 12,
+            right: 12,
+            zIndex: 2,
+            bgcolor: gold,
+            color: navy,
+            fontFamily: mono,
+            fontSize: 9,
+            letterSpacing: '0.2em',
+            textTransform: 'uppercase',
+            px: 1.2,
+            py: 0.7,
+            fontWeight: 700,
+          }}
+        >
+          Haute gamme
         </Box>
+      )}
 
-        <CardContent sx={{ flex: 1, display: 'flex', flexDirection: 'column', gap: 1, p: 2 }}>
-          <Stack direction="row" spacing={1} sx={{ alignItems: 'center' }}>
-            <Typography variant="caption" sx={{ color: 'neutral.500', fontWeight: 600 }}>
+      <Box className="imgwrap" sx={{ position: 'relative', width: '100%', aspectRatio: '1 / 1', bgcolor: palette.neutral[50], transition: 'background 0.3s', overflow: 'hidden' }}>
+        {imageUrl ? (
+          <Box component="img" src={imageUrl} alt={product.name} sx={{ width: '100%', height: '100%', objectFit: 'cover' }} />
+        ) : (
+          <Box sx={{ width: '100%', height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+            <Typography sx={{ fontFamily: mono, fontSize: 12, letterSpacing: '0.24em', color: palette.neutral[500] }}>
               {product.code}
             </Typography>
-            <Chip
-              label={RANGE_LABELS[product.range] ?? product.range}
-              size="small"
-              sx={{
-                height: 20,
-                fontSize: 10,
-                fontWeight: 600,
-                bgcolor: 'primary.50',
-                color: 'primary.500',
-              }}
-            />
-          </Stack>
+          </Box>
+        )}
+      </Box>
 
-          <Typography
-            variant="body1"
-            sx={{
-              fontWeight: 600,
-              color: 'text.primary',
-              overflow: 'hidden',
-              textOverflow: 'ellipsis',
-              display: '-webkit-box',
-              WebkitLineClamp: 2,
-              WebkitBoxOrient: 'vertical',
-              lineHeight: 1.3,
-            }}
-          >
-            {product.name}
+      <Box sx={{ p: 2.5, display: 'flex', flexDirection: 'column', gap: 1.2, flex: 1 }}>
+        <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between' }}>
+          <Typography sx={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.22em', color: gold, textTransform: 'uppercase', fontWeight: 700 }}>
+            {RANGE_LABELS[product.range] ?? product.range}
           </Typography>
+          <Typography sx={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.16em', color: palette.neutral[500] }}>
+            {product.code}
+          </Typography>
+        </Stack>
 
-          {product.scent && (
-            <Typography variant="caption" sx={{ color: 'neutral.700' }}>
-              Parfum : {product.scent}
-            </Typography>
-          )}
+        <Typography
+          sx={{
+            fontWeight: 600,
+            color: navy,
+            fontSize: 16,
+            lineHeight: 1.25,
+            letterSpacing: '-0.01em',
+            overflow: 'hidden',
+            display: '-webkit-box',
+            WebkitLineClamp: 2,
+            WebkitBoxOrient: 'vertical',
+            minHeight: '2.5em',
+          }}
+        >
+          {product.name}
+        </Typography>
 
-          {product.conditionnement && product.conditionnement.length > 0 && (
-            <Stack direction="row" spacing={0.5} sx={{ flexWrap: 'wrap' }}>
-              {product.conditionnement.map((c) => (
-                <Chip
-                  key={c}
-                  label={c}
-                  size="small"
-                  variant="outlined"
-                  sx={{ height: 20, fontSize: 10, borderColor: 'neutral.300', color: 'neutral.700' }}
-                />
-              ))}
-            </Stack>
-          )}
-        </CardContent>
+        {product.scent && (
+          <Typography sx={{ fontSize: 12, color: palette.neutral[700] }}>
+            Parfum · {product.scent}
+          </Typography>
+        )}
 
-        <CardActions sx={{ p: 2, pt: 0 }}>
-          <Button
-            variant="primary"
-            fullWidth
-            size="small"
-            onClick={(e) => {
-              e.stopPropagation();
-            }}
-          >
-            {t('addToCart')}
-          </Button>
-        </CardActions>
-      </Card>
-    </Badge>
+        <Stack direction="row" sx={{ alignItems: 'center', justifyContent: 'space-between', pt: 1.5, mt: 'auto', borderTop: `1px solid ${palette.neutral[200]}` }}>
+          <Typography sx={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.22em', color: navy, textTransform: 'uppercase' }}>
+            {product.conditionnement?.[0] ?? 'Voir fiche'}
+          </Typography>
+          <Box className="arrow" sx={{ fontSize: 18, color: navy, transition: 'all 0.3s', lineHeight: 1 }}>
+            ↗
+          </Box>
+        </Stack>
+      </Box>
+    </Box>
   );
 }

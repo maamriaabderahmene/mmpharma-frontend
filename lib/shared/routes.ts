@@ -20,4 +20,5 @@ export const ROUTES = {
   myArticles: (locale: string) => `/${locale}/account/my-articles`,
   myComments: (locale: string) => `/${locale}/account/comments`,
   settings: (locale: string) => `/${locale}/account/settings`,
+  admin: (locale: string) => `/${locale}/admin`,
 } as const;

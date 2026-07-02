@@ -2,10 +2,7 @@ import { Container, Typography, Button, Stack, Box } from '@mui/material';
 import Link from 'next/link';
 import { palette } from '@/theme/palette';
 
-const trustPills = [
-  'Certifié ISO 9001',
-  'Agréé par le ministère de la Santé',
-];
+const marquee = ['ISO 21149', 'ISO 16212', 'ISO 21150', 'ISO 22717', 'ISO 22718', 'ISO 18416', 'JO N°16 · 2020'];
 
 export function Hero() {
   return (
@@ -13,128 +10,145 @@ export function Hero() {
       component="section"
       sx={{
         position: 'relative',
-        minHeight: { xs: '90vh', md: '100vh' },
+        minHeight: '100vh',
         display: 'flex',
-        alignItems: 'center',
+        alignItems: 'stretch',
         overflow: 'hidden',
-        bgcolor: palette.neutral[50],
+        bgcolor: palette.primary[900],
+        color: palette.neutral[0],
+        isolation: 'isolate',
       }}
     >
-      <Container maxWidth="lg" sx={{ py: { xs: 8, md: 12 } }}>
-        <Stack spacing={3} sx={{ maxWidth: 720 }}>
-          <Box
-            sx={{
-              display: 'inline-flex',
-              alignItems: 'center',
-              gap: 1.5,
-              px: 3,
-              py: 1,
-              borderRadius: 20,
-              bgcolor: `${palette.primary[500]}10`,
-              border: `1px solid ${palette.primary[200]}`,
-            }}
-          >
-            <Box
-              sx={{
-                width: 8,
-                height: 8,
-                borderRadius: '50%',
-                bgcolor: palette.primary[500],
-                flexShrink: 0,
-              }}
-            />
-            <Typography
-              variant="overline"
-              sx={{
-                color: palette.primary[500],
-                letterSpacing: 2,
-                fontWeight: 600,
-                fontSize: 11,
-              }}
-            >
-              PHARMACEUTIQUE · MAROC
+      <Box
+        aria-hidden
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background: `radial-gradient(60% 50% at 85% 10%, ${palette.primary[500]}55 0%, transparent 60%), radial-gradient(50% 45% at 10% 90%, ${palette.accent[500]}22 0%, transparent 60%)`,
+          zIndex: -1,
+        }}
+      />
+      <Box
+        aria-hidden
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          backgroundImage: `linear-gradient(${palette.neutral[0]}0A 1px, transparent 1px), linear-gradient(90deg, ${palette.neutral[0]}0A 1px, transparent 1px)`,
+          backgroundSize: '64px 64px',
+          maskImage: 'radial-gradient(ellipse at 50% 40%, black 40%, transparent 80%)',
+          WebkitMaskImage: 'radial-gradient(ellipse at 50% 40%, black 40%, transparent 80%)',
+          zIndex: -1,
+        }}
+      />
+
+      <Container maxWidth="xl" sx={{ py: { xs: 12, md: 14 }, display: 'flex', flexDirection: 'column', justifyContent: 'space-between' }}>
+        <Stack direction="row" sx={{ justifyContent: 'space-between', alignItems: 'flex-start', mb: { xs: 8, md: 0 } }}>
+          <Stack direction="row" spacing={2} sx={{ alignItems: 'center' }}>
+            <Box sx={{ width: 32, height: '1px', bgcolor: palette.accent[500] }} />
+            <Typography sx={{ fontSize: 11, letterSpacing: '0.28em', color: palette.accent[500], fontWeight: 600 }}>
+              N° 01 — PHARMACEUTIQUE
             </Typography>
-          </Box>
-
-          <Typography
-            variant="h1"
-            sx={{
-              fontSize: { xs: 32, md: 52, lg: 64 },
-              lineHeight: 1.1,
-              color: palette.primary[900],
-              fontWeight: 700,
-              letterSpacing: '-0.02em',
-            }}
-          >
-            L'hygiène et la désinfection, par la science.
-          </Typography>
-
-          <Typography
-            variant="body1"
-            sx={{
-              color: palette.neutral[700],
-              fontSize: { xs: 16, md: 18 },
-              maxWidth: 600,
-              lineHeight: 1.7,
-            }}
-          >
-            MM Pharma conçoit, fabrique et distribue une gamme complète de produits d'hygiène, de désinfection et d'entretien pour les professionnels de santé, l'hôtellerie, l'industrie et les collectivités.
-          </Typography>
-
-          <Stack spacing={2} sx={{ pt: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
-            <Button
-              component={Link}
-              href="/products"
-              variant="contained"
-              color="primary"
-              size="large"
-              sx={{
-                px: 4,
-                fontWeight: 600,
-                borderRadius: 8,
-                minWidth: 144,
-                height: 52,
-              }}
-            >
-              Découvrir nos produits
-            </Button>
-            <Button
-              component={Link}
-              href="/contact"
-              variant="outlined"
-              color="primary"
-              size="large"
-              sx={{
-                px: 4,
-                fontWeight: 600,
-                borderRadius: 8,
-                minWidth: 144,
-                height: 52,
-              }}
-            >
-              Demander un devis
-            </Button>
           </Stack>
-
-          <Stack direction="row" spacing={3} sx={{ pt: 5, flexWrap: 'wrap' }}>
-            {trustPills.map((pill) => (
-              <Stack key={pill} direction="row" spacing={1} sx={{ alignItems: 'center', height: 44 }}>
-                <Box
-                  component="span"
-                  sx={{
-                    width: 4,
-                    height: 4,
-                    borderRadius: '50%',
-                    bgcolor: palette.primary[500],
-                  }}
-                />
-                <Typography variant="caption" sx={{ color: palette.neutral[500], fontSize: 12 }}>
-                  {pill}
-                </Typography>
-              </Stack>
-            ))}
-          </Stack>
+          <Typography sx={{ fontSize: 11, letterSpacing: '0.28em', color: `${palette.neutral[0]}66`, fontWeight: 500, display: { xs: 'none', md: 'block' } }}>
+            EST. MMXIV · MAROC
+          </Typography>
         </Stack>
+
+        <Box sx={{ maxWidth: 1200 }}>
+          <Typography
+            component="h1"
+            sx={{
+              fontSize: { xs: 52, sm: 80, md: 120, lg: 152 },
+              lineHeight: { xs: 0.98, md: 0.9 },
+              letterSpacing: '-0.045em',
+              fontWeight: 600,
+              color: palette.neutral[0],
+              mb: { xs: 5, md: 7 },
+            }}
+          >
+            L&rsquo;hygiène,{' '}
+            <Box component="span" sx={{ fontStyle: 'italic', fontWeight: 300, color: palette.accent[500] }}>
+              par la science.
+            </Box>
+          </Typography>
+
+          <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 4, md: 8 }} sx={{ alignItems: { md: 'flex-end' } }}>
+            <Typography
+              sx={{
+                color: `${palette.neutral[0]}CC`,
+                fontSize: { xs: 15, md: 17 },
+                lineHeight: 1.6,
+                maxWidth: 520,
+                fontWeight: 400,
+              }}
+            >
+              MM Pharma conçoit, fabrique et distribue une gamme complète de produits d&rsquo;hygiène,
+              de désinfection et d&rsquo;entretien pour les professionnels de santé, l&rsquo;hôtellerie,
+              l&rsquo;industrie et les collectivités.
+            </Typography>
+
+            <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ flexShrink: 0 }}>
+              <Button
+                component={Link}
+                href="/products"
+                size="large"
+                sx={{
+                  px: 4,
+                  height: 56,
+                  borderRadius: 0,
+                  bgcolor: palette.accent[500],
+                  color: palette.primary[900],
+                  fontWeight: 700,
+                  letterSpacing: '0.04em',
+                  '&:hover': { bgcolor: palette.neutral[0] },
+                }}
+              >
+                Découvrir le catalogue →
+              </Button>
+              <Button
+                component={Link}
+                href="/contact"
+                size="large"
+                sx={{
+                  px: 4,
+                  height: 56,
+                  borderRadius: 0,
+                  color: palette.neutral[0],
+                  border: `1px solid ${palette.neutral[0]}33`,
+                  fontWeight: 600,
+                  letterSpacing: '0.04em',
+                  '&:hover': { borderColor: palette.neutral[0], bgcolor: `${palette.neutral[0]}0A` },
+                }}
+              >
+                Demander un devis
+              </Button>
+            </Stack>
+          </Stack>
+        </Box>
+
+        <Box sx={{ mt: { xs: 10, md: 12 }, pt: 4, borderTop: `1px solid ${palette.neutral[0]}1F` }}>
+          <Stack direction={{ xs: 'column', md: 'row' }} spacing={3} sx={{ alignItems: { md: 'center' }, justifyContent: 'space-between' }}>
+            <Typography sx={{ fontSize: 10, letterSpacing: '0.32em', color: `${palette.neutral[0]}66`, fontWeight: 600 }}>
+              CONTRÔLE MICROBIOLOGIQUE — LOT PAR LOT
+            </Typography>
+            <Stack direction="row" spacing={{ xs: 2, md: 4 }} sx={{ flexWrap: 'wrap', rowGap: 1 }}>
+              {marquee.map((m) => (
+                <Typography
+                  key={m}
+                  sx={{
+                    fontSize: 11,
+                    letterSpacing: '0.16em',
+                    color: palette.neutral[0],
+                    fontWeight: 500,
+                    fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                  }}
+                >
+                  {m}
+                </Typography>
+              ))}
+            </Stack>
+          </Stack>
+        </Box>
       </Container>
     </Box>
   );

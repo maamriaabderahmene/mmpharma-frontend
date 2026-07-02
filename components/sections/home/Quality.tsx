@@ -1,64 +1,136 @@
-import { Container, Typography, Grid, Card, CardContent, Stack, Box } from '@mui/material';
-import ScienceIcon from '@mui/icons-material/Science';
-import VerifiedIcon from '@mui/icons-material/Verified';
-import FactoryIcon from '@mui/icons-material/Factory';
+import { Container, Typography, Box, Stack, Grid } from '@mui/material';
 import { palette } from '@/theme/palette';
 
 const pillars = [
   {
-    icon: <ScienceIcon sx={{ fontSize: 32, color: palette.primary[500] }} />,
+    n: '01',
     heading: 'Contrôle microbiologique',
-    description: "Chaque lot est analysé en laboratoire pour garantir l'absence de germes pathogènes, levures et moisissures.",
+    kicker: 'ISO 21149 · 16212 · 21150 · 22717 · 22718 · 18416',
+    description:
+      'Chaque lot est analysé en laboratoire pour garantir l\u2019absence de germes pathogènes, levures et moisissures — Escherichia coli, Pseudomonas aeruginosa, Staphylococcus aureus, Candida albicans.',
   },
   {
-    icon: <VerifiedIcon sx={{ fontSize: 32, color: palette.secondary[500] }} />,
+    n: '02',
     heading: 'Conformité réglementaire',
-    description: 'Tous nos produits respectent le Journal Officiel n°16 2020 et les normes pharmaceutiques marocaines en vigueur.',
+    kicker: 'JO N°16 · 24 mars 2020',
+    description:
+      'Tous nos produits respectent l\u2019arrêté du 21/10/2019 publié au Journal Officiel n°16 du 24 mars 2020 et les normes pharmaceutiques marocaines en vigueur.',
   },
   {
-    icon: <FactoryIcon sx={{ fontSize: 32, color: palette.primary[500] }} />,
+    n: '03',
     heading: 'Fabrication locale',
-    description: 'Produits conçus et fabriqués dans notre unité de production au Maroc, avec un contrôle qualité rigoureux à chaque étape.',
+    kicker: 'Unité de production au Maroc',
+    description:
+      'Produits conçus et fabriqués dans notre unité de production, avec un contrôle qualité rigoureux à chaque étape — dossier technique et traçabilité par lot.',
   },
 ] as const;
 
 export function Quality() {
   return (
-    <Box component="section" sx={{ py: { xs: 6, md: 8 }, bgcolor: palette.neutral[0] }}>
-      <Container maxWidth="lg">
-        <Typography
-          variant="h2"
-          sx={{
-            textAlign: 'center',
-            mb: 5,
-            fontSize: { xs: 28, md: 36 },
-            color: palette.primary[900],
-          }}
-        >
-          Une qualité pharmaceutique, lot après lot.
-        </Typography>
+    <Box
+      component="section"
+      sx={{
+        py: { xs: 10, md: 16 },
+        bgcolor: palette.primary[900],
+        color: palette.neutral[0],
+        position: 'relative',
+        overflow: 'hidden',
+      }}
+    >
+      <Box
+        aria-hidden
+        sx={{
+          position: 'absolute',
+          inset: 0,
+          background: `radial-gradient(50% 60% at 100% 0%, ${palette.accent[500]}18, transparent 60%)`,
+          pointerEvents: 'none',
+        }}
+      />
+      <Container maxWidth="xl" sx={{ position: 'relative' }}>
+        <Grid container spacing={{ xs: 6, md: 10 }} sx={{ mb: { xs: 8, md: 12 }, alignItems: 'flex-end' }}>
+          <Grid size={{ xs: 12, md: 7 }}>
+            <Stack direction="row" spacing={2} sx={{ alignItems: 'center', mb: 3 }}>
+              <Box sx={{ width: 32, height: '1px', bgcolor: palette.accent[500] }} />
+              <Typography sx={{ fontSize: 11, letterSpacing: '0.28em', color: palette.accent[500], fontWeight: 600 }}>
+                MÉTHODE — QUALITÉ PHARMACEUTIQUE
+              </Typography>
+            </Stack>
+            <Typography
+              component="h2"
+              sx={{
+                fontSize: { xs: 40, md: 72 },
+                lineHeight: 0.95,
+                letterSpacing: '-0.035em',
+                fontWeight: 500,
+                color: palette.neutral[0],
+              }}
+            >
+              Une qualité{' '}
+              <Box component="span" sx={{ fontStyle: 'italic', fontWeight: 300, color: palette.accent[500] }}>
+                mesurable
+              </Box>
+              , lot après lot.
+            </Typography>
+          </Grid>
+          <Grid size={{ xs: 12, md: 5 }}>
+            <Typography sx={{ color: `${palette.neutral[0]}B3`, fontSize: 15, lineHeight: 1.7, maxWidth: 460 }}>
+              La conformité n&rsquo;est pas un argument commercial — c&rsquo;est un protocole.
+              Notre laboratoire produit un dossier microbiologique complet pour chaque référence,
+              disponible sur demande auprès de nos partenaires professionnels.
+            </Typography>
+          </Grid>
+        </Grid>
 
-        <Grid container spacing={{ xs: 2, md: 3 }}>
-          {pillars.map((pillar) => (
-            <Grid size={{ xs: 12, md: 4 }} key={pillar.heading}>
-              <Card sx={{ height: '100%', textAlign: 'center', p: { xs: 3, md: 4 }, borderRadius: 12 }}>
-                <CardContent sx={{ p: 0 }}>
-                  <Box sx={{ mb: 2, height: 40, display: 'flex', alignItems: 'center', justifyContent: 'center' }}>{pillar.icon}</Box>
-                  <Typography
-                    variant="h5"
-                    sx={{
-                      color: palette.primary[900],
-                      mb: 1,
-                      fontSize: { xs: 18, md: 20 },
-                    }}
-                  >
-                    {pillar.heading}
-                  </Typography>
-                  <Typography variant="body2" sx={{ color: palette.neutral[700], lineHeight: 1.7 }}>
-                    {pillar.description}
-                  </Typography>
-                </CardContent>
-              </Card>
+        <Grid container spacing={0} sx={{ borderTop: `1px solid ${palette.neutral[0]}22` }}>
+          {pillars.map((p, i) => (
+            <Grid
+              size={{ xs: 12, md: 4 }}
+              key={p.n}
+              sx={{
+                p: { xs: 4, md: 6 },
+                borderRight: { md: i < 2 ? `1px solid ${palette.neutral[0]}22` : 'none' },
+                borderBottom: { xs: i < 2 ? `1px solid ${palette.neutral[0]}22` : 'none', md: 'none' },
+              }}
+            >
+              <Typography
+                sx={{
+                  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                  fontSize: 12,
+                  letterSpacing: '0.24em',
+                  color: palette.accent[500],
+                  fontWeight: 600,
+                  mb: 4,
+                }}
+              >
+                {p.n} / 03
+              </Typography>
+              <Typography
+                sx={{
+                  fontSize: { xs: 24, md: 28 },
+                  fontWeight: 500,
+                  lineHeight: 1.2,
+                  letterSpacing: '-0.015em',
+                  color: palette.neutral[0],
+                  mb: 2,
+                }}
+              >
+                {p.heading}
+              </Typography>
+              <Typography
+                sx={{
+                  fontFamily: "'JetBrains Mono', ui-monospace, monospace",
+                  fontSize: 11,
+                  letterSpacing: '0.06em',
+                  color: palette.accent[500],
+                  mb: 3,
+                  lineHeight: 1.5,
+                }}
+              >
+                {p.kicker}
+              </Typography>
+              <Typography sx={{ fontSize: 14, color: `${palette.neutral[0]}B3`, lineHeight: 1.7 }}>
+                {p.description}
+              </Typography>
             </Grid>
           ))}
         </Grid>

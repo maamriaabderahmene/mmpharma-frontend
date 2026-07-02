@@ -1,6 +1,8 @@
 import type { Metadata } from 'next';
-import { Container, Typography, Box, Grid, Card, CardContent } from '@mui/material';
+import { Container, Typography, Box, Grid, Stack } from '@mui/material';
 import { palette } from '@/theme/palette';
+
+const mono = "'JetBrains Mono', ui-monospace, monospace";
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -10,7 +12,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
   return {
     title: 'À propos',
-    description: "MM Pharma — fabricant de produits d'hygiène et de désinfection au ALGERIA.",
+    description: "MM Pharma — fabricant de produits d'hygiène et de désinfection au Maroc.",
     alternates: { canonical: `https://www.mmpharma.ma/${locale}/about` },
   };
 }
@@ -18,85 +20,125 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function AboutPage({ params }: Props) {
   const { locale } = await params;
 
+  const navy = palette.primary[900];
+  const gold = palette.accent[500];
+
+  const values = [
+    { idx: 'I', title: 'Qualité', body: 'Contrôles microbiologiques et physico-chimiques rigoureux sur chaque lot.' },
+    { idx: 'II', title: 'Innovation', body: 'R&D constante pour des formulations toujours plus performantes.' },
+    { idx: 'III', title: 'Engagement', body: 'ISO 9001. Conformité JO N°16 · 2020. Traçabilité totale.' },
+    { idx: 'IV', title: 'Proximité', body: 'Fabrication marocaine — service réactif, empreinte réduite.' },
+  ];
+
+  const numbers = [
+    { k: '15+', v: 'Années d’expertise' },
+    { k: '32', v: 'Références actives' },
+    { k: '100%', v: 'Fabrication au Maroc' },
+    { k: 'ISO 9001', v: 'Certification qualité' },
+  ];
+
   return (
     <>
-      <Box component="section" sx={{ py: { xs: 8, md: 16 } }}>
-        <Container maxWidth="md">
-          <Typography variant="overline" sx={{ color: palette.primary[500], letterSpacing: 3, mb: 2, display: 'block' }}>
-            À PROPOS
+      {/* Hero */}
+      <Box sx={{ bgcolor: navy, color: '#fff', pt: { xs: 14, md: 22 }, pb: { xs: 10, md: 16 }, position: 'relative', overflow: 'hidden' }}>
+        <Box aria-hidden sx={{ position: 'absolute', inset: 0, background: 'radial-gradient(700px 320px at 10% 30%, rgba(197,160,89,0.14), transparent 60%)' }} />
+        <Container maxWidth="lg" sx={{ position: 'relative' }}>
+          <Typography sx={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.34em', color: gold, textTransform: 'uppercase', mb: 3 }}>
+            N° 02 — Maison
           </Typography>
-          <Typography
-            variant="h1"
-            sx={{ fontSize: { xs: 32, md: 48 }, color: palette.primary[900], mb: 4, lineHeight: 1.1 }}
-          >
-            L'excellence pharmaceutique au service de l'hygiène professionnelle.
+          <Typography sx={{ fontSize: { xs: 44, sm: 72, md: 112 }, lineHeight: 0.92, letterSpacing: '-0.04em', fontWeight: 600, maxWidth: 1100 }}>
+            L’hygiène<br />
+            <span style={{ fontStyle: 'italic', fontWeight: 400, color: gold }}>professionnelle,</span><br />
+            à échelle industrielle.
           </Typography>
-          <Typography variant="body1" sx={{ color: palette.neutral[700], lineHeight: 1.8, fontSize: 16, mb: 3 }}>
-            MM Pharma est un fabricant ALGERIAain spécialisé dans la conception, la fabrication et la distribution
-            de produits d'hygiène, de désinfection et d'entretien. Nous accompagnons les professionnels de santé,
-            l'hôtellerie, l'industrie et les collectivités depuis plus de 15 ans.
-          </Typography>
-          <Typography variant="body1" sx={{ color: palette.neutral[700], lineHeight: 1.8, fontSize: 16 }}>
-            Notre engagement : offrir des solutions conformes aux normes pharmaceutiques les plus exigeantes,
-            avec un contrôle qualité rigoureux sur chaque lot produit.
+          <Typography sx={{ mt: 6, maxWidth: 640, fontSize: 17, color: 'rgba(255,255,255,0.72)', lineHeight: 1.7 }}>
+            MM Pharma conçoit, fabrique et distribue depuis plus de 15 ans des
+            produits d’hygiène, de désinfection et d’entretien pour les
+            établissements de santé, l’hôtellerie, l’industrie et les
+            collectivités marocaines.
           </Typography>
         </Container>
       </Box>
 
-      <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.neutral[0] }}>
+      {/* Numbers */}
+      <Box sx={{ bgcolor: '#fff', borderBottom: `1px solid ${palette.neutral[200]}` }}>
         <Container maxWidth="lg">
-          <Typography
-            variant="h2"
-            sx={{ fontSize: { xs: 28, md: 36 }, color: palette.primary[900], textAlign: 'center', mb: 8 }}
-          >
-            Nos valeurs
-          </Typography>
-          <Grid container spacing={4}>
-            {[
-              { title: 'Qualité', body: 'Chaque lot est soumis à des contrôles microbiologiques et physico-chimiques rigoureux.' },
-              { title: 'Innovation', body: "Nous investissons dans la R&D pour développer des formulations toujours plus performantes." },
-              { title: 'Engagement', body: 'Certifiés ISO 9001, nous respectons les normes les plus strictes de l\'industrie pharmaceutique.' },
-              { title: 'Proximité', body: 'Fabrication locale au ALGERIA pour un service réactif et une empreinte carbone réduite.' },
-            ].map((value) => (
-              <Grid size={{ xs: 12, sm: 6, md: 3 }} key={value.title}>
-                <Card sx={{ height: '100%', textAlign: 'center', borderRadius: 12 }}>
-                  <CardContent sx={{ p: 4 }}>
-                    <Typography variant="h5" sx={{ color: palette.primary[900], mb: 1.5 }}>
-                      {value.title}
-                    </Typography>
-                    <Typography variant="body2" sx={{ color: palette.neutral[700], lineHeight: 1.7 }}>
-                      {value.body}
-                    </Typography>
-                  </CardContent>
-                </Card>
+          <Grid container>
+            {numbers.map((n, i) => (
+              <Grid size={{ xs: 6, md: 3 }} key={n.v}
+                sx={{
+                  py: { xs: 4, md: 6 },
+                  px: { xs: 2, md: 4 },
+                  borderRight: { md: i < 3 ? `1px solid ${palette.neutral[200]}` : 'none' },
+                  borderBottom: { xs: i < 2 ? `1px solid ${palette.neutral[200]}` : 'none', md: 'none' },
+                }}
+              >
+                <Typography sx={{ fontFamily: mono, fontSize: 10, letterSpacing: '0.24em', color: palette.neutral[500], textTransform: 'uppercase', mb: 1.5 }}>
+                  {String(i + 1).padStart(2, '0')} / 04
+                </Typography>
+                <Typography sx={{ fontSize: { xs: 40, md: 64 }, fontWeight: 600, color: navy, lineHeight: 1, letterSpacing: '-0.03em' }}>
+                  {n.k}
+                </Typography>
+                <Typography sx={{ fontSize: 13, color: palette.neutral[700], mt: 1.5 }}>{n.v}</Typography>
               </Grid>
             ))}
           </Grid>
         </Container>
       </Box>
 
-      <Box component="section" sx={{ py: { xs: 8, md: 12 } }}>
-        <Container maxWidth="md">
-          <Typography variant="h2" sx={{ fontSize: { xs: 28, md: 36 }, color: palette.primary[900], textAlign: 'center', mb: 3 }}>
-            Notre équipe
-          </Typography>
-          <Typography variant="body1" sx={{ color: palette.neutral[700], textAlign: 'center', mb: 6, maxWidth: 600, mx: 'auto' }}>
-            Une équipe passionnée au service de votre santé et de votre environnement professionnel.
-          </Typography>
-          <Typography variant="body2" sx={{ color: palette.neutral[500], textAlign: 'center' }}>
-            Photos et biographies à venir.
-          </Typography>
+      {/* Values */}
+      <Box component="section" sx={{ py: { xs: 10, md: 16 }, bgcolor: palette.neutral[50] }}>
+        <Container maxWidth="lg">
+          <Stack direction={{ xs: 'column', md: 'row' }} spacing={{ xs: 4, md: 8 }} sx={{ mb: { xs: 6, md: 10 } }}>
+            <Box sx={{ flex: '0 0 auto', minWidth: { md: 280 } }}>
+              <Typography sx={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.3em', color: gold, textTransform: 'uppercase', mb: 2 }}>
+                N° 03 — Valeurs
+              </Typography>
+              <Typography sx={{ fontSize: { xs: 36, md: 56 }, lineHeight: 0.95, letterSpacing: '-0.03em', color: navy, fontWeight: 600 }}>
+                Nos quatre<br />
+                <span style={{ fontStyle: 'italic', fontWeight: 400, color: gold }}>principes.</span>
+              </Typography>
+            </Box>
+          </Stack>
+          <Grid container>
+            {values.map((v, i) => (
+              <Grid size={{ xs: 12, sm: 6 }} key={v.title}
+                sx={{
+                  p: { xs: 3, md: 5 },
+                  borderTop: `1px solid ${palette.neutral[300]}`,
+                  borderRight: { sm: i % 2 === 0 ? `1px solid ${palette.neutral[300]}` : 'none' },
+                  '&:nth-last-of-type(-n+1)': { borderBottom: `1px solid ${palette.neutral[300]}` },
+                }}
+              >
+                <Stack direction="row" sx={{ alignItems: 'baseline', gap: 3, mb: 2 }}>
+                  <Typography sx={{ fontFamily: mono, fontSize: 13, letterSpacing: '0.2em', color: gold, fontWeight: 700 }}>{v.idx}</Typography>
+                  <Typography sx={{ fontSize: { xs: 24, md: 32 }, color: navy, fontWeight: 600, letterSpacing: '-0.02em' }}>
+                    {v.title}
+                  </Typography>
+                </Stack>
+                <Typography sx={{ fontSize: 15, color: palette.neutral[700], lineHeight: 1.75, maxWidth: 460 }}>
+                  {v.body}
+                </Typography>
+              </Grid>
+            ))}
+          </Grid>
         </Container>
       </Box>
 
-      <Box component="section" sx={{ py: { xs: 8, md: 12 }, bgcolor: palette.primary[500] }}>
-        <Container maxWidth="md" sx={{ textAlign: 'center' }}>
-          <Typography variant="h2" sx={{ fontSize: { xs: 28, md: 36 }, color: palette.neutral[0], mb: 3 }}>
-            Un engagement qualité irréprochable
+      {/* CTA */}
+      <Box sx={{ bgcolor: navy, color: '#fff', py: { xs: 10, md: 14 }, position: 'relative', overflow: 'hidden' }}>
+        <Box aria-hidden sx={{ position: 'absolute', inset: 0, background: 'radial-gradient(700px 320px at 80% 50%, rgba(197,160,89,0.14), transparent 60%)' }} />
+        <Container maxWidth="md" sx={{ position: 'relative', textAlign: 'center' }}>
+          <Typography sx={{ fontFamily: mono, fontSize: 11, letterSpacing: '0.3em', color: gold, textTransform: 'uppercase', mb: 3 }}>
+            Engagement qualité
           </Typography>
-          <Typography variant="body1" sx={{ color: palette.neutral[0], mb: 4, maxWidth: 600, mx: 'auto', lineHeight: 1.7 }}>
-            De la sélection des matières premières jusqu'à la livraison, chaque étape est contrôlée
-            pour garantir des produits sûrs, efficaces et conformes.
+          <Typography sx={{ fontSize: { xs: 32, md: 56 }, lineHeight: 1, letterSpacing: '-0.03em', fontWeight: 600, mb: 4 }}>
+            De la matière première<br />
+            <span style={{ fontStyle: 'italic', fontWeight: 400, color: gold }}>à la livraison.</span>
+          </Typography>
+          <Typography sx={{ fontSize: 16, color: 'rgba(255,255,255,0.72)', maxWidth: 600, mx: 'auto', lineHeight: 1.7 }}>
+            Chaque étape est tracée, contrôlée, documentée — pour des produits
+            sûrs, efficaces et conformes aux exigences les plus strictes.
           </Typography>
         </Container>
       </Box>

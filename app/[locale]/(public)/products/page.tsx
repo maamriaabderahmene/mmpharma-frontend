@@ -1,13 +1,14 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { LocaleValues } from '@/lib/shared/constants/Locale';
-import { ProductRangeValues, ProductRange } from '@/lib/shared/constants/ProductRange';
+import { ProductRangeValues } from '@/lib/shared/constants/ProductRange';
 import type { ProductFilter, ProductSortOption } from '@/lib/shared/types/Product';
 import { getTranslations } from '@/lib/i18n/server';
 import { CatalogHeader } from '@/components/sections/products/CatalogHeader';
 import { CatalogFilters } from '@/components/sections/products/CatalogFilters';
 import { CatalogResults } from '@/components/sections/products/CatalogResults';
 import { CatalogPagination } from '@/components/sections/products/CatalogPagination';
+import { search } from '@/lib/server/api/products.service';
 import { env } from '@/lib/env';
 
 type Props = {
@@ -23,7 +24,8 @@ type Props = {
   }>;
 };
 
-export const revalidate = 60;
+export const dynamic = 'force-dynamic';
+export const revalidate = 0;
 
 function parseSort(raw: string | undefined): ProductSortOption | undefined {
   if (!raw) return undefined;
@@ -34,9 +36,8 @@ function parseSort(raw: string | undefined): ProductSortOption | undefined {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations(locale, 'products');
-
   return {
-    title: t('title'),
+    title: `${t('title')} | MM Pharma`,
     description: t('subtitle'),
     alternates: {
       canonical: `${env.MMP_APP_URL}/${locale}/products`,
@@ -44,6 +45,7 @@ export async function generateMetadata({ params }: { params: Promise<{ locale: s
         'fr-MA': `${env.MMP_APP_URL}/fr-MA/products`,
         'ar-MA': `${env.MMP_APP_URL}/ar-MA/products`,
         'en-US': `${env.MMP_APP_URL}/en-US/products`,
+        'x-default': `${env.MMP_APP_URL}/fr-MA/products`,
       },
     },
   };
@@ -70,12 +72,9 @@ export default async function ProductsPage({ params, searchParams }: Props) {
     limit: 20,
   };
 
-  const { search: searchProducts } = await import('@/lib/server/api/products.service');
-  const { products, facets: facetsData } = await searchProducts(filter);
+  const { products, facets: facetsData } = await search(filter);
 
   const scents = (facetsData?.scents ?? []).map((s) => s.value);
-
-  const t = await getTranslations(locale, 'products');
 
   return (
     <>

@@ -23,7 +23,7 @@ export default async function PublicLayout({ children, params }: Props) {
       </a>
       <Navbar />
       <main id="main">{children}</main>
-      <Footer />
+      <Footer locale={locale} />
     </>
   );
 }

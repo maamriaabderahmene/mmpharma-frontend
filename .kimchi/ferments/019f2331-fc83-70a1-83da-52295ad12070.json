@@ -1,0 +1,17 @@
+{
+  "id": "019f2331-fc83-70a1-83da-52295ad12070",
+  "name": "hi",
+  "description": "hi",
+  "status": "draft",
+  "worktree": {
+    "path": "/home/maamria/Desktop/MMPHARMA/prod/mmpharma-frontend",
+    "branch": "master",
+    "commit": "9090f1146ec86ea72f091c2f16399442ae69f095"
+  },
+  "scoping": {},
+  "phases": [],
+  "decisions": [],
+  "memories": [],
+  "createdAt": "2026-07-02T14:18:26.307Z",
+  "updatedAt": "2026-07-02T14:18:26.307Z"
+}

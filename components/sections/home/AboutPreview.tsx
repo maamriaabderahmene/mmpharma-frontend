@@ -46,7 +46,7 @@ export function AboutPreview() {
               L'excellence pharmaceutique au service de l'hygiène professionnelle.
             </Typography>
             <Typography variant="body1" sx={{ color: palette.neutral[700], lineHeight: 1.7 }}>
-              Depuis plus de 10 ans, MM Pharma est un acteur ALGERIAain incontournable dans la fabrication de produits d'hygiène, de désinfection et d'entretien. Notre engagement : offrir des solutions conformes aux normes pharmaceutiques les plus strictes.
+              Depuis plus de 10 ans, MM Pharma est un acteur Marocain incontournable dans la fabrication de produits d'hygiène, de désinfection et d'entretien. Notre engagement : offrir des solutions conformes aux normes pharmaceutiques les plus strictes.
             </Typography>
             <Button
               component={Link}

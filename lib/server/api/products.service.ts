@@ -8,31 +8,63 @@ import type { SessionPayload } from '@/lib/shared/types/Session';
 import * as productsRepo from './products.repo';
 import * as seoRepo from './seo.repo';
 import * as mediaRepo from './media.repo';
-import { create as createAuditLog } from './audit.repo';
-import { cacheHeaders } from './cache';
+import * as auditRepo from './audit.repo';
+
+const emptyFacets: ProductFacets = {
+  ranges: [],
+  categories: [],
+  scents: [],
+  conditionnements: [],
+};
+
+const emptyPage = (filter: ProductFilter): Paginated<Product> => ({
+  data: [],
+  total: 0,
+  page: filter.page ?? 1,
+  limit: filter.limit ?? 20,
+  totalPages: 0,
+});
+
+function isDbReachable(): boolean {
+  return Boolean(process.env.MONGO_URI && process.env.MONGO_URI.length > 0);
+}
 
 export async function search(filter: ProductFilter): Promise<{ products: Paginated<Product>; facets: ProductFacets }> {
-  const products = await productsRepo.list(filter);
-  const facets = await productsRepo.facets();
-  return { products, facets };
+  if (!isDbReachable()) {
+    return { products: emptyPage(filter), facets: emptyFacets };
+  }
+  try {
+    const products = await productsRepo.list(filter);
+    const facets = await productsRepo.facets();
+    return { products, facets };
+  } catch (err) {
+    console.error('[products.search] failed', { filter, err: (err as Error).message });
+    return { products: emptyPage(filter), facets: emptyFacets };
+  }
 }
 
 export async function getDetail(slug: string, locale = 'fr-MA'): Promise<{ product: Product; related: Product[]; seo: unknown }> {
-  const product = await productsRepo.bySlug(slug);
-  if (!product) {
-    throw new ApiError(404, 'NOT_FOUND', `Product with slug ${slug} not found`);
+  if (!isDbReachable()) {
+    throw new ApiError(404, 'NOT_FOUND', `Product ${slug} not found`);
   }
-
-  const related = await productsRepo.related(product, 4);
-
-  let seo = null;
   try {
-    seo = await seoRepo.byPath(`/products/${slug}`, locale);
-  } catch {
-    seo = null;
+    const product = await productsRepo.bySlug(slug);
+    if (!product) {
+      throw new ApiError(404, 'NOT_FOUND', `Product with slug ${slug} not found`);
+    }
+    const related = await productsRepo.related(product, 4);
+    let seo = null;
+    try {
+      seo = await seoRepo.byPath(`/products/${slug}`, locale);
+    } catch {
+      seo = null;
+    }
+    return { product, related, seo };
+  } catch (err) {
+    if (err instanceof ApiError) throw err;
+    console.error('[products.getDetail] failed', { slug, err: (err as Error).message });
+    throw new ApiError(404, 'NOT_FOUND', `Product ${slug} not found`);
   }
-
-  return { product, related, seo };
 }
 
 export async function create(input: CreateProductInput, session: SessionPayload): Promise<Product> {
@@ -65,7 +97,7 @@ export async function create(input: CreateProductInput, session: SessionPayload)
     }
   }
 
-  await createAuditLog({
+  await auditRepo.create({
     userId: session.userId,
     action: 'create_product',
     resource: 'product',
@@ -84,7 +116,7 @@ export async function update(id: string, input: UpdateProductInput, session: Ses
 
   const product = await productsRepo.update(id, input);
 
-  await createAuditLog({
+  await auditRepo.create({
     userId: session.userId,
     action: 'update_product',
     resource: 'product',
@@ -103,7 +135,7 @@ export async function softDelete(id: string, session: SessionPayload): Promise<v
 
   await productsRepo.softDelete(id);
 
-  await createAuditLog({
+  await auditRepo.create({
     userId: session.userId,
     action: 'delete_product',
     resource: 'product',
@@ -114,13 +146,31 @@ export async function softDelete(id: string, session: SessionPayload): Promise<v
 }
 
 export async function featured(limit = 6, locale = 'fr-MA'): Promise<Product[]> {
-  return productsRepo.featured(limit, locale);
+  if (!isDbReachable()) return [];
+  try {
+    return await productsRepo.featured(limit, locale);
+  } catch (err) {
+    console.error('[products.featured] failed', { err: (err as Error).message });
+    return [];
+  }
 }
 
 export async function related(product: Product, limit = 4): Promise<Product[]> {
-  return productsRepo.related(product, limit);
+  if (!isDbReachable()) return [];
+  try {
+    return await productsRepo.related(product, limit);
+  } catch (err) {
+    console.error('[products.related] failed', { err: (err as Error).message });
+    return [];
+  }
 }
 
 export async function allSlugs(): Promise<{ slug: string }[]> {
-  return productsRepo.allSlugs();
+  if (!isDbReachable()) return [];
+  try {
+    return await productsRepo.allSlugs();
+  } catch (err) {
+    console.error('[products.allSlugs] failed', { err: (err as Error).message });
+    return [];
+  }
 }

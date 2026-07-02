@@ -50,7 +50,7 @@ export default async function TermsPage({ params }: Props) {
 
         <h2>4. Prix et paiement</h2>
         <p>
-          Les prix sont indiqués en dirhams ALGERIAains (MAD) hors taxes. Le paiement s'effectue selon
+          Les prix sont indiqués en dirhams Marocains (MAD) hors taxes. Le paiement s'effectue selon
           les modalités précisées lors de la commande.
         </p>
 
