@@ -2,6 +2,7 @@ import type { Metadata } from 'next';
 import { Container, Typography, Box } from '@mui/material';
 import { BlogList } from '@/components/sections/blog/BlogList';
 import { palette } from '@/theme/palette';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 const mono = "'JetBrains Mono', ui-monospace, monospace";
 
@@ -12,11 +13,13 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return {
+  return buildPageMetadata({
+    locale,
+    section: 'blog',
+    path: '/blog',
     title: 'Blog',
     description: 'Actualités, conseils et expertise en hygiène et désinfection professionnelle.',
-    alternates: { canonical: `https://www.mmpharma.ma/${locale}/blog` },
-  };
+  });
 }
 
 export default async function BlogPage({ params, searchParams }: Props) {

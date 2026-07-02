@@ -8,8 +8,8 @@ import { CatalogHeader } from '@/components/sections/products/CatalogHeader';
 import { CatalogFilters } from '@/components/sections/products/CatalogFilters';
 import { CatalogResults } from '@/components/sections/products/CatalogResults';
 import { CatalogPagination } from '@/components/sections/products/CatalogPagination';
-import { search } from '@/lib/server/api/products.service';
-import { env } from '@/lib/env';
+import { safeSearch } from '@/lib/server/api/products.service';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -36,19 +36,13 @@ function parseSort(raw: string | undefined): ProductSortOption | undefined {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   const t = await getTranslations(locale, 'products');
-  return {
-    title: `${t('title')} | MM Pharma`,
+  return buildPageMetadata({
+    locale,
+    section: 'products',
+    path: '/products',
+    title: t('title'),
     description: t('subtitle'),
-    alternates: {
-      canonical: `${env.MMP_APP_URL}/${locale}/products`,
-      languages: {
-        'fr-MA': `${env.MMP_APP_URL}/fr-MA/products`,
-        'ar-MA': `${env.MMP_APP_URL}/ar-MA/products`,
-        'en-US': `${env.MMP_APP_URL}/en-US/products`,
-        'x-default': `${env.MMP_APP_URL}/fr-MA/products`,
-      },
-    },
-  };
+  });
 }
 
 export default async function ProductsPage({ params, searchParams }: Props) {
@@ -72,7 +66,7 @@ export default async function ProductsPage({ params, searchParams }: Props) {
     limit: 20,
   };
 
-  const { products, facets: facetsData } = await search(filter);
+  const { products, facets: facetsData } = await safeSearch(filter);
 
   const scents = (facetsData?.scents ?? []).map((s) => s.value);
 

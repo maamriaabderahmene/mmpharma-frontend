@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Container, Typography, Box, Grid, Stack, TextField, Button } from '@mui/material';
 import { palette } from '@/theme/palette';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 const mono = "'JetBrains Mono', ui-monospace, monospace";
 
@@ -10,11 +11,13 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return {
+  return buildPageMetadata({
+    locale,
+    section: 'contact',
+    path: '/contact',
     title: 'Contact',
     description: 'Contactez MM Pharma — devis, information, support.',
-    alternates: { canonical: `https://www.mmpharma.ma/${locale}/contact` },
-  };
+  });
 }
 
 export default async function ContactPage({ params }: Props) {

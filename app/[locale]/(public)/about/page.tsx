@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Container, Typography, Box, Grid, Stack } from '@mui/material';
 import { palette } from '@/theme/palette';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 const mono = "'JetBrains Mono', ui-monospace, monospace";
 
@@ -10,11 +11,13 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return {
+  return buildPageMetadata({
+    locale,
+    section: 'about',
+    path: '/about',
     title: 'À propos',
     description: "MM Pharma — fabricant de produits d'hygiène et de désinfection au Maroc.",
-    alternates: { canonical: `https://www.mmpharma.ma/${locale}/about` },
-  };
+  });
 }
 
 export default async function AboutPage({ params }: Props) {

@@ -3,7 +3,8 @@ import { notFound } from 'next/navigation';
 import { LocaleValues } from '@/lib/shared/constants/Locale';
 import ThemeRegistry from '@/components/providers/ThemeRegistry';
 import { I18nProvider } from '@/lib/i18n/client';
-import { env } from '@/lib/env';
+import { buildLocaleAlternates } from '@/lib/seo/alternates';
+import { defaultMetadata } from '@/lib/seo/defaults';
 
 type Props = {
   children: React.ReactNode;
@@ -19,17 +20,9 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: { params: Promise<{ locale: string }> }): Promise<Metadata> {
   const { locale } = await params;
   return {
-    title: { default: 'MM Pharma', template: '%s | MM Pharma' },
-    description: "Fabricant de produits d'hygiène et de désinfection au Maroc",
-    alternates: {
-      canonical: `${env.MMP_APP_URL}/${locale}`,
-      languages: {
-        'fr-MA': `${env.MMP_APP_URL}/fr-MA`,
-        'ar-MA': `${env.MMP_APP_URL}/ar-MA`,
-        'en-US': `${env.MMP_APP_URL}/en-US`,
-        'x-default': `${env.MMP_APP_URL}/fr-MA`,
-      },
-    },
+    ...defaultMetadata,
+    title: { default: 'MM Pharma', template: '%s' },
+    alternates: buildLocaleAlternates(locale, ''),
   };
 }
 

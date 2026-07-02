@@ -10,6 +10,9 @@ import * as seoRepo from './seo.repo';
 import * as mediaRepo from './media.repo';
 import * as auditRepo from './audit.repo';
 
+const SEARCH_CACHE_TTL_MS = 30_000;
+const searchCache = new Map<string, { expiresAt: number; value: { products: Paginated<Product>; facets: ProductFacets } }>();
+
 const emptyFacets: ProductFacets = {
   ranges: [],
   categories: [],
@@ -29,6 +32,33 @@ function isDbReachable(): boolean {
   return Boolean(process.env.MONGO_URI && process.env.MONGO_URI.length > 0);
 }
 
+function filterCacheKey(filter: ProductFilter): string {
+  return JSON.stringify({
+    q: filter.q ?? '',
+    range: filter.range ?? '',
+    scent: filter.scent ?? '',
+    conditionnement: filter.conditionnement ?? '',
+    haute: filter.haute ?? '',
+    sort: filter.sort ?? '',
+    page: filter.page ?? 1,
+    limit: filter.limit ?? 20,
+  });
+}
+
+export async function safeSearch(filter: ProductFilter): Promise<{ products: Paginated<Product>; facets: ProductFacets }> {
+  const key = filterCacheKey(filter);
+  const now = Date.now();
+  const cached = searchCache.get(key);
+
+  if (cached && cached.expiresAt > now) {
+    return cached.value;
+  }
+
+  const value = await search(filter);
+  searchCache.set(key, { expiresAt: now + SEARCH_CACHE_TTL_MS, value });
+  return value;
+}
+
 export async function search(filter: ProductFilter): Promise<{ products: Paginated<Product>; facets: ProductFacets }> {
   if (!isDbReachable()) {
     return { products: emptyPage(filter), facets: emptyFacets };
@@ -38,7 +68,13 @@ export async function search(filter: ProductFilter): Promise<{ products: Paginat
     const facets = await productsRepo.facets();
     return { products, facets };
   } catch (err) {
-    console.error('[products.search] failed', { filter, err: (err as Error).message });
+    console.error(
+      JSON.stringify({
+        event: 'products.search.failed',
+        filter,
+        message: (err as Error).message,
+      }),
+    );
     return { products: emptyPage(filter), facets: emptyFacets };
   }
 }

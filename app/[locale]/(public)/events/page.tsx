@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Container, Typography, Box, ToggleButtonGroup, ToggleButton } from '@mui/material';
 import { EventList } from '@/components/sections/events/EventList';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -9,11 +10,13 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return {
+  return buildPageMetadata({
+    locale,
+    section: 'events',
+    path: '/events',
     title: 'Événements',
     description: 'Webinars, conférences et ateliers — expertise en hygiène et désinfection.',
-    alternates: { canonical: `https://www.mmpharma.ma/${locale}/events` },
-  };
+  });
 }
 
 export default async function EventsPage({ params, searchParams }: Props) {

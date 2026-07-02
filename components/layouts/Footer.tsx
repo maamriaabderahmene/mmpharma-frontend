@@ -1,13 +1,17 @@
 import Link from 'next/link';
-import { palette } from '@/theme/palette';
 import { Brand } from '@/components/ui/Brand';
 import { getTranslations } from '@/lib/i18n/server';
 import { ROUTES } from '@/lib/shared/routes';
+import { Certifications } from '@/components/layouts/Footer/Certifications';
+import { Manifesto } from '@/components/layouts/Footer/Manifesto';
+import { Newsletter } from '@/components/layouts/Footer/Newsletter';
+import { WordmarkBleed } from '@/components/layouts/Footer/WordmarkBleed';
 
 const socials = [
-  { label: 'IG', href: 'https://instagram.com', title: 'Instagram' },
-  { label: 'YT', href: 'https://youtube.com', title: 'YouTube' },
-  { label: 'IN', href: 'https://linkedin.com', title: 'LinkedIn' },
+  { label: 'IG', href: 'https://instagram.com' },
+  { label: 'YT', href: 'https://youtube.com' },
+  { label: 'IN', href: 'https://linkedin.com' },
+  { label: 'FB', href: 'https://facebook.com' },
 ];
 
 type Props = {
@@ -18,322 +22,105 @@ export async function Footer({ locale }: Props) {
   const tNav = await getTranslations(locale, 'nav');
   const tFooter = await getTranslations(locale, 'footer');
 
-  const footerColumns = [
-    {
-      title: tFooter('contact'),
-      isContact: true,
-      links: [{ label: 'contact@mmpharma.ma', href: 'mailto:contact@mmpharma.ma' }],
-    },
-    {
-      title: tFooter('products'),
-      links: [
-        { label: 'Gamme I — Hygiène', href: `${ROUTES.products(locale)}?range=hygiene` },
-        { label: 'Gamme II — Détergent', href: `${ROUTES.products(locale)}?range=detergent` },
-        { label: 'Gamme III — Désinfectant', href: `${ROUTES.products(locale)}?range=disinfectant` },
-        { label: 'Gamme IV — Inox', href: `${ROUTES.products(locale)}?range=inox` },
-        { label: 'Gamme V — Divers', href: `${ROUTES.products(locale)}?range=misc` },
-      ],
-    },
-    {
-      title: tFooter('about'),
-      links: [
-        { label: tNav('home'), href: ROUTES.home(locale) },
-        { label: tNav('blog'), href: ROUTES.blog(locale) },
-        { label: tNav('events'), href: ROUTES.events(locale) },
-        { label: tNav('community'), href: ROUTES.community(locale) },
-        { label: tFooter('contact'), href: ROUTES.contact(locale) },
-      ],
-    },
-    {
-      title: tFooter('resources'),
-      links: [
-        { label: 'FAQ', href: ROUTES.faq(locale) },
-        { label: tNav('community'), href: ROUTES.community(locale) },
-        { label: 'Fiches techniques', href: ROUTES.products(locale) },
-        { label: 'Normes & conformité', href: `${ROUTES.about(locale)}#quality` },
-      ],
-    },
-    {
-      title: tFooter('legal'),
-      links: [
-        { label: tFooter('privacy'), href: `/${locale}/legal/privacy` },
-        { label: tFooter('terms'), href: `/${locale}/legal/terms` },
-        { label: tFooter('cookies'), href: `/${locale}/legal/cookies` },
-      ],
-    },
+  const sitemap = [
+    { label: tNav('products'), href: ROUTES.products(locale) },
+    { label: tNav('blog'), href: ROUTES.blog(locale) },
+    { label: tNav('events'), href: ROUTES.events(locale) },
+    { label: tNav('community'), href: ROUTES.community(locale) },
+    { label: tFooter('contact'), href: ROUTES.contact(locale) },
   ];
 
-  const navy = palette.primary[900];
-  const gold = palette.accent[500];
-  const mono = "'JetBrains Mono', ui-monospace, monospace";
+  const legal = [
+    { label: tFooter('privacy'), href: `/${locale}/legal/privacy` },
+    { label: tFooter('terms'), href: `/${locale}/legal/terms` },
+    { label: tFooter('cookies'), href: `/${locale}/legal/cookies` },
+  ];
+
   return (
-    <footer
-      style={{
-        backgroundColor: '#050B14',
-        color: '#E1E7EE',
-        position: 'relative',
-        overflow: 'hidden',
-      }}
-    >
+    <footer className="relative overflow-hidden bg-[#050B14] text-[#E1E7EE]">
       <div
         aria-hidden
-        style={{
-          position: 'absolute',
-          inset: 0,
-          background:
-            `radial-gradient(700px 380px at 85% 0%, rgba(242,177,53,0.10), transparent 60%), radial-gradient(600px 400px at 0% 100%, ${navy}88, transparent 60%)`,
-          pointerEvents: 'none',
-        }}
+        className="pointer-events-none absolute inset-0 bg-[radial-gradient(600px_380px_at_0%_100%,rgba(6,42,79,0.6),transparent_60%)]"
       />
-      <div style={{ position: 'relative', maxWidth: 1360, margin: '0 auto', padding: '96px 24px 24px' }}>
-        {/* Top CTA — headline centered */}
-        <div
-          style={{
-            textAlign: 'center',
-            paddingBottom: 72,
-            marginBottom: 72,
-            borderBottom: '1px solid rgba(255,255,255,0.08)',
-          }}
-        >
-          <div
-            style={{
-              fontFamily: mono,
-              fontSize: 11,
-              letterSpacing: '0.32em',
-              textTransform: 'uppercase',
-              color: gold,
-              marginBottom: 32,
-            }}
-          >
-            — Hygiène pharmaceutique · Maroc —
-          </div>
-          <h2
-            style={{
-              fontFamily: "'Inter', system-ui, sans-serif",
-              fontSize: 'clamp(36px, 6.5vw, 84px)',
-              lineHeight: 1.02,
-              letterSpacing: '-0.035em',
-              fontWeight: 500,
-              color: '#F5F7FA',
-              margin: '0 auto 40px',
-              maxWidth: 1100,
-            }}
-          >
-            L&rsquo;hygiène pharmaceutique,{' '}
-            <span style={{ fontStyle: 'italic', fontWeight: 300, color: gold }}>
-              formulée au Maroc.
-            </span>
-          </h2>
-          <div style={{ display: 'inline-flex', gap: 16, flexWrap: 'wrap', justifyContent: 'center' }}>
-            <Link
-              href={`${ROUTES.contact(locale)}?intent=quote`}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 12,
-                padding: '16px 28px',
-                background: gold,
-                color: navy,
-                fontFamily: mono,
-                fontSize: 11,
-                letterSpacing: '0.24em',
-                textTransform: 'uppercase',
-                fontWeight: 700,
-                textDecoration: 'none',
-              }}
-            >
-              Demander un devis <span>→</span>
-            </Link>
-            <Link
-              href={ROUTES.products(locale)}
-              style={{
-                display: 'inline-flex',
-                alignItems: 'center',
-                gap: 12,
-                padding: '16px 28px',
-                background: 'transparent',
-                color: '#F5F7FA',
-                border: '1px solid rgba(255,255,255,0.25)',
-                fontFamily: mono,
-                fontSize: 11,
-                letterSpacing: '0.24em',
-                textTransform: 'uppercase',
-                fontWeight: 600,
-                textDecoration: 'none',
-              }}
-            >
-              Voir le catalogue
-            </Link>
-          </div>
+
+      <div className="relative mx-auto w-full max-w-[1280px] px-4 pb-6 pt-20 md:px-8">
+        <div className="mb-16 border-b border-white/10 pb-12">
+          <Manifesto />
         </div>
 
-        {/* Link columns */}
-        <div
-          style={{
-            display: 'grid',
-            gridTemplateColumns: 'repeat(auto-fit, minmax(180px, 1fr))',
-            gap: 48,
-            marginBottom: 96,
-          }}
-        >
-          {footerColumns.map((col) => (
-            <div key={col.title}>
-              <div
-                style={{
-                  fontFamily: mono,
-                  fontSize: 11,
-                  letterSpacing: '0.3em',
-                  textTransform: 'uppercase',
-                  color: 'rgba(255,255,255,0.55)',
-                  marginBottom: 24,
-                  fontWeight: 600,
-                }}
-              >
-                {col.title}
-              </div>
-              <ul style={{ listStyle: 'none', padding: 0, margin: 0, display: 'flex', flexDirection: 'column', gap: 14 }}>
-                {col.links.map((link) => (
-                  <li key={link.label}>
-                    <Link
-                      href={link.href}
-                      style={{
-                        fontSize: 14,
-                        color: col.isContact ? gold : 'rgba(255,255,255,0.78)',
-                        textDecoration: 'none',
-                        transition: 'color 0.2s',
-                        display: 'inline-block',
-                        borderBottom: col.isContact ? `1px solid ${gold}55` : 'none',
-                        paddingBottom: col.isContact ? 2 : 0,
-                      }}
-                    >
-                      {link.label}
-                    </Link>
-                  </li>
-                ))}
-                {col.isContact && (
-                  <li style={{ marginTop: 20, display: 'flex', gap: 10 }}>
-                    {socials.map((s) => (
-                      <a
-                        key={s.label}
-                        href={s.href}
-                        title={s.title}
-                        target="_blank"
-                        rel="noopener noreferrer"
-                        style={{
-                          width: 36,
-                          height: 36,
-                          display: 'inline-flex',
-                          alignItems: 'center',
-                          justifyContent: 'center',
-                          border: '1px solid rgba(255,255,255,0.15)',
-                          color: 'rgba(255,255,255,0.75)',
-                          textDecoration: 'none',
-                          fontFamily: mono,
-                          fontSize: 10,
-                          letterSpacing: '0.1em',
-                          fontWeight: 700,
-                        }}
-                      >
-                        {s.label}
-                      </a>
-                    ))}
-                  </li>
-                )}
-              </ul>
+        <div className="mb-16 grid grid-cols-1 gap-10 md:grid-cols-2 lg:grid-cols-4">
+          <div>
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-[#F2B135]">{tFooter('products')}</p>
+            <ul className="space-y-3">
+              {sitemap.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-sm text-white/75 transition hover:text-[#F2B135]">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-[#F2B135]">{tFooter('legal')}</p>
+            <ul className="space-y-3">
+              {legal.map((item) => (
+                <li key={item.href}>
+                  <Link href={item.href} className="text-sm text-white/75 transition hover:text-[#F2B135]">
+                    {item.label}
+                  </Link>
+                </li>
+              ))}
+            </ul>
+          </div>
+
+          <div>
+            <Newsletter />
+            <div className="mt-4 flex gap-2">
+              {socials.map((social) => (
+                <a
+                  key={social.label}
+                  href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex h-9 w-9 items-center justify-center border border-white/20 font-mono text-[10px] uppercase tracking-[0.16em] text-white/80 transition hover:border-[#F2B135] hover:text-[#F2B135]"
+                >
+                  {social.label}
+                </a>
+              ))}
             </div>
-          ))}
+          </div>
+
+          <div>
+            <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-[#F2B135]">{tFooter('contact')}</p>
+            <p className="mb-2 text-sm text-white/80">Casablanca, Maroc</p>
+            <p className="mb-2 text-sm text-white/80">+212 5XX XX XX XX</p>
+            <p className="mb-3 text-sm text-[#F2B135]">contact@mmpharma.ma</p>
+            <p className="text-xs uppercase tracking-[0.18em] text-white/50">Lun — Ven · 09h00 / 18h00</p>
+          </div>
         </div>
 
-        {/* Brand block + certifications */}
-        <div
-          style={{
-            display: 'flex',
-            gap: 32,
-            flexWrap: 'wrap',
-            alignItems: 'flex-end',
-            justifyContent: 'space-between',
-            paddingTop: 40,
-            borderTop: '1px solid rgba(255,255,255,0.08)',
-          }}
-        >
-          <div style={{ maxWidth: 520 }}>
-            <div style={{ marginBottom: 16 }}>
+        <div className="flex flex-wrap items-end justify-between gap-8 border-t border-white/10 pt-8">
+          <div className="max-w-[520px]">
+            <div className="mb-3">
               <Brand variant="light" size={40} />
             </div>
-            <p style={{ fontSize: 13, lineHeight: 1.7, color: 'rgba(255,255,255,0.55)', margin: 0 }}>
-              Fabricant marocain de produits d&apos;hygiène, de désinfection et
-              d&apos;entretien professionnel. Formulés, testés et conditionnés au
-              Maroc — conformes à la norme JO N°16 · 2020.
+            <p className="text-sm leading-7 text-white/60">
+              Fabricant marocain de produits d&apos;hygiène, de désinfection et d&apos;entretien professionnel.
+              Formulés, testés et conditionnés au Maroc.
             </p>
           </div>
-          <div style={{ display: 'flex', gap: 8, flexWrap: 'wrap' }}>
-            {['ISO 9001', 'JO N°16 · 2020', 'Made in Morocco'].map((tag) => (
-              <span
-                key={tag}
-                style={{
-                  fontFamily: mono,
-                  fontSize: 10,
-                  letterSpacing: '0.24em',
-                  textTransform: 'uppercase',
-                  padding: '10px 14px',
-                  border: '1px solid rgba(242,177,53,0.35)',
-                  color: gold,
-                }}
-              >
-                {tag}
-              </span>
-            ))}
-          </div>
+          <Certifications />
         </div>
 
-        {/* Oversized wordmark — bleeds at the bottom */}
-        <div
-          aria-hidden
-          style={{
-            marginTop: 64,
-            fontFamily: "'Inter', system-ui, sans-serif",
-            fontWeight: 800,
-            fontSize: 'clamp(64px, 19vw, 260px)',
-            letterSpacing: '-0.05em',
-            lineHeight: 0.85,
-            color: 'transparent',
-            WebkitTextStroke: '1px rgba(255,255,255,0.08)',
-            textAlign: 'center',
-            userSelect: 'none',
-            whiteSpace: 'nowrap',
-            overflow: 'hidden',
-          }}
-        >
-          MM<span style={{ WebkitTextStroke: `1px rgba(242,177,53,0.22)` }}>·</span>PHARMA
-        </div>
+        <WordmarkBleed />
 
-        <div
-          style={{
-            marginTop: 24,
-            paddingTop: 24,
-            borderTop: '1px solid rgba(255,255,255,0.08)',
-            display: 'flex',
-            flexDirection: 'row',
-            flexWrap: 'wrap',
-            gap: 16,
-            justifyContent: 'space-between',
-            alignItems: 'center',
-            fontSize: 11,
-            fontFamily: mono,
-            letterSpacing: '0.14em',
-            textTransform: 'uppercase',
-            color: 'rgba(255,255,255,0.45)',
-          }}
-        >
-          <p style={{ margin: 0 }}>
-            MM Pharma est un fabricant marocain de produits d&apos;hygiène et de désinfection.
-            Les formulations respectent l&apos;arrêté du 21/10/2019 (JO N°16 · 24 mars 2020).
-            Copyright © MM Pharma Inc. 2026 — Casablanca, Maroc.
-          </p>
-          <div style={{ display: 'flex', gap: 24 }}>
-            <Link href={`/${locale}/legal/privacy`} style={{ color: 'inherit', textDecoration: 'none' }}>{tFooter('privacy')}</Link>
-            <Link href={`/${locale}/legal/terms`} style={{ color: 'inherit', textDecoration: 'none' }}>{tFooter('terms')}</Link>
-            <Link href={`/${locale}/legal/cookies`} style={{ color: 'inherit', textDecoration: 'none' }}>{tFooter('cookies')}</Link>
+        <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-white/50">
+          <p className="m-0">© 2026 MM Pharma — Made in Casablanca</p>
+          <div className="flex gap-5">
+            <span>{locale}</span>
+            <span>{process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? 'local'}</span>
           </div>
         </div>
       </div>

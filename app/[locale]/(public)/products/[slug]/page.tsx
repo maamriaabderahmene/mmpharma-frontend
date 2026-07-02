@@ -10,8 +10,10 @@ import { ProductTabs } from '@/components/sections/products/detail/ProductTabs';
 import { RelatedProducts } from '@/components/sections/products/detail/RelatedProducts';
 import { ProductJsonLd } from '@/components/seo/ProductJsonLd';
 import { HiddenSEO } from '@/components/seo/HiddenSEO';
-import { env } from '@/lib/env';
 import type { SeoEntry } from '@/lib/shared/types/SeoEntry';
+import { buildPageMetadata } from '@/lib/seo/metadata';
+import { buildLocaleAlternates } from '@/lib/seo/alternates';
+import { allSlugs, getDetail } from '@/lib/server/api/products.service';
 
 type Props = {
   params: Promise<{ locale: string; slug: string }>;
@@ -20,8 +22,8 @@ type Props = {
 export const revalidate = 120;
 
 export async function generateStaticParams() {
+  if (!process.env.MONGO_URI) return [];
   try {
-    const { allSlugs } = await import('@/lib/server/api/products.service');
     const slugs = await allSlugs();
     return slugs.flatMap(({ slug }) =>
       LocaleValues.map((locale) => ({ locale, slug })),
@@ -34,31 +36,23 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale, slug } = await params;
   try {
-    const { getDetail } = await import('@/lib/server/api/products.service');
     const { product, seo } = await getDetail(slug, locale);
     const seoData = seo as SeoEntry | null;
-
-    const title = seoData?.title
-      ? `${seoData.title} | MM Pharma`
-      : `${product.name} | MM Pharma`;
+    const title = seoData?.title ?? product.name;
     const description = seoData?.description ?? product.description;
-    const canonical = `${env.MMP_APP_URL}/${locale}/products/${slug}`;
 
     return {
-      title,
-      description,
-      alternates: {
-        canonical,
-        languages: {
-          'fr-MA': `${env.MMP_APP_URL}/fr-MA/products/${slug}`,
-          'ar-MA': `${env.MMP_APP_URL}/ar-MA/products/${slug}`,
-          'en-US': `${env.MMP_APP_URL}/en-US/products/${slug}`,
-        },
-      },
-      openGraph: {
+      ...(await buildPageMetadata({
+        locale,
+        section: 'productDetail',
+        path: `/products/${slug}`,
         title,
         description,
-        url: canonical,
+      })),
+      alternates: buildLocaleAlternates(locale, `/products/${slug}`),
+      openGraph: {
+        title: `${title} · MM Pharma`,
+        description,
         images: product.images?.[0] ? [{ url: product.images[0].secureUrl }] : [],
       },
     };
@@ -73,12 +67,11 @@ export default async function ProductDetailPage({ params }: Props) {
     notFound();
   }
 
-  let product: Awaited<ReturnType<typeof import('@/lib/server/api/products.service').getDetail>>['product'];
-  let related: Awaited<ReturnType<typeof import('@/lib/server/api/products.service').getDetail>>['related'];
+  let product: Awaited<ReturnType<typeof getDetail>>['product'];
+  let related: Awaited<ReturnType<typeof getDetail>>['related'];
   let seoData: SeoEntry | null = null;
 
   try {
-    const { getDetail } = await import('@/lib/server/api/products.service');
     const result = await getDetail(slug, locale);
     product = result.product;
     related = result.related;

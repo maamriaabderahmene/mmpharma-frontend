@@ -1,0 +1,20 @@
+:root {
+  --color-ink: #0f1620;
+  --color-navy: #062a4f;
+  --color-navy-700: #07305a;
+  --color-navy-500: #0a427c;
+  --color-navy-300: #3678bb;
+  --color-gold: #f2b135;
+  --color-gold-deep: #c58816;
+  --color-bone: #f5f1e8;
+  --color-paper: #fafbfc;
+  --color-line: #e1e7ee;
+  --color-success: #16a37a;
+  --color-danger: #d63a3a;
+  --font-display: "Fraunces", "Iowan Old Style", Georgia, serif;
+  --font-sans: "Inter Tight", "Inter", system-ui, sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+  --radius-card: 12px;
+  --shadow-float: 0 24px 60px -20px rgb(10 25 47 / 25%);
+  --ease-editorial: cubic-bezier(0.2, 0.6, 0.2, 1);
+}

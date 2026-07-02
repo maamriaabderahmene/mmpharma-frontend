@@ -1,6 +1,7 @@
 import type { Metadata } from 'next';
 import { Container, Typography, Grid, Card, CardContent, Stack, Chip } from '@mui/material';
 import { ROUTES } from '@/lib/shared/routes';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
 type Props = {
   params: Promise<{ locale: string }>;
@@ -8,10 +9,12 @@ type Props = {
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { locale } = await params;
-  return {
-    title: 'Mon compte',
-    alternates: { canonical: `https://www.mmpharma.ma/${locale}/account` },
-  };
+  return buildPageMetadata({
+    locale,
+    section: 'account',
+    path: '/account',
+    title: 'Espace client',
+  });
 }
 
 export default async function AccountDashboardPage({ params }: Props) {

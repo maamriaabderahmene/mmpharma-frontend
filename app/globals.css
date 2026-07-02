@@ -1,9 +1,12 @@
 @import "tailwindcss";
+@import "../theme/tokens.css";
 
 body {
-  font-family: var(--font-inter), sans-serif;
+  font-family: var(--font-sans);
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  color: var(--color-ink);
+  background: var(--color-paper);
 }
 
 .visually-hidden {
@@ -23,14 +26,18 @@ body {
   left: 0;
   z-index: 9999;
   padding: 8px 16px;
-  background: #0E5AA7;
-  color: #FFFFFF;
-  font-family: var(--font-inter), sans-serif;
+  background: var(--color-navy);
+  color: #fff;
+  font-family: var(--font-sans);
   font-size: 0.875rem;
   text-decoration: none;
   transition: top 0.2s;
+  outline: none;
 }
 
 .skip-link:focus {
-  top: 0;
+  top: 16px;
+  left: 16px;
+  box-shadow: 0 0 0 4px rgb(14 90 167 / 16%);
+  border-radius: 8px;
 }
