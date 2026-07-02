@@ -24,7 +24,7 @@ export async function CatalogHeader({ locale, totalProducts }: Props) {
         </Typography>
         <Typography sx={{ fontSize: { xs: 44, sm: 72, md: 112 }, lineHeight: 0.92, letterSpacing: '-0.04em', fontWeight: 600 }}>
           Produits <span style={{ fontStyle: 'italic', fontWeight: 400, color: gold }}>certifiés,</span><br />
-          formulés au Maroc.
+          formulés en Algérie.
         </Typography>
         <Typography sx={{ fontFamily: mono, fontSize: 12, letterSpacing: '0.24em', color: 'rgba(255,255,255,0.55)', textTransform: 'uppercase', mt: 5, pt: 3, borderTop: '1px solid rgba(255,255,255,0.15)' }}>
           {String(totalProducts).padStart(3, '0')} · {t('stats')}

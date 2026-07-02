@@ -1,7 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { Box, Tabs, Tab, Typography, Stack, Chip, Link, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
+import { Box, Tabs, Tab, Typography, Stack, Chip, Button, Paper, Table, TableBody, TableCell, TableContainer, TableHead, TableRow } from '@mui/material';
 import type { Product } from '@/lib/shared/types/Product';
 import { useTranslations } from '@/lib/i18n/client';
 
@@ -55,7 +55,7 @@ export function ProductTabs({ product }: Props) {
           {product.pdfs.map((pdf) => (
             <Button
               key={pdf.publicId}
-              component={Link}
+              component="a"
               href={pdf.secureUrl}
               target="_blank"
               variant="outlined"

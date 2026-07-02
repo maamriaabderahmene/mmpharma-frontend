@@ -7,8 +7,8 @@ import { palette } from '@/theme/palette';
 
 const faqs = [
   {
-    q: 'Vos produits sont-ils conformes à la réglementation Marocaine ?',
-    a: 'Oui, tous nos produits respectent le Journal Officiel n°16 2020 et les normes pharmaceutiques en vigueur au Maroc. Nous effectuons des contrôles microbiologiques rigoureux sur chaque lot.',
+    q: 'Vos produits sont-ils conformes à la réglementation algérienne ?',
+    a: 'Oui, tous nos produits respectent le Journal Officiel n°16 2020 et les normes pharmaceutiques en vigueur en Algérie. Nous effectuons des contrôles microbiologiques rigoureux sur chaque lot.',
     category: 'réglementation',
   },
   {
@@ -23,7 +23,7 @@ const faqs = [
   },
   {
     q: 'Quels sont les délais et modalités de livraison ?',
-    a: 'Nous livrons partout au Maroc sous 24 à 72 heures. Un devis personnalisé vous est adressé sous 48 heures ouvrées.',
+    a: 'Nous livrons partout en Algérie sous 24 à 72 heures. Un devis personnalisé vous est adressé sous 48 heures ouvrées.',
     category: 'commandes',
   },
   {

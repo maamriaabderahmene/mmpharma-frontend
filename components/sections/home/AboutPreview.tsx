@@ -1,5 +1,4 @@
 import { Container, Typography, Button, Stack, Box } from '@mui/material';
-import Link from 'next/link';
 import { palette } from '@/theme/palette';
 
 export function AboutPreview() {
@@ -46,10 +45,10 @@ export function AboutPreview() {
               L&apos;excellence pharmaceutique au service de l&apos;hygiène professionnelle.
             </Typography>
             <Typography variant="body1" sx={{ color: palette.neutral[700], lineHeight: 1.7 }}>
-              Depuis plus de 10 ans, MM Pharma est un acteur Marocain incontournable dans la fabrication de produits d&apos;hygiène, de désinfection et d&apos;entretien. Notre engagement : offrir des solutions conformes aux normes pharmaceutiques les plus strictes.
+              Depuis plus de 10 ans, MM Pharma est un acteur algérien incontournable dans la fabrication de produits d&apos;hygiène, de désinfection et d&apos;entretien. Notre engagement : offrir des solutions conformes aux normes pharmaceutiques les plus strictes.
             </Typography>
             <Button
-              component={Link}
+              component="a"
               href="/about"
               variant="contained"
               color="primary"

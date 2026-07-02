@@ -14,7 +14,7 @@ type Props = {
   session: SessionPayload | null;
 };
 
-const CERTIFICATIONS = ['ISO 9001', 'JO N°16 · 2020', 'Made in Morocco', 'Formulation pharmaceutique'];
+const CERTIFICATIONS = ['ISO 9001', 'JO N°16 · 2020', 'Made in Algeria', 'Formulation pharmaceutique'];
 const LOCALES = ['fr-MA', 'ar-MA', 'en-US'] as const;
 
 function localizedPath(pathname: string, locale: string) {
@@ -90,7 +90,7 @@ export function NavbarClient({ session }: Props) {
 
   return (
     <>
-      <header className="fixed inset-x-0 top-0 z-40">
+      <header className="sticky inset-x-0 top-0 z-40">
         <div className="h-7 border-b border-white/10 bg-[#062A4F] text-white">
           <div className="mx-auto flex h-full w-full max-w-[1280px] items-center justify-between px-4 md:px-8">
             <div className="flex items-center gap-1 text-[10px] font-semibold uppercase tracking-[0.22em] text-white/70">

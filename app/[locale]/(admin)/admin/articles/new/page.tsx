@@ -1,13 +1,21 @@
-import { Form } from '@/components/admin/Form';
-import { Editor } from '@/components/admin/Editor';
+import type { Metadata } from 'next';
+import Link from 'next/link';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
-export default function AdminArticleNewPage() {
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata({ locale, section: 'admin', path: '/admin/articles/new', title: 'Nouvel article — Admin' });
+}
+
+export default async function NewArticlePage({ params }: Props) {
+  const { locale } = await params;
   return (
-    <section className="space-y-5">
-      <h1 className="text-[32px] font-semibold tracking-[-0.02em] text-[#062A4F]">New article</h1>
-      <Form title="Article draft">
-        <Editor />
-      </Form>
-    </section>
+    <div className="mx-auto max-w-3xl">
+      <Link href={`/${locale}/admin/articles`} className="font-mono text-[11px] uppercase tracking-[0.2em] text-[#7A8694] hover:text-[#062A4F]">← Retour</Link>
+      <h1 className="mt-2 text-2xl font-semibold tracking-tight text-[#062A4F]">Nouvel article</h1>
+      <p className="mt-6 text-sm text-[#7A8694]">Module en cours de développement.</p>
+    </div>
   );
 }

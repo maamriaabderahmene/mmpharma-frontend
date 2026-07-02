@@ -91,7 +91,7 @@ export function Brand({
                 textTransform: 'uppercase',
               }}
             >
-              Hygiène · Maroc
+              Hygiène · Algérie
             </span>
           )}
         </span>

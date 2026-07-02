@@ -16,7 +16,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     section: 'about',
     path: '/about',
     title: 'À propos',
-    description: "MM Pharma — fabricant de produits d'hygiène et de désinfection au Maroc.",
+    description: "MM Pharma — fabricant de produits d'hygiène et de désinfection en Algérie.",
   });
 }
 
@@ -30,13 +30,13 @@ export default async function AboutPage({ params }: Props) {
     { idx: 'I', title: 'Qualité', body: 'Contrôles microbiologiques et physico-chimiques rigoureux sur chaque lot.' },
     { idx: 'II', title: 'Innovation', body: 'R&D constante pour des formulations toujours plus performantes.' },
     { idx: 'III', title: 'Engagement', body: 'ISO 9001. Conformité JO N°16 · 2020. Traçabilité totale.' },
-    { idx: 'IV', title: 'Proximité', body: 'Fabrication marocaine — service réactif, empreinte réduite.' },
+    { idx: 'IV', title: 'Proximité', body: 'Fabrication algérienne — service réactif, empreinte réduite.' },
   ];
 
   const numbers = [
     { k: '15+', v: 'Années d’expertise' },
     { k: '32', v: 'Références actives' },
-    { k: '100%', v: 'Fabrication au Maroc' },
+    { k: '100%', v: 'Fabrication en Algérie' },
     { k: 'ISO 9001', v: 'Certification qualité' },
   ];
 
@@ -58,7 +58,7 @@ export default async function AboutPage({ params }: Props) {
             MM Pharma conçoit, fabrique et distribue depuis plus de 15 ans des
             produits d’hygiène, de désinfection et d’entretien pour les
             établissements de santé, l’hôtellerie, l’industrie et les
-            collectivités marocaines.
+            collectivités algériennes.
           </Typography>
         </Container>
       </Box>

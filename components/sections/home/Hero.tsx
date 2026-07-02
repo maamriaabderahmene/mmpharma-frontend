@@ -1,5 +1,4 @@
 import { Container, Typography, Button, Stack, Box } from '@mui/material';
-import Link from 'next/link';
 import { palette } from '@/theme/palette';
 
 const marquee = ['ISO 21149', 'ISO 16212', 'ISO 21150', 'ISO 22717', 'ISO 22718', 'ISO 18416', 'JO N°16 · 2020'];
@@ -50,7 +49,7 @@ export function Hero() {
             </Typography>
           </Stack>
           <Typography sx={{ fontSize: 11, letterSpacing: '0.28em', color: `${palette.neutral[0]}66`, fontWeight: 500, display: { xs: 'none', md: 'block' } }}>
-            EST. MMXIV · MAROC
+            EST. MMXIV · ALGERIA
           </Typography>
         </Stack>
 
@@ -89,7 +88,7 @@ export function Hero() {
 
             <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2} sx={{ flexShrink: 0 }}>
               <Button
-                component={Link}
+                component="a"
                 href="/products"
                 size="large"
                 sx={{
@@ -106,7 +105,7 @@ export function Hero() {
                 Découvrir le catalogue →
               </Button>
               <Button
-                component={Link}
+                component="a"
                 href="/contact"
                 size="large"
                 sx={{

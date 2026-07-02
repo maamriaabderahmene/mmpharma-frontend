@@ -56,7 +56,7 @@ export default async function PrivacyPage({ params }: Props) {
 
         <h2>5. Vos droits</h2>
         <p>
-          Conformément à la loi Marocaine 09-08 relative à la protection des données à caractère personnel,
+          Conformément à la loi algérienne 09-08 relative à la protection des données à caractère personnel,
           vous disposez d'un droit d'accès, de rectification et de suppression de vos données.
           Pour exercer ces droits, contactez-nous à l'adresse email suivante : privacy@mmpharma.ma.
         </p>

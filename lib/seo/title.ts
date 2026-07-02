@@ -14,7 +14,7 @@ type MetaSection =
   | 'admin';
 
 const FALLBACKS: Record<MetaSection, string> = {
-  home: 'MM Pharma — L’hygiène pharmaceutique, formulée au Maroc.',
+  home: 'MM Pharma — L’hygiène pharmaceutique, formulée en Algérie.',
   products: 'Catalogue · MM Pharma',
   productDetail: 'Produit · MM Pharma',
   about: 'À propos · MM Pharma',

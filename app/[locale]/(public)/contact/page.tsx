@@ -27,7 +27,7 @@ export default async function ContactPage({ params }: Props) {
   const gold = palette.accent[500];
 
   const infos = [
-    { idx: '01', label: 'Adresse', value: 'MM Pharma — Casablanca, Maroc' },
+    { idx: '01', label: 'Adresse', value: 'MM Pharma — Alger, Algérie' },
     { idx: '02', label: 'Téléphone', value: '+212 5XX XX XX XX' },
     { idx: '03', label: 'Email', value: 'contact@mmpharma.ma' },
     { idx: '04', label: 'Horaires', value: 'Lun — Ven · 09h00 → 18h00' },

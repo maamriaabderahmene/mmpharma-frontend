@@ -53,10 +53,10 @@ function getFallbackHtml(kind: HiddenKind, payload: Record<string, unknown>): st
   const name = String(payload.name ?? payload.title ?? payload.slug ?? '');
   switch (kind) {
     case 'product':
-      return `<h1>MM Pharma — ${name} : produit d'hygiène et de désinfection professionnel</h1><p>Découvrez ${name}, un produit de qualité pharmaceutique fabriqué au ALGERIA par MM Pharma.</p>`;
+      return `<h1>MM Pharma — ${name} : produit d'hygiène et de désinfection professionnel</h1><p>Découvrez ${name}, un produit de qualité pharmaceutique fabriqué en Algérie par MM Pharma.</p>`;
     case 'blog':
       return `<h1>MM Pharma — ${name} : article expert en hygiène et désinfection</h1><p>Lisez notre article "${name}" rédigé par nos experts MM Pharma.</p>`;
     default:
-      return `<h1>MM Pharma — ${name}</h1><p>MM Pharma, fabricant de produits d'hygiène et de désinfection au ALGERIA.</p>`;
+      return `<h1>MM Pharma — ${name}</h1><p>MM Pharma, fabricant de produits d'hygiène et de désinfection en Algérie.</p>`;
   }
 }

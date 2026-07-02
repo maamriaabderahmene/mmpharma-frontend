@@ -1,5 +1,4 @@
 import { Container, Typography, Grid, Card, CardContent, Button, Box } from '@mui/material';
-import Link from 'next/link';
 import type { Article } from '@/lib/shared/types/Article';
 import { palette } from '@/theme/palette';
 
@@ -22,7 +21,7 @@ export function Insights({ articles }: Props) {
             Ressources & expertise
           </Typography>
           <Button
-            component={Link}
+            component="a"
             href="/blog"
             variant="outlined"
             color="primary"
@@ -36,7 +35,7 @@ export function Insights({ articles }: Props) {
           {articles.map((article) => (
             <Grid size={{ xs: 12, sm: 6, md: 4 }} key={article.id}>
               <Card
-                component={Link}
+                component="a"
                 href={`/article/${article.slug}`}
                 sx={{
                   textDecoration: 'none',

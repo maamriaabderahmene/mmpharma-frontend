@@ -18,7 +18,7 @@ export function EventCard({ event, locale }: Props) {
 
   return (
     <Card
-      component={Link}
+      component="a"
       href={`/${locale}/events/${event.slug}`}
       sx={{
         textDecoration: 'none',

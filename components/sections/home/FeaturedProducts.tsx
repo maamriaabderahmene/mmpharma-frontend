@@ -1,7 +1,6 @@
 'use client';
 
 import { Container, Typography, Grid, Button, Box, Stack, Chip } from '@mui/material';
-import Link from 'next/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import type { Product } from '@/lib/shared/types/Product';
 import { palette } from '@/theme/palette';
@@ -42,7 +41,7 @@ export function FeaturedProducts({ products }: Props) {
             </Typography>
           </Box>
           <Button
-            component={Link}
+            component="a"
             href="/products"
             endIcon={<ArrowForwardIcon />}
             sx={{
@@ -64,7 +63,7 @@ export function FeaturedProducts({ products }: Props) {
           {products.map((product, i) => (
             <Grid size={{ xs: 12, sm: 6, lg: 4 }} key={product.id}>
               <Box
-                component={Link}
+                component="a"
                 href={`/products/${product.slug}`}
                 sx={{
                   display: 'block',

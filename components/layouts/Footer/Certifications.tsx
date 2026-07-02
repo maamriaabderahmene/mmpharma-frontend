@@ -1,4 +1,4 @@
-const CERTIFICATIONS = ['ISO 9001', 'JO N°16 · 2020', 'Made in Morocco'];
+const CERTIFICATIONS = ['ISO 9001', 'JO N°16 · 2020', 'Made in Algeria'];
 
 export function Certifications() {
   return (

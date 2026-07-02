@@ -29,7 +29,7 @@ export async function EventList({ locale, filter }: Props) {
     <>
       <Stack direction="row" spacing={1} sx={{ mb: 4 }}>
         <Button
-          component={Link}
+          component="a"
           href={`/${locale}/events`}
           variant={filter !== 'past' ? 'contained' : 'outlined'}
           color="primary"
@@ -38,7 +38,7 @@ export async function EventList({ locale, filter }: Props) {
           À venir
         </Button>
         <Button
-          component={Link}
+          component="a"
           href={`/${locale}/events?filter=past`}
           variant={filter === 'past' ? 'contained' : 'outlined'}
           color="primary"

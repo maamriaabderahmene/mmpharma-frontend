@@ -40,12 +40,12 @@ export default async function LocaleLayout({ children, params }: Props) {
   }
 
   return (
-    <html lang={locale} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
-      <body style={{ margin: 0 }}>
-        <ThemeRegistry>
-          <I18nProvider messages={messages}>{children}</I18nProvider>
-        </ThemeRegistry>
-      </body>
-    </html>
+    <ThemeRegistry>
+      <I18nProvider messages={messages}>
+        <div lang={locale} dir={isRtl(locale) ? 'rtl' : 'ltr'}>
+          {children}
+        </div>
+      </I18nProvider>
+    </ThemeRegistry>
   );
 }

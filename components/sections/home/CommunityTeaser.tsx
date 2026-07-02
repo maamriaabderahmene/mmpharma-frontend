@@ -1,5 +1,4 @@
 import { Container, Typography, Button, Stack, Box } from '@mui/material';
-import Link from 'next/link';
 import { palette } from '@/theme/palette';
 
 export function CommunityTeaser() {
@@ -20,7 +19,7 @@ export function CommunityTeaser() {
             Échangez avec nos experts et partagez vos expériences.
           </Typography>
           <Button
-            component={Link}
+            component="a"
             href="/community"
             variant="contained"
             color="primary"

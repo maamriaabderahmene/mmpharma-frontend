@@ -1,5 +1,4 @@
 import { Container, Typography, Button, Stack, Box } from '@mui/material';
-import Link from 'next/link';
 import type { Event } from '@/lib/shared/types/Event';
 import { palette } from '@/theme/palette';
 
@@ -51,7 +50,7 @@ export function EventsTeaser({ event }: Props) {
           )}
 
           <Button
-            component={Link}
+            component="a"
             href={`/events/${event.slug}`}
             variant="contained"
             color="primary"

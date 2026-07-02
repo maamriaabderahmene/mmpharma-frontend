@@ -94,7 +94,7 @@ export async function Footer({ locale }: Props) {
 
           <div>
             <p className="mb-4 font-mono text-[11px] uppercase tracking-[0.3em] text-[#F2B135]">{tFooter('contact')}</p>
-            <p className="mb-2 text-sm text-white/80">Casablanca, Maroc</p>
+            <p className="mb-2 text-sm text-white/80">Alger, Algérie</p>
             <p className="mb-2 text-sm text-white/80">+212 5XX XX XX XX</p>
             <p className="mb-3 text-sm text-[#F2B135]">contact@mmpharma.ma</p>
             <p className="text-xs uppercase tracking-[0.18em] text-white/50">Lun — Ven · 09h00 / 18h00</p>
@@ -104,11 +104,11 @@ export async function Footer({ locale }: Props) {
         <div className="flex flex-wrap items-end justify-between gap-8 border-t border-white/10 pt-8">
           <div className="max-w-[520px]">
             <div className="mb-3">
-              <Brand variant="light" size={40} />
+              <Brand variant="light" size={40} showWordmark={false} />
             </div>
             <p className="text-sm leading-7 text-white/60">
-              Fabricant marocain de produits d&apos;hygiène, de désinfection et d&apos;entretien professionnel.
-              Formulés, testés et conditionnés au Maroc.
+              Fabricant algérien de produits d&apos;hygiène, de désinfection et d&apos;entretien professionnel.
+              Formulés, testés et conditionnés en Algérie.
             </p>
           </div>
           <Certifications />
@@ -117,7 +117,7 @@ export async function Footer({ locale }: Props) {
         <WordmarkBleed />
 
         <div className="mt-5 flex flex-wrap items-center justify-between gap-4 border-t border-white/10 pt-4 font-mono text-[10px] uppercase tracking-[0.14em] text-white/50">
-          <p className="m-0">© 2026 MM Pharma — Made in Casablanca</p>
+          <p className="m-0">© 2026 MM Pharma — Made in Algeria</p>
           <div className="flex gap-5">
             <span>{locale}</span>
             <span>{process.env.VERCEL_GIT_COMMIT_SHA?.slice(0, 7) ?? 'local'}</span>

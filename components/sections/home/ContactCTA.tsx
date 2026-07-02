@@ -1,5 +1,4 @@
 import { Container, Typography, Button, Stack, Box } from '@mui/material';
-import Link from 'next/link';
 import { palette } from '@/theme/palette';
 
 export function ContactCTA() {
@@ -15,7 +14,7 @@ export function ContactCTA() {
           </Typography>
           <Stack direction={{ xs: 'column', sm: 'row' }} spacing={2}>
             <Button
-              component={Link}
+              component="a"
               href="/contact"
               variant="contained"
               sx={{
@@ -31,7 +30,7 @@ export function ContactCTA() {
               Nous contacter
             </Button>
             <Button
-              component={Link}
+              component="a"
               href="/contact?intent=quote"
               variant="outlined"
               sx={{

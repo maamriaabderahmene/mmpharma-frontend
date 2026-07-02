@@ -1,27 +1,30 @@
+import type { Metadata } from 'next';
 import Link from 'next/link';
-import { EmptyState } from '@/components/admin/EmptyState';
+import { buildPageMetadata } from '@/lib/seo/metadata';
 
-type Props = {
-  params: Promise<{ locale: string }>;
-};
+type Props = { params: Promise<{ locale: string }> };
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { locale } = await params;
+  return buildPageMetadata({ locale, section: 'admin', path: '/admin/articles', title: 'Articles — Admin' });
+}
 
 export default async function AdminArticlesPage({ params }: Props) {
   const { locale } = await params;
   return (
-    <section className="space-y-5">
-      <div className="flex items-center justify-between">
-        <h1 className="text-[32px] font-semibold tracking-[-0.02em] text-[#062A4F]">Articles</h1>
-        <Link
-          href={`/${locale}/admin/articles/new`}
-          className="inline-flex h-11 items-center rounded-md bg-[#062A4F] px-4 font-mono text-[11px] uppercase tracking-[0.2em] text-white"
-        >
-          New article
+    <div className="mx-auto max-w-6xl">
+      <div className="mb-6 flex items-center justify-between">
+        <div>
+          <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[#F2B135]">N° 03 — Contenu</p>
+          <h1 className="mt-1 text-2xl font-semibold tracking-tight text-[#062A4F]">Articles</h1>
+        </div>
+        <Link href={`/${locale}/admin/articles/new`} className="inline-flex h-10 items-center rounded-lg bg-[#062A4F] px-4 text-sm font-medium text-white hover:bg-[#07305A]">
+          + Nouvel article
         </Link>
       </div>
-      <EmptyState
-        title="Editorial module initialized"
-        description="Article administration shell is available with route-level access protection."
-      />
-    </section>
+      <div className="rounded-xl border border-[#E1E7EE] bg-white p-12 text-center">
+        <p className="text-sm text-[#7A8694]">Module articles — en cours de développement.</p>
+      </div>
+    </div>
   );
 }

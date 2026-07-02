@@ -99,7 +99,7 @@ export function CartPage() {
           Découvrez nos produits et ajoutez-les à votre panier.
         </Typography>
         <Button
-          component={Link}
+          component="a"
           href={ROUTES.products(locale)}
           variant="contained"
           color="primary"
@@ -206,7 +206,7 @@ export function CartPage() {
         spacing={2}
         sx={{ flexDirection: { xs: 'column', sm: 'row' }, justifyContent: 'space-between', alignItems: { sm: 'center' } }}
       >
-        <Button component={Link} href={ROUTES.products(locale)} variant="outlined" color="primary">
+        <Button component="a" href={ROUTES.products(locale)} variant="outlined" color="primary">
           Continuer mes achats
         </Button>
 

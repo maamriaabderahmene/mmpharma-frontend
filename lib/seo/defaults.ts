@@ -3,7 +3,7 @@ import { env } from '@/lib/env';
 
 export const defaultMetadata: Metadata = {
   metadataBase: new URL(env.MMP_APP_URL),
-  description: "Fabricant de produits d'hygiène et de désinfection au Maroc",
+  description: "Fabricant de produits d'hygiène et de désinfection en Algérie",
   openGraph: {
     siteName: 'MM Pharma',
     type: 'website',

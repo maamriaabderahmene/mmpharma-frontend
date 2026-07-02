@@ -1,7 +1,6 @@
 import type { Metadata } from 'next';
 import { notFound } from 'next/navigation';
 import { Container, Grid, Breadcrumbs, Link, Typography } from '@mui/material';
-import NextLink from 'next/link';
 import { LocaleValues } from '@/lib/shared/constants/Locale';
 import { getTranslations } from '@/lib/i18n/server';
 import { ProductGallery } from '@/components/sections/products/detail/ProductGallery';
@@ -88,10 +87,10 @@ export default async function ProductDetailPage({ params }: Props) {
 
       <Container maxWidth="lg" sx={{ pt: { xs: 3, md: 5 }, pb: 6 }}>
         <Breadcrumbs aria-label="breadcrumb" sx={{ mb: 4 }}>
-          <Link component={NextLink} underline="hover" color="inherit" href={`/${locale}`}>
+          <Link component="a" underline="hover" color="inherit" href={`/${locale}`}>
             {t('home')}
           </Link>
-          <Link component={NextLink} underline="hover" color="inherit" href={`/${locale}/products`}>
+          <Link component="a" underline="hover" color="inherit" href={`/${locale}/products`}>
             {t('products')}
           </Link>
           <Typography color="text.primary">{product.name}</Typography>

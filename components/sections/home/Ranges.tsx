@@ -1,5 +1,4 @@
 import { Container, Typography, Box, Stack } from '@mui/material';
-import Link from 'next/link';
 import ArrowForwardIcon from '@mui/icons-material/ArrowForward';
 import { palette } from '@/theme/palette';
 
@@ -77,7 +76,7 @@ export function Ranges() {
             </Typography>
           </Box>
           <Typography sx={{ maxWidth: 380, color: palette.neutral[700], fontSize: 15, lineHeight: 1.7 }}>
-            32 références conçues et fabriquées au Maroc, alignées sur les protocoles hospitaliers,
+            32 références conçues et fabriquées en Algérie, alignées sur les protocoles hospitaliers,
             hôteliers et industriels les plus exigeants.
           </Typography>
         </Box>
@@ -86,7 +85,7 @@ export function Ranges() {
           {ranges.map((r) => (
             <Box
               key={r.id}
-              component={Link}
+              component="a"
               href={`/products?range=${r.id}`}
               sx={{
                 display: 'grid',

@@ -14,12 +14,12 @@ const pillars = [
     heading: 'Conformité réglementaire',
     kicker: 'JO N°16 · 24 mars 2020',
     description:
-      'Tous nos produits respectent l\u2019arrêté du 21/10/2019 publié au Journal Officiel n°16 du 24 mars 2020 et les normes pharmaceutiques marocaines en vigueur.',
+      'Tous nos produits respectent l\u2019arrêté du 21/10/2019 publié au Journal Officiel n°16 du 24 mars 2020 et les normes pharmaceutiques algériennes en vigueur.',
   },
   {
     n: '03',
     heading: 'Fabrication locale',
-    kicker: 'Unité de production au Maroc',
+    kicker: 'Unité de production en Algérie',
     description:
       'Produits conçus et fabriqués dans notre unité de production, avec un contrôle qualité rigoureux à chaque étape — dossier technique et traçabilité par lot.',
   },
